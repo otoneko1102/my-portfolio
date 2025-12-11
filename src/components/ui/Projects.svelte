@@ -424,6 +424,8 @@
     border-radius: var(--border-radius-full);
     font-size: var(--font-size-xs);
     font-weight: 500;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .carousel-dots {
