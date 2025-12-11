@@ -1,0 +1,18 @@
+---
+import Layout from "../components/Layout.astro";
+import Header from "../components/ui/Header.svelte";
+import About from "../components/ui/About.astro";
+import Skills from "../components/ui/Skills.svelte";
+import Projects from "../components/ui/Projects.svelte";
+import BlogFeed from "../components/ui/BlogFeed.svelte";
+import Contact from "../components/ui/Contact.astro";
+---
+
+<Layout>
+  <Header client:load />
+  <About />
+  <Skills client:load />
+  <Projects client:load />
+  <BlogFeed client:load />
+  <Contact />
+</Layout>

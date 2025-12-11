@@ -1,0 +1,194 @@
+---
+import { contactLinks } from "../../settings/config.js";
+---
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2 class="contact-title">Contact</h2>
+    <div class="contact-list">
+      {
+        contactLinks.map((contact) => {
+          const isPath =
+            contact.icon.startsWith("/") || contact.icon.includes(".");
+          return (
+            <div class="contact-item">
+              <div class="contact-icon">
+                {isPath ? (
+                  <img src={contact.icon} alt={contact.name} />
+                ) : (
+                  <iconify-icon icon={contact.icon} width="24" height="24" />
+                )}
+              </div>
+              <a
+                href={contact.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                {contact.value}
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    background-color: var(--color-background);
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .contact-title {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    color: var(--color-primary);
+    font-size: var(--font-size-4xl);
+  }
+
+  .contact-list {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    transition: all var(--transition-normal);
+  }
+
+  .contact-item:hover {
+    border-bottom-color: var(--color-primary);
+    transform: translateX(4px);
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .contact-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6, #6366f1, #8b5cf6);
+    background-size: 200%;
+    animation: gradientFlow 4s linear infinite;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 200% 0%;
+    }
+  }
+
+  .contact-icon img,
+  .contact-icon iconify-icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-link {
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+    font-weight: 500;
+  }
+
+  .contact-link:hover {
+    color: var(--color-primary);
+  }
+
+  :global(.contact-icon iconify-icon) {
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .contact-title {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .contact-list {
+      gap: var(--spacing-lg);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+    }
+
+    .contact-link {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+
+    .contact-title {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .contact-list {
+      gap: var(--spacing-md);
+    }
+
+    .contact-item {
+      gap: var(--spacing-md);
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+    }
+
+    .contact-link {
+      font-size: var(--font-size-sm);
+    }
+  }
+</style>

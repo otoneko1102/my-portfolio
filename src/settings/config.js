@@ -1,0 +1,11 @@
+export { siteConfig } from "./data/siteConfig.js";
+export { metaConfig } from "./data/metaConfig.js";
+export { navLinks } from "./data/navLinks.js";
+export { socialLinks } from "./data/socialLinks.js";
+export { skills } from "./data/skills.js";
+export { projects } from "./data/projects.js";
+export { aboutMe } from "./data/aboutMe.js";
+export { aboutDetails } from "./data/aboutDetails.js";
+export { contactLinks } from "./data/contactLinks.js";
+export { blogConfig } from "./data/blogConfig.js";
+export { colors } from "./data/colors.js";

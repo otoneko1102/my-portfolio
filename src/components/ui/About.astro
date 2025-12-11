@@ -1,0 +1,320 @@
+---
+import { aboutMe, socialLinks } from "../../settings/config.js";
+import SelfIcon from "../assets/SelfIcon.astro";
+import AboutDetails from "./AboutDetails.svelte";
+
+/**
+ * @param {Array<{ icon: string, url: string, name: string }>} links
+ */
+/**
+ * @param {Array<{ icon: string, url: string, name: string }>} links
+ */
+const chunkSocialLinks = (
+  links: Array<{ icon: string; url: string; name: string }>
+) => {
+  const rows: Array<Array<{ icon: string; url: string; name: string }>> = [];
+  let index = 0;
+  let isOddRow = true;
+
+  while (index < links.length) {
+    const take = isOddRow ? 5 : 4;
+    rows.push(links.slice(index, index + take));
+    index += take;
+    isOddRow = !isOddRow;
+  }
+
+  return rows;
+};
+
+const socialRows = chunkSocialLinks(socialLinks);
+---
+
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="about-profile">
+      <div class="about-image">
+        <SelfIcon
+          img={aboutMe.image}
+          alt={aboutMe.name}
+          size="300"
+          borderWidth="5"
+        />
+      </div>
+      <div class="about-info">
+        <h2>{aboutMe.name}</h2>
+        <p class="about-title">{aboutMe.title}</p>
+        <p class="about-bio">{aboutMe.bio}</p>
+        <div class="about-socials">
+          {
+            socialRows.map((row) => (
+              <div class="social-row">
+                {row.map(
+                  (social: { icon: string; url: string; name: string }) => {
+                    const isPath =
+                      social.icon.startsWith("/") || social.icon.includes(".");
+                    return (
+                      <a
+                        href={social.url}
+                        title={social.name}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-link"
+                      >
+                        <span class="social-icon">
+                          {isPath ? (
+                            <img src={social.icon} alt={social.name} />
+                          ) : (
+                            <iconify-icon
+                              icon={social.icon}
+                              width="24"
+                              height="24"
+                            />
+                          )}
+                        </span>
+                        <span class="social-label">{social.name}</span>
+                      </a>
+                    );
+                  }
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <AboutDetails client:load />
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background-color: var(--color-background);
+    padding: var(--spacing-md) var(--spacing-xl);
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .about-profile {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-md);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .about-image {
+    display: flex;
+    justify-content: center;
+    transition: transform var(--transition-normal);
+  }
+
+  .about-image:hover {
+    transform: scale(1.05);
+  }
+
+  .about-info h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-title {
+    font-size: var(--font-size-xl);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
+  }
+
+  .about-bio {
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .about-socials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .social-row {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    width: 72px;
+    border: none;
+    background-color: transparent;
+    transition: all var(--transition-normal);
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  .social-link:hover {
+    transform: scale(1.02);
+  }
+
+  .social-label {
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+    line-height: 1.2;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #ffffff;
+    transition: all var(--transition-normal);
+    flex-shrink: 0;
+  }
+
+  .social-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6, #6366f1, #8b5cf6);
+    background-size: 200%;
+    animation: gradientFlow 4s linear infinite;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 200% 0%;
+    }
+  }
+
+  .social-icon img,
+  .social-icon iconify-icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .social-link:hover .social-icon {
+    transform: scale(1.05);
+  }
+
+  :global(.social-link iconify-icon) {
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .about-profile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+      margin-bottom: 0;
+    }
+
+    .about-image :global(.self-icon) {
+      --size: 220px;
+    }
+
+    .about-info h2 {
+      font-size: var(--font-size-2xl);
+    }
+
+    .about-title {
+      font-size: var(--font-size-base);
+    }
+
+    .about-bio {
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+
+    .about-profile {
+      gap: var(--spacing-lg);
+    }
+
+    .about-content {
+      gap: var(--spacing-lg);
+    }
+
+    .about-image :global(.self-icon) {
+      --size: 160px;
+    }
+
+    .social-row {
+      gap: var(--spacing-md);
+    }
+
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      min-height: 48px;
+    }
+
+    .about-info h2 {
+      font-size: var(--font-size-xl);
+    }
+
+    .about-title {
+      font-size: var(--font-size-sm);
+    }
+
+    .about-bio {
+      font-size: var(--font-size-xs);
+      line-height: 1.5;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  img: string;
+  alt?: string;
+  width?: string | number;
+  height?: string | number;
+  class?: string;
+  title?: string;
+}
+
+const {
+  img,
+  alt = "icon",
+  width = "24",
+  height = "24",
+  class: className = "",
+  title,
+} = Astro.props as Props;
+---
+
+<img
+  src={img}
+  alt={alt}
+  width={width}
+  height={height}
+  class={`icon ${className}`}
+  title={title}
+/>
+
+<style>
+  .icon {
+    display: inline-block;
+    object-fit: contain;
+  }
+</style>

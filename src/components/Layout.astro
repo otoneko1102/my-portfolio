@@ -1,0 +1,93 @@
+---
+import Footer from "./ui/Footer.astro";
+import { metaConfig, siteConfig } from "../settings/config.js";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  pageKey?: string;
+}
+
+type MetaEntry = {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+};
+
+const {
+  title,
+  description,
+  image,
+  type = "website",
+  pageKey,
+} = Astro.props as Props;
+
+const pagesMeta = metaConfig.pages as Record<string, MetaEntry>;
+const metaPreset = ((pageKey && pagesMeta?.[pageKey]) || {}) as MetaEntry;
+const baseMeta = (metaConfig.default || {}) as MetaEntry;
+
+const pageTitle =
+  metaPreset.title || title || baseMeta.title || `${siteConfig.title}`;
+const pageDescription =
+  metaPreset.description ||
+  description ||
+  baseMeta.description ||
+  siteConfig.description;
+const pageImage =
+  metaPreset.image || image || baseMeta.image || siteConfig.ogImage;
+const pageType = metaPreset.type || type || baseMeta.type || "website";
+
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
+const ogImageURL = new URL(pageImage, siteConfig.url);
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={siteConfig.author} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={pageType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content={siteConfig.title} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:image" content={ogImageURL} />
+    {
+      siteConfig.twitterHandle && (
+        <meta property="twitter:site" content={siteConfig.twitterHandle} />
+      )
+    }
+
+    <script
+      src="https://code.iconify.design/iconify-icon/3.0.2/iconify-icon.min.js"
+    ></script>
+  </head>
+  <body>
+    <slot />
+    <Footer />
+  </body>
+</html>
