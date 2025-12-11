@@ -400,8 +400,20 @@
 
   .project-tags {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--spacing-xs);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .project-tags::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .project-tags::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: var(--border-radius-full);
   }
 
   .tag {
@@ -557,6 +569,14 @@
     .project-link,
     .project-github {
       justify-content: center;
+    }
+
+    .project-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .project-tags {
+      scrollbar-width: none;
     }
 
     .project-content {
