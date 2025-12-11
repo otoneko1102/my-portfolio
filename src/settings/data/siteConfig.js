@@ -14,9 +14,9 @@
  * @type {SiteConfig}
  */
 export const siteConfig = {
-  title: "My Portfolio",
+  title: "まろん｡のポートフォリオ",
   description:
-    "モダンなポートフォリオサイト",
+    "まろん｡のポートフォリオサイトです。",
   author: "まろん｡",
   email: "montblank.fun@gmail.com",
   url: "https://montblank.fun",
