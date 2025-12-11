@@ -548,6 +548,17 @@
       right: 0;
     }
 
+    .project-overlay {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-sm);
+    }
+
+    .project-link,
+    .project-github {
+      justify-content: center;
+    }
+
     .project-content {
       padding: var(--spacing-md);
     }
