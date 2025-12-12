@@ -13,6 +13,15 @@
  */
 export const projects = [
   {
+    title: "My Portfolio",
+    description:
+      "キモい構成のポートフォリオ",
+    image: "/icon.png",
+    tags: ["Astro", "Svelte"],
+    github:
+      "https://github.com/otoneko1102/my-portfolio",
+  },
+  {
     title: "Milkee",
     description:
       "現代のCoffeeScript Builderです。",
