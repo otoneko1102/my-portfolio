@@ -32,7 +32,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-lg) var(--spacing-lg);
+    padding: var(--header-padding-y) var(--header-padding-x);
     max-width: 1600px;
     margin: 0 auto;
     width: 100%;
@@ -103,9 +103,7 @@
   }
 
   @media (max-width: 768px) {
-    .header-content {
-      padding: var(--spacing-md) var(--spacing-md);
-    }
+    .header-content { padding: var(--header-padding-y) var(--header-padding-x); }
 
     .header-brand {
       margin-left: var(--spacing-md);
@@ -126,9 +124,7 @@
   }
 
   @media (max-width: 480px) {
-    .header-content {
-      padding: var(--spacing-sm) var(--spacing-sm);
-    }
+    .header-content { padding: var(--header-padding-y) var(--header-padding-x); }
 
     .header-brand {
       margin-left: var(--spacing-sm);

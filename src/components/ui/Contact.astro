@@ -11,7 +11,12 @@ import { contactLinks } from "../../settings/config.js";
           const isPath =
             contact.icon.startsWith("/") || contact.icon.includes(".");
           return (
-            <div class="contact-item">
+            <a
+              href={contact.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-item"
+            >
               <div class="contact-icon">
                 {isPath ? (
                   <img src={contact.icon} alt={contact.name} />
@@ -19,15 +24,8 @@ import { contactLinks } from "../../settings/config.js";
                   <iconify-icon icon={contact.icon} width="24" height="24" />
                 )}
               </div>
-              <a
-                href={contact.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-link"
-              >
-                {contact.value}
-              </a>
-            </div>
+              <span class="contact-link">{contact.value}</span>
+            </a>
           );
         })
       }
@@ -68,11 +66,17 @@ import { contactLinks } from "../../settings/config.js";
     padding-bottom: var(--spacing-md);
     border-bottom: 1px solid var(--color-border);
     transition: all var(--transition-normal);
+    text-decoration: none;
+    color: inherit;
   }
 
   .contact-item:hover {
     border-bottom-color: var(--color-primary);
     transform: translateX(4px);
+  }
+
+  .contact-item:hover .contact-link {
+    color: var(--color-primary);
   }
 
   .contact-icon {
@@ -123,13 +127,8 @@ import { contactLinks } from "../../settings/config.js";
   .contact-link {
     font-size: var(--font-size-lg);
     color: var(--color-text);
-    text-decoration: none;
     transition: color var(--transition-normal);
     font-weight: 500;
-  }
-
-  .contact-link:hover {
-    color: var(--color-primary);
   }
 
   :global(.contact-icon iconify-icon) {

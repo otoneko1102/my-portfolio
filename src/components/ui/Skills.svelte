@@ -133,7 +133,7 @@
   }
 
   .skill-name {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text);
     font-weight: 500;
     margin: 0;

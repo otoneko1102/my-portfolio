@@ -11,7 +11,7 @@ export const aboutDetails = [
     values: [
       "公立はこだて未来大学 '25 (B1)",
       "Mariners' conference",
-      "温泉同好会"
+      "温泉同好会",
     ],
   },
   {

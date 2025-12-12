@@ -41,7 +41,7 @@
 
   .detail-label {
     margin: 0 0 var(--spacing-sm) 0;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     font-weight: 600;
     color: var(--color-primary);
     text-transform: uppercase;
@@ -56,7 +56,7 @@
 
   .detail-values li {
     margin-bottom: var(--spacing-xs);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     color: var(--color-text-light);
     line-height: 1.6;
   }
