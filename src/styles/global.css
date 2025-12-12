@@ -43,6 +43,24 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  /* Layout heights */
+  --header-height: 108px; /* headerの見かけ高さ（padding含む、margin除く） */
+  --footer-height: 96px; /* footerの見かけ高さ（padding含む、margin除く） */
+
+  /* Layout spacings (per side) */
+  --header-padding-y: var(--spacing-lg);
+  --header-padding-x: var(--spacing-lg);
+  --header-margin-top: 0px;
+  --header-margin-bottom: 0px;
+
+  --footer-padding-y: var(--spacing-2xl);
+  --footer-padding-x: var(--spacing-lg);
+  --footer-margin-top: var(--spacing-4xl);
+  --footer-margin-bottom: 0px;
+
+  /* Brand gradient */
+  --brand-gradient: linear-gradient(45deg, #6366f1, #8b5cf6);
 }
 
 /* Reset Styles */
@@ -54,7 +72,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-height, 50px);
+  scroll-padding-top: var(--header-height, 80px);
 }
 
 body {
@@ -217,15 +235,35 @@ th {
 
 /* Sections */
 section {
-  scroll-margin-top: 120px;
+  scroll-margin-top: calc(var(--header-height) + var(--spacing-xl));
 }
 
 /* Gradient */
 .gradient-text {
-  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  background: var(--brand-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@media (max-width: 768px) {
+  :root {
+    /* ヘッダー/フッターの縮小値に追従 */
+    --header-padding-y: var(--spacing-md);
+    --header-padding-x: var(--spacing-md);
+    --header-height: 80px; /* ロゴ縮小＋padding調整想定 */
+
+    /* footerはPCと同等でもOK。必要なら下記で縮小 */
+    /* --footer-padding-y: var(--spacing-xl); */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-padding-y: var(--spacing-sm);
+    --header-padding-x: var(--spacing-sm);
+    --header-height: 72px;
+  }
 }
 
 /* Flexbox Utilities */
