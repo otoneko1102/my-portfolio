@@ -23,6 +23,20 @@ export const projects = [
       "https://github.com/otoneko1102/coffeescript-milkee",
   },
   {
+    title: "nekos",
+    description:
+      "Let's have cute cats mess around in the log!",
+    image: "/projects/nekos.png",
+    tags: [
+      "JavaScript",
+      "TypeScript",
+      "cli",
+    ],
+    url: "https://www.npmjs.com/package/nekos",
+    github:
+      "https://github.com/otoneko1102/nekos",
+  },
+  {
     title: "ドメインフォ",
     description:
       "ドメイン関連の話題を扱うブログです。",
