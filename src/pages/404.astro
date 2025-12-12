@@ -1,9 +1,12 @@
 ---
 import Layout from "../components/Layout.astro";
-import ErrorAsset from "../components/assets/Error.astro";
+import ErrorAsset from "../components/assets/ErrorAsset.svelte";
 ---
 
-<Layout title="404 - Page Not Found" description="お探しのページが見つかりませんでした">
+<Layout
+  title="404 - Page Not Found"
+  description="お探しのページが見つかりませんでした"
+>
   <ErrorAsset
     code="404"
     title="Page Not Found"

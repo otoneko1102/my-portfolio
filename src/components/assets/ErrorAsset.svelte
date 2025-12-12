@@ -1,79 +1,62 @@
----
-interface Props {
-  code: string;
-  title: string;
-  description?: string;
-  icon?: string;
-  variant?: 'default' | 'teapot';
-  redirectAfter?: number; // sec
-  redirectTo?: string;
-  backText?: string;
-}
+<script lang="ts">
+  import { onMount } from "svelte";
 
-const {
-  code,
-  title,
-  description = '',
-  icon,
-  variant = 'default',
-  redirectAfter,
-  redirectTo = '/',
-  backText = 'トップページへ戻る',
-} = Astro.props as Props;
----
+  export let code: string;
+  export let title: string;
+  export let description: string = "";
+  export let icon: string | null;
+  export let variant: "default" | "teapot" = "default";
+  export let redirectAfter: number | null; // sec
+  export let redirectTo: string = "/";
+  export let backText: string = "トップページへ戻る";
+
+  let countdown = redirectAfter ?? 0;
+
+  onMount(() => {
+    if (typeof redirectAfter === "number" && redirectAfter > 0) {
+      countdown = redirectAfter;
+      const timer = setInterval(() => {
+        countdown -= 1;
+        if (countdown <= 0) {
+          clearInterval(timer);
+          window.location.href = redirectTo;
+        }
+      }, 1000);
+    }
+  });
+</script>
 
 <div
   class={`error-container ${variant}`}
   role="region"
   aria-labelledby="error-title"
-  data-redirect-after={typeof redirectAfter === 'number' ? redirectAfter : undefined}
-  data-redirect-to={redirectTo}
 >
   <div class="error-content">
-    {icon && <div class="error-icon" aria-hidden="true">{icon}</div>}
+    {#if icon}
+      <div class="error-icon" aria-hidden="true">{icon}</div>
+    {/if}
     <h1 class="error-code">{code}</h1>
+
     <div class="message-card" role="group" aria-labelledby="error-title">
       <h2 id="error-title" class="error-message">{title}</h2>
-      {description && <p class="error-description">{description}</p>}
-      {typeof redirectAfter === 'number' && redirectAfter > 0 && (
+      {#if description}
+        <p class="error-description">{description}</p>
+      {/if}
+      {#if typeof redirectAfter === "number" && redirectAfter > 0}
         <p class="redirect-message">
-          <span id="countdown">{redirectAfter}</span>秒後にトップページへリダイレクトします...
+          <span id="countdown">{countdown}</span
+          >秒後にトップページへリダイレクトします...
         </p>
-      )}
+      {/if}
       <a class="back-button gradient-btn" href={redirectTo}>{backText}</a>
     </div>
   </div>
 </div>
 
-{typeof redirectAfter === 'number' && redirectAfter > 0 && (
-  <script is:inline>
-    const container = document.querySelector('.error-container');
-    const afterAttr = container?.getAttribute('data-redirect-after');
-    const toAttr = container?.getAttribute('data-redirect-to') || '/';
-    const after = Number(afterAttr);
-    if (!Number.isNaN(after) && after > 0) {
-      let countdown = after;
-      const el = document.getElementById('countdown');
-      const timer = setInterval(() => {
-        countdown--;
-        if (el) el.textContent = String(countdown);
-        if (countdown <= 0) {
-          clearInterval(timer);
-          window.location.href = toAttr;
-        }
-      }, 1000);
-    }
-  </script>
-)}
-
 <style>
   .error-container {
-    /* Errorページではfooterをfixedにするため、実際の固定高に合わせて上書き */
     --footer-height: 56px;
-    height: calc(
-      100dvh - var(--header-height) - var(--footer-height)
-      - 4px
-    );
+    height: calc(100dvh - var(--header-height) - var(--footer-height) - 4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,11 +96,13 @@ const {
 
   .message-card .error-message,
   .message-card .error-description,
-  .message-card .redirect-message { text-shadow: none; }
+  .message-card .redirect-message {
+    text-shadow: none;
+  }
 
-  .message-card .gradient-btn { margin-top: var(--spacing-sm); }
-
-  .error-content > * { margin: 0; }
+  .message-card .gradient-btn {
+    margin-top: var(--spacing-sm);
+  }
 
   .error-icon {
     font-size: 52px;
@@ -126,21 +111,33 @@ const {
   }
 
   @keyframes steam {
-    0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
-    50% { transform: translateY(-8px) scale(1.03); opacity: .9; }
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-8px) scale(1.03);
+      opacity: 0.9;
+    }
   }
 
   .error-code {
     font-size: 60px;
     font-weight: 700;
     line-height: 1;
-    text-shadow: 0 4px 20px rgba(0,0,0,.3);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     animation: float 3s ease-in-out infinite;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0) }
-    50% { transform: translateY(-8px) }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   .error-message {
@@ -148,20 +145,20 @@ const {
     font-weight: 600;
     margin: var(--spacing-xs) 0;
     line-height: 1.15;
-    text-shadow: 0 2px 10px rgba(0,0,0,.2);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   .error-description {
     font-size: var(--font-size-xs);
     margin: var(--spacing-xs) 0;
     line-height: 1.4;
-    opacity: .9;
+    opacity: 0.9;
   }
 
   .redirect-message {
     font-size: var(--font-size-xs);
     margin: var(--spacing-xs) 0;
-    opacity: .85;
+    opacity: 0.85;
   }
 
   .gradient-btn {
@@ -175,19 +172,34 @@ const {
     font-weight: 700;
     font-size: var(--font-size-sm);
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal), opacity var(--transition-normal);
+    transition:
+      transform var(--transition-normal),
+      box-shadow var(--transition-normal),
+      opacity var(--transition-normal);
   }
 
-  .gradient-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(99,102,241,.45); opacity: .95; }
+  .gradient-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(99, 102, 241, 0.45);
+    opacity: 0.95;
+  }
 
   @media (max-width: 768px) {
     .error-container {
       height: calc(100dvh - var(--header-height) - var(--footer-height) - 4px);
     }
-    .error-icon { font-size: 44px; }
-    .error-code { font-size: 48px; }
-    .error-message { font-size: var(--font-size-base); }
-    .message-card { padding: var(--spacing-sm) var(--spacing-md); }
+    .error-icon {
+      font-size: 44px;
+    }
+    .error-code {
+      font-size: 48px;
+    }
+    .error-message {
+      font-size: var(--font-size-base);
+    }
+    .message-card {
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
   }
 
   :global(footer) {
@@ -200,5 +212,7 @@ const {
     margin-top: 0;
     padding: var(--spacing-2xs) var(--spacing-md);
   }
-  :global(footer p) { font-size: var(--font-size-sm); }
+  :global(footer p) {
+    font-size: var(--font-size-sm);
+  }
 </style>

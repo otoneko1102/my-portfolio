@@ -103,7 +103,9 @@
   }
 
   @media (max-width: 768px) {
-    .header-content { padding: var(--header-padding-y) var(--header-padding-x); }
+    .header-content {
+      padding: var(--header-padding-y) var(--header-padding-x);
+    }
 
     .header-brand {
       margin-left: var(--spacing-md);
@@ -124,7 +126,9 @@
   }
 
   @media (max-width: 480px) {
-    .header-content { padding: var(--header-padding-y) var(--header-padding-x); }
+    .header-content {
+      padding: var(--header-padding-y) var(--header-padding-x);
+    }
 
     .header-brand {
       margin-left: var(--spacing-sm);
