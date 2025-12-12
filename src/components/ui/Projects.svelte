@@ -87,6 +87,46 @@
     }
     return () => clearInterval(autoplayInterval);
   });
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  let touchStartTime = 0;
+  const SWIPE_THRESHOLD = 50;
+  const SWIPE_MAX_VERTICAL_DRIFT = 40;
+
+  const handleTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchEndX = t.clientX;
+    touchEndY = t.clientY;
+    touchStartTime = Date.now();
+  };
+
+  const handleTouchMove = (e) => {
+    const t = e.touches[0];
+    touchEndX = t.clientX;
+    touchEndY = t.clientY;
+  };
+
+  const handleTouchEnd = () => {
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+    if (
+      Math.abs(dy) < SWIPE_MAX_VERTICAL_DRIFT &&
+      Math.abs(dx) > SWIPE_THRESHOLD
+    ) {
+      if (dx < 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    resetAutoplay();
+  };
 </script>
 
 <section id="projects" class="projects-section">
@@ -94,7 +134,12 @@
     <h2 class="projects-title">Projects</h2>
 
     <div class="carousel-wrapper">
-      <div class="carousel">
+      <div
+        class="carousel"
+        on:touchstart={handleTouchStart}
+        on:touchmove={handleTouchMove}
+        on:touchend={handleTouchEnd}
+      >
         {#each projects as project, index}
           <article
             class="project-card"
@@ -396,6 +441,11 @@
     color: var(--color-text-light);
     font-size: var(--font-size-sm);
     line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
   .project-tags {
@@ -405,6 +455,7 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    margin-top: auto;
   }
 
   .project-tags::-webkit-scrollbar {
@@ -489,7 +540,10 @@
 
     .carousel {
       padding: var(--spacing-lg) 0;
-      min-height: 450px;
+      min-height: 420px;
+    }
+    .project-image {
+      height: 220px;
     }
 
     .project-card {
@@ -540,7 +594,10 @@
 
     .carousel {
       padding: var(--spacing-md) 0;
-      min-height: 400px;
+      min-height: 360px;
+    }
+    .project-image {
+      height: 180px;
     }
 
     .project-card {
@@ -563,14 +620,24 @@
     }
 
     .project-overlay {
-      flex-direction: column;
-      align-items: stretch;
-      gap: var(--spacing-sm);
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-end;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-sm);
     }
 
     .project-link,
     .project-github {
       justify-content: center;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: var(--font-size-xs);
+      border-radius: var(--border-radius-sm);
+    }
+
+    .project-github iconify-icon {
+      width: 16px;
+      height: 16px;
     }
 
     .project-tags::-webkit-scrollbar {
