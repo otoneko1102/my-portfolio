@@ -13,7 +13,7 @@
             {#each category.items as skill}
               {@const isPath =
                 skill.icon.startsWith("/") || skill.icon.includes(".")}
-              <div class="skill-item" title={skill.name}>
+              <div class="skill-item">
                 <div class="skill-icon">
                   {#if isPath}
                     <img src={skill.icon} alt={skill.name} />

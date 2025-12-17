@@ -9,3 +9,7 @@ export { aboutDetails } from "./data/aboutDetails.js";
 export { contactLinks } from "./data/contactLinks.js";
 export { blogConfig } from "./data/blogConfig.js";
 export { colors } from "./data/colors.js";
+export {
+  crossLinks,
+  crossLinksConfig,
+} from "./data/crossLinks.js";

@@ -48,7 +48,9 @@
           >秒後にトップページへリダイレクトします...
         </p>
       {/if}
-      <a class="back-button gradient-btn" href={redirectTo}>{backText}</a>
+      <a class="back-button gradient-btn" href={redirectTo} data-no-preview
+        >{backText}</a
+      >
     </div>
   </div>
 </div>

@@ -4,7 +4,6 @@
 
   let currentIndex = 0;
   let displayIndex = 0;
-  let autoplayInterval;
   let isTransitioning = false;
   let imageErrors = new Set();
 
@@ -22,8 +21,6 @@
       currentIndex = index;
       isTransitioning = false;
     }, 650);
-
-    resetAutoplay();
   };
 
   const prevSlide = () => {
@@ -35,8 +32,6 @@
       currentIndex = currentIndex - 1;
       isTransitioning = false;
     }, 650);
-
-    resetAutoplay();
   };
 
   const nextSlide = () => {
@@ -48,28 +43,6 @@
       currentIndex = currentIndex + 1;
       isTransitioning = false;
     }, 650);
-
-    resetAutoplay();
-  };
-
-  const resetAutoplay = () => {
-    clearInterval(autoplayInterval);
-    startAutoplay();
-  };
-
-  const startAutoplay = () => {
-    autoplayInterval = setInterval(() => {
-      if (currentIndex < projects.length - 1) {
-        nextSlide();
-      } else {
-        isTransitioning = true;
-        displayIndex = 0;
-        setTimeout(() => {
-          currentIndex = 0;
-          isTransitioning = false;
-        }, 650);
-      }
-    }, 10000);
   };
 
   const getSlidePosition = (index) => {
@@ -82,10 +55,7 @@
   };
 
   onMount(() => {
-    if (projects.length > 1) {
-      startAutoplay();
-    }
-    return () => clearInterval(autoplayInterval);
+    // Autoplay disabled - manual navigation only
   });
 
   let touchStartX = 0;
@@ -125,7 +95,6 @@
         prevSlide();
       }
     }
-    resetAutoplay();
   };
 </script>
 

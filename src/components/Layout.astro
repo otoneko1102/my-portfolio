@@ -1,6 +1,7 @@
 ---
 import Header from "./ui/Header.svelte";
 import Footer from "./ui/Footer.astro";
+import LinkPreview from "./ui/LinkPreview.svelte";
 import { metaConfig, siteConfig } from "../settings/config.js";
 import "../styles/global.css";
 
@@ -91,5 +92,6 @@ const ogImageURL = new URL(pageImage, siteConfig.url);
     <Header client:load />
     <slot />
     <Footer />
+    <LinkPreview client:load />
   </body>
 </html>

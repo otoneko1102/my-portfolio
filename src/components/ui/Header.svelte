@@ -4,13 +4,13 @@
 
 <header>
   <div class="container header-content">
-    <a href="/" class="header-brand">
+    <a href="/" class="header-brand" data-no-preview>
       <img src={siteConfig.logo} alt={siteConfig.title} class="header-logo" />
     </a>
     <ul class="header-links">
       {#each navLinks as link}
         <li>
-          <a href={link.href}>{link.label}</a>
+          <a href={link.href} data-no-preview>{link.label}</a>
         </li>
       {/each}
     </ul>
