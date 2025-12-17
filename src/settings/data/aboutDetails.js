@@ -12,7 +12,7 @@ export const aboutDetails = [
       "公立はこだて未来大学 '25 (B1)",
       "Mariners' conference",
       "温泉同好会",
-      "もふもふぽっぷ"
+      "もふもふぽっぷ",
     ],
   },
   {

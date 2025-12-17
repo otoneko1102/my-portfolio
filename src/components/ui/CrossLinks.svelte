@@ -36,7 +36,7 @@
     };
   };
 
-  const fetchWithTimeout = async (url, timeout = 8000) => {
+  const fetchWithTimeout = async (url, timeout = 3000) => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -60,7 +60,7 @@
         if (i > 0) {
           await new Promise((resolve) => setTimeout(resolve, i * 200));
         }
-        const response = await fetchWithTimeout(url, 8000);
+        const response = await fetchWithTimeout(url, 3000);
         if (response.ok) {
           return await response.text();
         }

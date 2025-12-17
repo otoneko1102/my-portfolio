@@ -40,7 +40,7 @@
     };
   };
 
-  const fetchWithTimeout = async (url, timeout = 8000) => {
+  const fetchWithTimeout = async (url, timeout = 3000) => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -61,11 +61,10 @@
   const fetchWithRetry = async (url, maxRetries = 2) => {
     for (let i = 0; i < maxRetries; i++) {
       try {
-        // 各リトライで少し遅延を入れる（200ms, 400ms...）
         if (i > 0) {
           await new Promise((resolve) => setTimeout(resolve, i * 200));
         }
-        const response = await fetchWithTimeout(url, 8000);
+        const response = await fetchWithTimeout(url, 3000);
         if (response.ok) {
           return await response.text();
         }
