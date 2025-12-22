@@ -19,7 +19,7 @@ const javaScript = {
 const typescript = {
   name: "TypeScript",
   icon: "vscode-icons:file-type-typescript-official",
-  proficiency: 60,
+  proficiency: 65,
 };
 
 const coffeescript = {
@@ -66,17 +66,17 @@ export const skills = [
       {
         name: "React",
         icon: "logos:react",
-        proficiency: 30,
+        proficiency: 35,
       },
       {
         name: "Next.js",
         icon: "logos:nextjs-icon",
-        proficiency: 30,
+        proficiency: 35,
       },
       {
         name: "TailwindCSS",
         icon: "logos:tailwindcss-icon",
-        proficiency: 30,
+        proficiency: 35,
       },
     ],
   },
@@ -99,7 +99,7 @@ export const skills = [
       {
         name: "Hono",
         icon: "logos:hono",
-        proficiency: 60,
+        proficiency: 70,
       },
       {
         name: "Nest.js",
