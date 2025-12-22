@@ -64,14 +64,53 @@
     justify-content: center;
     padding: 0;
     overflow: hidden;
+    position: relative; /* allow overlay pseudo-element */
   }
 
   .error-container.default {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: transparent;
   }
 
+  /* Teapot uses an image background with a subtle overlay for readability */
   .error-container.teapot {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-image: url("/teapot.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f5576c; /* fallback */
+    position: relative;
+  }
+
+  .error-container.teapot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* subtle dark overlay to ensure contrast with varying images */
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+    z-index: 0;
+  }
+
+  /* Hide inline icon for teapot variant (we also remove the prop in the invocation) */
+  .error-container.teapot .error-icon {
+    display: none;
+  }
+
+  .error-content {
+    text-align: center;
+    color: white;
+    max-width: 560px;
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    z-index: 1;
   }
 
   .error-content {
@@ -88,12 +127,12 @@
 
   .message-card {
     margin-top: var(--spacing-sm);
-    background: rgba(255, 255, 255, 0.96);
+    background: transparent;
     color: var(--color-text);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-md) var(--spacing-lg);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(2px);
+    box-shadow: 0 0 0 transparent;
+    backdrop-filter: none;
   }
 
   .message-card .error-message,

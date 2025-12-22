@@ -10,9 +10,15 @@ export const aboutDetails = [
     label: "所属",
     values: [
       "公立はこだて未来大学 '25 (B1)",
-      "Mariners' conference",
-      "温泉同好会",
       "もふもふぽっぷ",
+    ],
+  },
+  {
+    label: "サークル",
+    values: [
+      "Mariners' conference",
+      "Sound Create",
+      "温泉同好会",
     ],
   },
   {
@@ -28,6 +34,13 @@ export const aboutDetails = [
     values: [
       "便利とロマンをシェアしよう",
       "思い立ったが吉日",
+    ],
+  },
+  {
+    label: "実績",
+    values: [
+      "P2HACKS 2025 Pre-PBL部門 Fenrir賞",
+      "P2HACKS 2025 Pre-PBL部門 最優秀賞",
     ],
   },
 ];

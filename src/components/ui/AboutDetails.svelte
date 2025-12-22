@@ -20,7 +20,8 @@
 <style>
   .about-details {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Show up to 3 groups per row; any additional groups will wrap to the next line */
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: var(--spacing-lg);
     margin-top: var(--spacing-2xl);
   }
@@ -63,7 +64,7 @@
 
   @media (max-width: 768px) {
     .about-details {
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
     }
   }
 

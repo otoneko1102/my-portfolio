@@ -75,4 +75,19 @@ export const projects = [
     github:
       "https://github.com/otoneko1102/shorturl-service",
   },
+  {
+    title: "U'n'IVERSE",
+    description:
+      "Create your own profile card easily and share it with the people you meet to expand your universe.",
+    image: "/projects/universe.png",
+    tags: [
+      "P2HACKS 2025",
+      "もふもふぽっぷ",
+      "Next.js",
+      "TailwindCSS",
+      "TypeScript",
+      "Hono",
+    ],
+    url: "https://universe.mfmf.moe",
+  },
 ];
