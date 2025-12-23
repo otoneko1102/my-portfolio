@@ -50,7 +50,7 @@
 
   /* Layout heights */
   --header-height: 108px;
-  --footer-height: 96px;
+  --footer-height: 72px;
 
   /* Layout spacings (per side) */
   --header-padding-y: var(--spacing-lg);
@@ -58,9 +58,9 @@
   --header-margin-top: 0px;
   --header-margin-bottom: 0px;
 
-  --footer-padding-y: var(--spacing-2xl);
+  --footer-padding-y: var(--spacing-lg);
   --footer-padding-x: var(--spacing-lg);
-  --footer-margin-top: var(--spacing-4xl);
+  --footer-margin-top: var(--spacing-xl);
   --footer-margin-bottom: 0px;
 
   /* Brand gradient */

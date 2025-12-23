@@ -71,7 +71,20 @@
       <h2 class="blog-title">Blog</h2>
     </div>
     {#if loading}
-      <p class="empty">Loading...</p>
+      <div class="blog-list">
+        {#each Array(MAX_ITEMS) as _, i}
+          <article class="blog-card placeholder" aria-busy="true">
+            <div class="card-header">
+              <p class="pub-date skeleton skeleton-text short"></p>
+              <h3 class="post-title skeleton skeleton-title"><span class="sr-only">Loading…</span></h3>
+            </div>
+            <p class="post-description skeleton skeleton-text"></p>
+            <div class="card-actions" aria-hidden="true">
+              <div class="read-link skeleton skeleton-button" style="width: 100px; height: 34px;"></div>
+            </div>
+          </article>
+        {/each}
+      </div>
     {:else if hasError}
       <p class="empty">Unable to load recent posts.</p>
     {:else}
@@ -253,6 +266,64 @@
     color: var(--color-text);
     opacity: 0.8;
     font-size: var(--font-size-md);
+  }
+
+  /* Skeleton placeholders for loading state */
+  .blog-card.placeholder {
+    pointer-events: none;
+    opacity: 0.95;
+    filter: saturate(0.98);
+    background: linear-gradient(180deg, #fff, #fbfbfb);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+
+  .blog-card.placeholder:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border-color: var(--color-border);
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, rgba(0,0,0,0.06) 25%, rgba(0,0,0,0.04) 50%, rgba(0,0,0,0.06) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+    border-radius: 6px;
+  }
+
+  .skeleton-text {
+    height: 12px;
+  }
+
+  .skeleton-text.short {
+    width: 80px;
+    height: 12px;
+  }
+
+  .skeleton-title {
+    height: 20px;
+    width: 80%;
+    margin: 6px 0;
+  }
+
+  .skeleton-button {
+    border-radius: var(--border-radius-md);
+  }
+
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (max-width: 768px) {

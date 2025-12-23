@@ -1,13 +1,15 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   let previewData = null;
   let isLoading = false;
   let showPreview = false;
   let previewPosition = { x: 0, y: 0 };
   let currentUrl = null;
+  let currentLink = null;
   let previewTimeout = null;
   let cache = new Map();
+  let previewDirection = "top";
 
   const extractOGData = (html, url) => {
     const parser = new DOMParser();
@@ -139,6 +141,7 @@
     }
 
     currentUrl = url;
+    currentLink = link;
 
     clearTimeout(previewTimeout);
     previewTimeout = setTimeout(async () => {
@@ -147,14 +150,22 @@
         x: rect.left + rect.width / 2,
         y: rect.top - 10,
       };
+      previewDirection = "top";
 
       showPreview = true;
       isLoading = true;
+
+      // initial adjust so it doesn't overflow while loading
+      await tick();
+      adjustPreview(link);
 
       const data = await fetchPreviewData(url);
       if (currentUrl === url) {
         previewData = data;
         isLoading = false;
+        // re-adjust after content changes size
+        await tick();
+        adjustPreview(link);
       }
     }, 300);
   };
@@ -165,7 +176,8 @@
     isLoading = false;
     previewData = null;
     currentUrl = null;
-  };
+    currentLink = null;
+  }; 
 
   const attachListeners = (link) => {
     // Remove title attribute
@@ -179,6 +191,53 @@
     link.removeEventListener("mouseenter", handleMouseEnter);
     link.removeEventListener("mouseleave", handleMouseLeave);
   };
+
+  const adjustPreview = async (link) => {
+    await tick();
+    const el = document.querySelector(".link-preview");
+    if (!el || !link) return;
+
+    const elRect = el.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const margin = 12;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const elWidth = elRect.width;
+    const elHeight = elRect.height;
+
+    // Horizontal clamp (center of link)
+    let centerX = linkRect.left + linkRect.width / 2;
+    centerX = Math.min(
+      Math.max(centerX, margin + elWidth / 2),
+      viewportWidth - margin - elWidth / 2
+    );
+    previewPosition.x = centerX;
+
+    // Vertical placement: prefer above, fallback to below
+    const gap = 8;
+    const topSpace = linkRect.top - margin;
+    const bottomSpace = viewportHeight - linkRect.bottom - margin;
+
+    if (topSpace >= elHeight + gap) {
+      previewDirection = "top";
+      previewPosition.y = linkRect.top - gap;
+    } else if (bottomSpace >= elHeight + gap) {
+      previewDirection = "bottom";
+      previewPosition.y = linkRect.bottom + gap;
+    } else {
+      // choose the side with more space and clamp
+      if (topSpace > bottomSpace) {
+        previewDirection = "top";
+        previewPosition.y = Math.max(margin + elHeight, linkRect.top - gap);
+      } else {
+        previewDirection = "bottom";
+        previewPosition.y = Math.min(
+          viewportHeight - margin - elHeight,
+          linkRect.bottom + gap
+        );
+      }
+    }
+  }; 
 
   onMount(() => {
     const attachedLinks = new Set();
@@ -209,12 +268,23 @@
       subtree: true,
     });
 
+    const onWindowChange = () => {
+      if (showPreview && currentLink) {
+        adjustPreview(currentLink);
+      }
+    };
+
+    window.addEventListener("resize", onWindowChange);
+    document.addEventListener("scroll", onWindowChange, true);
+
     return () => {
       observer.disconnect();
       attachedLinks.forEach((link) => {
         detachListeners(link);
       });
       attachedLinks.clear();
+      window.removeEventListener("resize", onWindowChange);
+      document.removeEventListener("scroll", onWindowChange, true);
     };
   });
 </script>
@@ -222,6 +292,7 @@
 {#if showPreview}
   <div
     class="link-preview"
+    data-position={previewDirection}
     style="left: {previewPosition.x}px; top: {previewPosition.y}px;"
   >
     {#if isLoading}
@@ -269,21 +340,29 @@
     border: 1px solid #e0e0e0;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    max-width: 400px;
-    width: max-content;
+    max-width: min(400px, calc(100vw - 32px));
+    width: auto;
     z-index: 10001;
     pointer-events: none;
-    animation: fadeIn 0.2s ease;
+    opacity: 0;
+    animation: fadeIn 0.12s ease forwards;
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+  }
+
+  .link-preview[data-position="bottom"] {
+    transform: translate(-50%, 0);
+  }
+  .link-preview[data-position="top"] {
+    transform: translate(-50%, -100%);
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translate(-50%, calc(-100% + 8px));
     }
     to {
       opacity: 1;
-      transform: translate(-50%, -100%);
     }
   }
 
@@ -317,7 +396,7 @@
   .preview-content {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto;
     border-radius: 12px;
   }
 

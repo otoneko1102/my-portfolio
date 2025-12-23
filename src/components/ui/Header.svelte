@@ -21,11 +21,13 @@
   header {
     position: sticky;
     top: 0;
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
+    background-color: rgba(248, 248, 248, 0.65);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     z-index: 100;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
     --header-height: 50px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .header-content {
