@@ -315,6 +315,18 @@
     margin: 6px 0;
   }
 
+  /* Ensure placeholders match the expected height of the real card content */
+  .blog-card.placeholder .skeleton-title {
+    /* title typically spans up to 2 lines */
+    height: calc(var(--font-size-xl) * 1.4 * 2);
+  }
+
+  .blog-card.placeholder .post-description.skeleton {
+    /* description typically spans up to 3 lines */
+    height: calc(var(--font-size-base) * 1.6 * 3);
+    margin: 0;
+  }
+
   .skeleton-button {
     border-radius: var(--border-radius-md);
   }
@@ -346,7 +358,7 @@
     }
 
     .blog-title {
-      font-size: var(--font-size-3xl);
+      font-size: var(--font-size-2xl);
     }
   }
 
