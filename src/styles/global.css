@@ -50,7 +50,7 @@
 
   /* Layout heights */
   --header-height: 108px;
-  --footer-height: 72px;
+  --footer-height: 56px;
 
   /* Layout spacings (per side) */
   --header-padding-y: var(--spacing-lg);
@@ -58,9 +58,9 @@
   --header-margin-top: 0px;
   --header-margin-bottom: 0px;
 
-  --footer-padding-y: var(--spacing-lg);
-  --footer-padding-x: var(--spacing-lg);
-  --footer-margin-top: var(--spacing-xl);
+  --footer-padding-y: var(--spacing-sm);
+  --footer-padding-x: var(--spacing-md);
+  --footer-margin-top: var(--spacing-md);
   --footer-margin-bottom: 0px;
 
   /* Brand gradient */
@@ -97,6 +97,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
+  /* leave room for fixed footer so content isn't hidden */
+  /* padding-bottom: var(--footer-height); */
+  /* respect safe-area insets on supported devices */
+  /* padding-bottom: calc(var(--footer-height) + env(safe-area-inset-bottom)); */
 }
 
 /* Typography */
@@ -246,6 +250,17 @@ th {
 /* Sections */
 section {
   scroll-margin-top: calc(var(--header-height) + var(--spacing-xl));
+}
+
+.site-main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.site-main.with-header-spacing {
+  padding-top: var(--header-height);
+  padding-bottom: calc(var(--footer-height) + env(safe-area-inset-bottom));
+  min-height: calc(100dvh - var(--header-height) - var(--footer-height));
 }
 
 /* Gradient */

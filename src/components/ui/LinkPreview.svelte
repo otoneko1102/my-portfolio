@@ -177,7 +177,7 @@
     previewData = null;
     currentUrl = null;
     currentLink = null;
-  }; 
+  };
 
   const attachListeners = (link) => {
     // Remove title attribute
@@ -237,7 +237,7 @@
         );
       }
     }
-  }; 
+  };
 
   onMount(() => {
     const attachedLinks = new Set();

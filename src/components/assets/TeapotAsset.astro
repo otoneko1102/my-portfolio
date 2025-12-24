@@ -3,7 +3,11 @@ import Layout from "../Layout.astro";
 import ErrorAsset from "./ErrorAsset.svelte";
 ---
 
-<Layout title="418 - I'm a teapot" description="I'm a teapot">
+<Layout
+  title="418 - I'm a teapot"
+  description="I'm a teapot"
+  headerSpacing={false}
+>
   <ErrorAsset
     code="418"
     title="I'm a teapot"

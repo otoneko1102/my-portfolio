@@ -11,6 +11,7 @@ interface Props {
   image?: string;
   type?: string;
   pageKey?: string;
+  headerSpacing?: boolean;
 }
 
 type MetaEntry = {
@@ -45,6 +46,7 @@ const pageType = metaPreset.type || type || baseMeta.type || "website";
 
 const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
 const ogImageURL = new URL(pageImage, siteConfig.url);
+const headerSpacing = (Astro.props.headerSpacing ?? true) as boolean;
 ---
 
 <html lang="ja">
@@ -90,7 +92,9 @@ const ogImageURL = new URL(pageImage, siteConfig.url);
   </head>
   <body>
     <Header client:load />
-    <slot />
+    <main class={headerSpacing ? "site-main with-header-spacing" : "site-main"}>
+      <slot />
+    </main>
     <Footer />
     <LinkPreview client:load />
   </body>

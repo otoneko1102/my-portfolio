@@ -26,7 +26,7 @@ export const crossLinksConfig = {
   twitterUsername:
     "1517667933291704320",
   applyMessageTemplate:
-    "相互リンクしませんか！\n\nURL:\nあなたの名前:\n紹介文:(任意)\nサイト名:(任意)\nサムネイルURL:(任意)",
+    "相互リンクしませんか！\n\nURL:\nあなたの名前:\n紹介文:(任意)\nサイト名:(任意)\nサムネイルURL:(任意)\n\n※OGPから取得できるのであれば任意の部分は不要",
 };
 
 /**
@@ -34,9 +34,9 @@ export const crossLinksConfig = {
  */
 export const crossLinks = [
   {
-    url: "https://otoneko.cat",
+    url: "https://kinoemon.com",
     title: null,
-    author: "otoneko.",
+    author: "キノえもん",
     description: null,
     thumbnail: null,
   },

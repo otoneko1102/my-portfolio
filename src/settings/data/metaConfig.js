@@ -1,3 +1,5 @@
+import { aboutMe } from "./aboutMe";
+
 /**
  * @typedef {Object} MetaTag
  * @property {string} [title]
@@ -18,9 +20,8 @@
 export const metaConfig = {
   default: {
     title: "まろん｡のポートフォリオ",
-    description:
-      "まろん｡のポートフォリオサイトです。",
-    image: "/icon.png",
+    description: aboutMe.bio,
+    image: aboutMe.image,
     type: "website",
   },
   pages: {

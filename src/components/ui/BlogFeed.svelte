@@ -76,11 +76,16 @@
           <article class="blog-card placeholder" aria-busy="true">
             <div class="card-header">
               <p class="pub-date skeleton skeleton-text short"></p>
-              <h3 class="post-title skeleton skeleton-title"><span class="sr-only">Loading…</span></h3>
+              <h3 class="post-title skeleton skeleton-title">
+                <span class="sr-only">Loading…</span>
+              </h3>
             </div>
             <p class="post-description skeleton skeleton-text"></p>
             <div class="card-actions" aria-hidden="true">
-              <div class="read-link skeleton skeleton-button" style="width: 100px; height: 34px;"></div>
+              <div
+                class="read-link skeleton skeleton-button"
+                style="width: 100px; height: 34px;"
+              ></div>
             </div>
           </article>
         {/each}
@@ -274,17 +279,22 @@
     opacity: 0.95;
     filter: saturate(0.98);
     background: linear-gradient(180deg, #fff, #fbfbfb);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
 
   .blog-card.placeholder:hover {
     transform: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     border-color: var(--color-border);
   }
 
   .skeleton {
-    background: linear-gradient(90deg, rgba(0,0,0,0.06) 25%, rgba(0,0,0,0.04) 50%, rgba(0,0,0,0.06) 75%);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06) 25%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.06) 75%
+    );
     background-size: 200% 100%;
     animation: shimmer 1.2s linear infinite;
     border-radius: 6px;
@@ -310,8 +320,12 @@
   }
 
   @keyframes shimmer {
-    from { background-position: 200% 0; }
-    to { background-position: -200% 0; }
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
   }
 
   .sr-only {

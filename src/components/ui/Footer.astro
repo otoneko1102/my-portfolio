@@ -15,11 +15,21 @@ const yearText =
 
 <style>
   footer {
-    background-color: var(--color-background);
-    border-top: 1px solid var(--color-border);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 60; /* below header (100) */
+    background-color: rgba(248, 248, 248, 0.35);
+    border-top: 1px solid rgba(0, 0, 0, 0.025);
     padding: var(--footer-padding-y) var(--footer-padding-x);
+    /* accommodate safe-area inset on iOS */
+    padding-bottom: calc(var(--footer-padding-y) + env(safe-area-inset-bottom));
     text-align: center;
-    margin-top: var(--footer-margin-top);
+    margin-top: 0;
+    box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .footer-content {
@@ -28,7 +38,7 @@ const yearText =
   }
 
   footer p {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-xs);
     color: var(--color-text);
     margin: 0;
     font-weight: 500;

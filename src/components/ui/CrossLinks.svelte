@@ -1,6 +1,6 @@
 <script>
   import { crossLinks, crossLinksConfig } from "../../settings/config.js";
-  import { onMount } from "svelte";
+  import { onMount, tick, onDestroy } from "svelte";
 
   let linkData = [];
   let isLoading = true;
@@ -143,6 +143,116 @@
       isLoading = false;
     }
   });
+
+  // Truncate multi-line descriptions to 3 lines (with ellipsis) as a JS fallback
+  // for browsers that don't support -webkit-line-clamp or where we'll ensure an ellipsis is shown.
+  let resizeTimeout;
+
+  const adjustDescriptions = async () => {
+    if (typeof window === "undefined" || typeof document === "undefined")
+      return;
+    await tick();
+    const container = document.getElementById("crosslinks");
+    if (!container) return;
+    const nodes = container.querySelectorAll(".crosslink-description");
+
+    nodes.forEach((el) => {
+      // store original text
+      if (!el.dataset.fulltext) el.dataset.fulltext = el.textContent || "";
+      const fulltext = el.dataset.fulltext;
+
+      // measurement element
+      const style = window.getComputedStyle(el);
+      const lineHeightPx =
+        parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.4;
+      const maxHeight = lineHeightPx * 3;
+
+      const measure = document.createElement("div");
+      measure.style.position = "absolute";
+      measure.style.visibility = "hidden";
+      measure.style.pointerEvents = "none";
+      measure.style.width = el.clientWidth + "px";
+      measure.style.font = style.font;
+      measure.style.fontSize = style.fontSize;
+      measure.style.fontWeight = style.fontWeight;
+      measure.style.lineHeight = style.lineHeight;
+      measure.style.letterSpacing = style.letterSpacing;
+      measure.style.whiteSpace = "normal";
+      measure.style.wordBreak = "break-word";
+      measure.style.padding = "0";
+      measure.style.margin = "0";
+      measure.textContent = fulltext;
+
+      document.body.appendChild(measure);
+
+      if (measure.scrollHeight <= maxHeight) {
+        el.textContent = fulltext;
+        el.removeAttribute("title");
+        document.body.removeChild(measure);
+        return;
+      }
+
+      // binary-search to find the maximum substring that fits
+      let low = 0;
+      let high = fulltext.length;
+      let best = 0;
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        measure.textContent = fulltext.slice(0, mid) + "…";
+        if (measure.scrollHeight <= maxHeight) {
+          best = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      let truncated = fulltext.slice(0, best);
+      const lastSpace = truncated.lastIndexOf(" ");
+      if (lastSpace > Math.floor(best * 0.6)) {
+        truncated = truncated.slice(0, lastSpace);
+      }
+
+      el.textContent = truncated + "…";
+      el.setAttribute("title", fulltext);
+
+      document.body.removeChild(measure);
+    });
+  };
+
+  $: if (!isLoading && linkData.length) {
+    // schedule it (adjustDescriptions uses tick internally)
+    adjustDescriptions();
+  }
+
+  const onResize = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(adjustDescriptions, 120);
+  };
+
+  let ro;
+
+  onMount(() => {
+    const container = document.getElementById("crosslinks");
+    if (typeof window !== "undefined") {
+      if (typeof ResizeObserver !== "undefined") {
+        ro = new ResizeObserver(() => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(adjustDescriptions, 120);
+        });
+        if (container) ro.observe(container);
+      }
+      window.addEventListener("resize", onResize);
+    }
+  });
+
+  onDestroy(() => {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("resize", onResize);
+    }
+    if (ro) ro.disconnect();
+    clearTimeout(resizeTimeout);
+  });
 </script>
 
 <section id="crosslinks" class="crosslinks-section">
@@ -181,15 +291,15 @@
             class="crosslink-card"
             data-no-preview
           >
-            {#if link.thumbnail}
-              <div class="crosslink-thumbnail">
+            <div class="crosslink-thumbnail">
+              {#if link.thumbnail}
                 <img
                   src={link.thumbnail}
                   alt={link.title}
                   on:error={(e) => (e.target.style.display = "none")}
                 />
-              </div>
-            {/if}
+              {/if}
+            </div>
             <div class="crosslink-content">
               <div class="crosslink-header">
                 <img
@@ -201,9 +311,9 @@
                 <span class="crosslink-sitename">{link.siteName}</span>
               </div>
               <h3 class="crosslink-title">{link.title}</h3>
-              {#if link.author}
-                <p class="crosslink-author">by {link.author}</p>
-              {/if}
+              <p class="crosslink-author">
+                {link.author ? "by " + link.author : ""}
+              </p>
               {#if link.description}
                 <p class="crosslink-description">{link.description}</p>
               {/if}
@@ -227,6 +337,24 @@
     margin-bottom: var(--spacing-3xl);
     width: 100%;
     overflow-x: hidden;
+
+    /* Card layout variables (title:2 lines, author:1 line, desc:3 lines) */
+    --cl-title-size: 1rem; /* slightly smaller than var(--font-size-lg) */
+    --cl-title-line-height: 1.4;
+    --cl-author-size: var(--font-size-sm);
+    --cl-author-line-height: 1.5;
+    --cl-desc-size: var(--font-size-sm);
+    --cl-desc-line-height: 1.5;
+
+    --cl-title-height: calc(
+      var(--cl-title-size) * var(--cl-title-line-height) * 2
+    );
+    --cl-author-height: calc(
+      var(--cl-author-size) * var(--cl-author-line-height) * 1
+    );
+    --cl-desc-height: calc(
+      var(--cl-desc-size) * var(--cl-desc-line-height) * 3
+    );
   }
 
   .crosslinks-title {
@@ -316,6 +444,8 @@
     gap: var(--spacing-xl);
     max-width: 1200px;
     margin: 0 auto;
+    align-items: stretch;
+    grid-auto-rows: 1fr;
   }
 
   .crosslink-card {
@@ -329,6 +459,7 @@
     text-decoration: none;
     color: inherit;
     box-shadow: var(--shadow-sm);
+    height: 100%;
   }
 
   .crosslink-card:hover {
@@ -342,6 +473,9 @@
     height: 160px;
     overflow: hidden;
     background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .crosslink-thumbnail img {
@@ -352,8 +486,10 @@
 
   .crosslink-content {
     padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto var(--cl-title-height) var(--cl-author-height) var(
+        --cl-desc-height
+      ) auto;
     gap: var(--spacing-sm);
     flex: 1;
   }
@@ -362,6 +498,9 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    /* ensure single-line header to keep title start aligned */
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .crosslink-favicon {
@@ -374,14 +513,18 @@
     font-size: var(--font-size-xs);
     color: var(--color-text-light);
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .crosslink-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--cl-title-size);
     font-weight: 600;
     color: var(--color-primary);
     margin: 0;
-    line-height: 1.4;
+    line-height: var(--cl-title-line-height);
+    height: var(--cl-title-height);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -390,23 +533,29 @@
   }
 
   .crosslink-author {
-    font-size: var(--font-size-sm);
+    font-size: var(--cl-author-size);
     color: var(--color-accent);
     font-weight: 500;
     margin: 0;
+    height: var(--cl-author-height);
+    line-height: var(--cl-author-line-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .crosslink-description {
-    font-size: var(--font-size-sm);
+    font-size: var(--cl-desc-size);
     color: var(--color-text-light);
-    line-height: 1.5;
+    line-height: var(--cl-desc-line-height);
+    height: var(--cl-desc-height);
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    flex: 1;
+    word-break: break-word;
   }
 
   .crosslink-url {
@@ -416,6 +565,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-top: auto;
     padding-top: var(--spacing-sm);
     border-top: 1px solid var(--color-border);
   }
@@ -423,6 +573,22 @@
   @media (max-width: 768px) {
     .crosslinks-section {
       padding: var(--spacing-2xl) var(--spacing-lg);
+      /* smaller measurements for mobile */
+      --cl-title-size: var(--font-size-base);
+      --cl-title-line-height: 1.3;
+      --cl-author-size: var(--font-size-xs);
+      --cl-author-line-height: 1.4;
+      --cl-desc-size: var(--font-size-xs);
+      --cl-desc-line-height: 1.4;
+      --cl-title-height: calc(
+        var(--cl-title-size) * var(--cl-title-line-height) * 2
+      );
+      --cl-author-height: calc(
+        var(--cl-author-size) * var(--cl-author-line-height) * 1
+      );
+      --cl-desc-height: calc(
+        var(--cl-desc-size) * var(--cl-desc-line-height) * 3
+      );
     }
 
     .crosslinks-title {

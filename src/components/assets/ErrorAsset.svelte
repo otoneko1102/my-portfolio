@@ -57,14 +57,15 @@
 
 <style>
   .error-container {
-    --footer-height: 56px;
-    height: calc(100dvh - var(--header-height) - var(--footer-height) - 4px);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    overflow: hidden;
-    position: relative; /* allow overlay pseudo-element */
+    overflow-x: hidden;
+    overflow-y: auto;
+    inset: 0;
+    z-index: 0; /* allow header/footer (higher z-index) to overlay */
   }
 
   .error-container.default {
@@ -75,10 +76,11 @@
   .error-container.teapot {
     background-image: url("/teapot.png");
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-color: #f5576c; /* fallback */
     position: relative;
+    overflow-x: hidden; /* hide any horizontal overflow from the background */
   }
 
   .error-container.teapot::before {
@@ -104,7 +106,7 @@
     color: white;
     max-width: 560px;
     width: 100%;
-    padding: 0 var(--spacing-sm);
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,7 +128,7 @@
   }
 
   .message-card {
-    margin-top: var(--spacing-sm);
+    margin-top: 0;
     background: transparent;
     color: var(--color-text);
     border-radius: var(--border-radius-lg);
@@ -139,6 +141,7 @@
   .message-card .error-description,
   .message-card .redirect-message {
     text-shadow: none;
+    margin: 0;
   }
 
   .message-card .gradient-btn {
@@ -147,7 +150,7 @@
 
   .error-icon {
     font-size: 52px;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 0;
     animation: steam 2s ease-in-out infinite;
   }
 
@@ -167,6 +170,7 @@
     font-size: 60px;
     font-weight: 700;
     line-height: 1;
+    margin: 0;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     animation: float 3s ease-in-out infinite;
   }
@@ -184,21 +188,21 @@
   .error-message {
     font-size: var(--font-size-lg);
     font-weight: 600;
-    margin: var(--spacing-xs) 0;
+    margin: 0;
     line-height: 1.15;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   .error-description {
     font-size: var(--font-size-xs);
-    margin: var(--spacing-xs) 0;
+    margin: 0;
     line-height: 1.4;
     opacity: 0.9;
   }
 
   .redirect-message {
     font-size: var(--font-size-xs);
-    margin: var(--spacing-xs) 0;
+    margin: 0;
     opacity: 0.85;
   }
 
@@ -227,7 +231,11 @@
 
   @media (max-width: 768px) {
     .error-container {
-      height: calc(100dvh - var(--header-height) - var(--footer-height) - 4px);
+      height: 100vh;
+      position: fixed;
+      inset: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     .error-icon {
       font-size: 44px;
@@ -241,19 +249,5 @@
     .message-card {
       padding: var(--spacing-sm) var(--spacing-md);
     }
-  }
-
-  :global(footer) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 10;
-    margin-top: 0;
-    padding: var(--spacing-2xs) var(--spacing-md);
-  }
-  :global(footer p) {
-    font-size: var(--font-size-sm);
   }
 </style>

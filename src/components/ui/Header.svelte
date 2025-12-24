@@ -19,13 +19,14 @@
 
 <style>
   header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    background-color: rgba(248, 248, 248, 0.65);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    left: 0;
+    width: 100%;
+    background-color: rgba(248, 248, 248, 0.45);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     z-index: 100;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-    --header-height: 50px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
