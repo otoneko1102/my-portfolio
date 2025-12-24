@@ -635,7 +635,7 @@
     }
 
     .crosslinks-title {
-      font-size: var(--font-size-2xl);
+      font-size: var(--font-size-xl);
       margin-bottom: var(--spacing-lg);
     }
 
