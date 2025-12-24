@@ -1,3 +1,5 @@
+import requirementsHtml from "./crossLinks.html?raw";
+
 /**
  * @typedef {Object} CrossLink
  * @property {string} url - リンク先のURL
@@ -27,6 +29,7 @@ export const crossLinksConfig = {
     "1517667933291704320",
   applyMessageTemplate:
     "相互リンクしませんか！\n\nURL:\nあなたの名前:\n紹介文:(任意)\nサイト名:(任意)\nサムネイルURL:(任意)\n\n※OGPから取得できるのであれば任意の部分は不要",
+  requirementsHtml: requirementsHtml,
 };
 
 /**
@@ -37,6 +40,13 @@ export const crossLinks = [
     url: "https://kinoemon.com",
     title: null,
     author: "キノえもん",
+    description: null,
+    thumbnail: null,
+  },
+  {
+    url: "https://shikoshib.ru",
+    title: null,
+    author: "shikoshib",
     description: null,
     thumbnail: null,
   },

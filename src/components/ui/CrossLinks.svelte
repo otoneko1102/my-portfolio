@@ -274,6 +274,15 @@
         ></iconify-icon>
         {crossLinksConfig.applyButtonText}
       </a>
+
+      {#if crossLinksConfig.requirementsHtml}
+        <div class="apply-requirements" aria-live="polite">
+          <h3 class="requirements-title">要件</h3>
+          <div class="requirements-content">
+            {@html crossLinksConfig.requirementsHtml}
+          </div>
+        </div>
+      {/if}
     </div>
 
     {#if isLoading}
@@ -400,6 +409,40 @@
     background: linear-gradient(45deg, #0d8bd9, #0a6fb8);
   }
 
+  .apply-requirements {
+    margin-top: var(--spacing-md);
+    text-align: left;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px dashed var(--color-border);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.01) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+  }
+
+  .requirements-title {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .requirements-content {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  :global(.apply-requirements ul) {
+    margin: 0.5rem 0 0 1.25rem;
+  }
+
+  :global(.apply-requirements li) {
+    margin: 0.25rem 0;
+  }
+
   .no-links {
     text-align: center;
     padding: var(--spacing-3xl);
@@ -487,9 +530,9 @@
   .crosslink-content {
     padding: var(--spacing-lg);
     display: grid;
-    grid-template-rows: auto var(--cl-title-height) var(--cl-author-height) var(
-        --cl-desc-height
-      ) auto;
+    grid-template-rows:
+      auto var(--cl-title-height) var(--cl-author-height) var(--cl-desc-height)
+      auto;
     gap: var(--spacing-sm);
     flex: 1;
   }
@@ -644,6 +687,11 @@
     .apply-button {
       font-size: var(--font-size-xs);
       padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .apply-requirements {
+      padding: var(--spacing-sm);
+      font-size: var(--font-size-xs);
     }
 
     .crosslink-content {
