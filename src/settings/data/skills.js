@@ -78,6 +78,11 @@ export const skills = [
         icon: "logos:tailwindcss-icon",
         proficiency: 35,
       },
+      {
+        name: "EJS",
+        icon: "vscode-icons:file-type-ejs",
+        proficiency: 50,
+      }
     ],
   },
   {

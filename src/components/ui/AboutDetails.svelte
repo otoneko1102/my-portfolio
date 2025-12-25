@@ -64,7 +64,12 @@
 
   @media (max-width: 768px) {
     .about-details {
-      grid-template-columns: repeat(2, minmax(160px, 1fr));
+      /* On mobile and small tablet widths, show a single stacked column to avoid horizontal side-by-side */
+      grid-template-columns: 1fr;
+    }
+
+    .detail-values li {
+      font-size: var(--font-size-xs);
     }
   }
 
