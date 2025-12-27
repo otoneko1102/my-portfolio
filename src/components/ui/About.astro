@@ -242,6 +242,51 @@ const socialRows = chunkSocialLinks(socialLinks);
     flex-shrink: 0;
   }
 
+  /* Desktop-only: make social icons scale and spacing stable to avoid layout shifting */
+  @media (min-width: 769px) {
+    .about-socials {
+      gap: var(--spacing-md);
+      overflow-x: auto;
+      overflow-y: visible; /* allow pseudo-element to render without being clipped */
+      scrollbar-gutter: stable; /* avoid layout shift when scrollbar appears */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .social-row {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap; /* prevent uneven wrapping across desktop sizes */
+      padding-block: 4px; /* small top/bottom padding to avoid clipping */
+    }
+
+    .social-link {
+      width: clamp(56px, 6.5vw, 72px);
+      min-width: 48px;
+      flex: 0 1 auto;
+      overflow: visible; /* ensure scaled children are not clipped */
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    .social-link:hover {
+      transform: translateZ(0) scale(1.02);
+    }
+
+    .social-icon {
+      width: clamp(48px, 5.5vw, 64px);
+      height: clamp(48px, 5.5vw, 64px);
+      min-width: 48px;
+      min-height: 48px;
+      overflow: visible; /* allow pseudo-element to render outside box */
+    }
+
+    .social-label {
+      font-size: 0.65rem;
+    }
+  }
+
   .social-icon::before {
     content: "";
     position: absolute;
@@ -256,6 +301,7 @@ const socialRows = chunkSocialLinks(socialLinks);
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    pointer-events: none; /* ensure hover applies to link, not pseudo */
   }
 
   @keyframes gradientFlow {

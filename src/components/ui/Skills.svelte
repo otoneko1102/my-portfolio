@@ -175,6 +175,14 @@
     border: 1px solid #e0e0e0;
   }
 
+  /* Desktop-only: slightly wider proficiency bars for improved readability */
+  @media (min-width: 769px) {
+    .proficiency-bar {
+      width: clamp(26px, 6.5vw, 48px);
+      height: clamp(4px, 0.6vw, 5px);
+    }
+  }
+
   .proficiency-fill {
     height: 100%;
     background: linear-gradient(45deg, #6366f1, #8b5cf6, #6366f1, #8b5cf6);
