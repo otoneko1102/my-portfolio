@@ -1,6 +1,8 @@
 ---
 import Layout from "../components/Layout.astro";
 import ErrorAsset from "../components/assets/ErrorAsset.svelte";
+Astro.response.status = 404;
+Astro.response.statusText = "Not Found";
 ---
 
 <Layout
@@ -12,8 +14,6 @@ import ErrorAsset from "../components/assets/ErrorAsset.svelte";
     code="404"
     title="Page Not Found"
     description="お探しのページが見つかりませんでした。"
-    variant="default"
-    redirectAfter={10}
-    redirectTo="/"
+    variant="notfound"
   />
 </Layout>

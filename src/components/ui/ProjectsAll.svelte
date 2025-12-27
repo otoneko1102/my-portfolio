@@ -1,11 +1,44 @@
 <script>
   import { projects } from "../../settings/config.js";
+  import { onMount } from "svelte";
+  import { fetchOGData } from "../../lib/og.js";
 
   let imageErrors = new Set();
+  let projectList = projects;
   const handleImageError = (index) => {
     imageErrors.add(index);
     imageErrors = imageErrors;
   };
+
+  onMount(() => {
+    (async () => {
+      const need = projects.some(
+        (p) => p.url && (!p.image || !p.title || !p.description)
+      );
+      if (!need) return;
+
+      const augmented = await Promise.all(
+        projects.map(async (p) => {
+          if (p.url && (!p.image || !p.title || !p.description)) {
+            try {
+              const og = await fetchOGData(p.url);
+              return {
+                ...p,
+                image: p.image || og.image,
+                title: p.title || og.title,
+                description: p.description || og.description,
+              };
+            } catch (e) {
+              return p;
+            }
+          }
+          return p;
+        })
+      );
+
+      projectList = augmented;
+    })();
+  });
 </script>
 
 <section id="projects" class="projects-section">
@@ -13,7 +46,7 @@
     <h2 class="projects-title">Projects</h2>
 
     <div class="projects-grid">
-      {#each projects as project, index (project.github ?? project.url ?? project.title)}
+      {#each projectList as project, index (project.github ?? project.url ?? project.title)}
         <article class="project-card grid" class:no-image={!project.image}>
           <div class="project-image">
             {#if !project.image || imageErrors.has(index)}
@@ -54,6 +87,13 @@
 </section>
 
 <style>
+  .projects-title {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    color: var(--color-primary);
+    font-size: var(--font-size-4xl);
+  }
+
   .projects-grid {
     display: grid;
     /* one card per row */

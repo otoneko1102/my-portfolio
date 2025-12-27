@@ -1,11 +1,14 @@
 <script>
   import { projects } from "../../settings/config.js";
   import { onMount } from "svelte";
+  import { fetchOGData } from "../../lib/og.js";
 
   let currentIndex = 0;
   let displayIndex = 0;
   let isTransitioning = false;
   let imageErrors = new Set();
+  // Only include pinned projects in the carousel
+  let projectList = projects.filter((p) => p.pin === true);
 
   const handleImageError = (index) => {
     imageErrors.add(index);
@@ -35,7 +38,7 @@
   };
 
   const nextSlide = () => {
-    if (isTransitioning || currentIndex === projects.length - 1) return;
+    if (isTransitioning || currentIndex === projectList.length - 1) return;
     isTransitioning = true;
     displayIndex = currentIndex + 1;
 
@@ -56,6 +59,35 @@
 
   onMount(() => {
     // Autoplay disabled - manual navigation only
+
+    (async () => {
+      const pinned = projects.filter((p) => p.pin === true);
+      const need = pinned.some(
+        (p) => p.url && (!p.image || !p.title || !p.description)
+      );
+      if (!need) return;
+
+      const augmented = await Promise.all(
+        pinned.map(async (p) => {
+          if (p.url && (!p.image || !p.title || !p.description)) {
+            try {
+              const og = await fetchOGData(p.url);
+              return {
+                ...p,
+                image: p.image || og.image,
+                title: p.title || og.title,
+                description: p.description || og.description,
+              };
+            } catch (e) {
+              return p;
+            }
+          }
+          return p;
+        })
+      );
+
+      projectList = augmented;
+    })();
   });
 
   let touchStartX = 0;
@@ -109,7 +141,7 @@
         on:touchmove={handleTouchMove}
         on:touchend={handleTouchEnd}
       >
-        {#each projects as project, index}
+        {#each projectList as project, index}
           <article
             class="project-card"
             class:active={index === currentIndex}
@@ -173,7 +205,7 @@
         {/each}
       </div>
 
-      {#if projects.length > 1}
+      {#if projectList.length > 1}
         {#if currentIndex > 0}
           <button
             class="carousel-control carousel-prev"
@@ -183,7 +215,7 @@
             ←
           </button>
         {/if}
-        {#if currentIndex < projects.length - 1}
+        {#if currentIndex < projectList.length - 1}
           <button
             class="carousel-control carousel-next"
             on:click={nextSlide}
@@ -195,9 +227,9 @@
       {/if}
     </div>
 
-    {#if projects.length > 1}
+    {#if projectList.length > 1}
       <div class="carousel-dots">
-        {#each projects as _, index}
+        {#each projectList as _, index}
           <button
             class="dot"
             class:active={index === currentIndex}

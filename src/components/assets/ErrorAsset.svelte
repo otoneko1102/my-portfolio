@@ -5,7 +5,7 @@
   export let title: string;
   export let description: string = "";
   export let icon: string | null;
-  export let variant: "default" | "teapot" = "default";
+  export let variant: "default" | "teapot" | "notfound" = "default";
   export let redirectAfter: number | null; // sec
   export let redirectTo: string = "/";
   export let backText: string = "トップページへ戻る";
@@ -99,6 +99,30 @@
   /* Hide inline icon for teapot variant (we also remove the prop in the invocation) */
   .error-container.teapot .error-icon {
     display: none;
+  }
+
+  /* Not Found uses an image background similar to teapot */
+  .error-container.notfound {
+    background-image: url("/notfound.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #f5f7fa; /* fallback */
+    position: relative;
+    overflow-x: hidden; /* hide any horizontal overflow from the background */
+  }
+
+  .error-container.notfound::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* subtle dark overlay to ensure contrast with varying images */
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+    z-index: 0;
   }
 
   .error-content {

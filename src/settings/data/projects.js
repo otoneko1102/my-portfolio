@@ -62,23 +62,7 @@ export const projects = [
     url: "https://domainfo.blog",
     github:
       "https://github.com/otoneko1102/domainfo.blog",
-    pin: false,
-  },
-  {
-    title: "oto.im URL Shortener",
-    description:
-      "シンプルで高速な短縮URLサービス",
-    image: null,
-    tags: [
-      "短縮URL",
-      "Astro",
-      "Svelte",
-      "CoffeeScript",
-    ],
-    url: "https://oto.im",
-    github:
-      "https://github.com/otoneko1102/shorturl-service",
-    pin: false,
+    pin: true,
   },
   {
     title: "U'n'IVERSE",
@@ -94,6 +78,22 @@ export const projects = [
       "Hono",
     ],
     url: "https://universe.mfmf.moe",
+    pin: true,
+  },
+  {
+    title: "oto.im URL Shortener",
+    description:
+      "シンプルで高速な短縮URLサービス",
+    image: null,
+    tags: [
+      "短縮URL",
+      "Astro",
+      "Svelte",
+      "CoffeeScript",
+    ],
+    url: "https://oto.im",
+    github:
+      "https://github.com/otoneko1102/shorturl-service",
     pin: false,
   },
 ];

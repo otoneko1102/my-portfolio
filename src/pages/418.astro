@@ -1,5 +1,7 @@
 ---
 import TeapotAsset from "../components/assets/TeapotAsset.astro";
+Astro.response.status = 418;
+Astro.response.statusText = "I'm a teapot";
 ---
 
 <TeapotAsset />

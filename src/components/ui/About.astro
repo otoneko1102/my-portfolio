@@ -43,6 +43,22 @@ const socialRows = chunkSocialLinks(socialLinks);
       <div class="about-info">
         <h2>{aboutMe.name}</h2>
         <p class="about-title">{aboutMe.title}</p>
+
+        <div class="about-meta">
+          {aboutMe.birthday && (
+            <p class="about-meta-item">
+              <span class="material-icons" aria-hidden="true">cake</span>
+              <span class="meta-text">{aboutMe.birthday}</span>
+            </p>
+          )}
+          {aboutMe.location && (
+            <p class="about-meta-item">
+              <span class="material-icons" aria-hidden="true">place</span>
+              <span class="meta-text">{aboutMe.location}</span>
+            </p>
+          )}
+        </div>
+
         <p class="about-bio">{aboutMe.bio}</p>
         <div class="about-socials">
           {
@@ -128,20 +144,45 @@ const socialRows = chunkSocialLinks(socialLinks);
   .about-info h2 {
     font-size: var(--font-size-4xl);
     color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 0;
   }
 
   .about-title {
     font-size: var(--font-size-xl);
     color: var(--color-accent);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 0;
     font-weight: 600;
+  }
+
+  .about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    color: var(--color-text-light);
+  }
+
+  .about-meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin: 0;
+    padding: 0;
+  }
+
+  .about-meta-item .material-icons {
+    font-size: 18px;
+    color: var(--color-accent);
+    line-height: 1;
   }
 
   .about-bio {
     font-size: var(--font-size-base);
     line-height: 1.8;
     color: var(--color-text-light);
+    margin-top: 0;
     margin-bottom: var(--spacing-2xl);
   }
 
@@ -309,6 +350,17 @@ const socialRows = chunkSocialLinks(socialLinks);
     .about-bio {
       font-size: var(--font-size-xs);
       line-height: 1.5;
+    }
+
+    .about-meta-item {
+      font-size: var(--font-size-xs);
+      gap: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .about-meta-item .material-icons {
+      font-size: 18px;
     }
 
     .social-link {

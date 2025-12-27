@@ -1,5 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
+  import { fetchOGData } from "../../lib/og.js";
 
   let previewData = null;
   let isLoading = false;
@@ -8,123 +9,16 @@
   let currentUrl = null;
   let currentLink = null;
   let previewTimeout = null;
-  let cache = new Map();
+
   let previewDirection = "top";
 
-  const extractOGData = (html, url) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
 
-    const getMetaContent = (property, attribute = "property") => {
-      const meta = doc.querySelector(`meta[${attribute}="${property}"]`);
-      return meta ? meta.getAttribute("content") : null;
-    };
 
-    const urlObj = new URL(url);
-    const domain = urlObj.hostname.replace(/^www\./, "");
 
-    return {
-      title:
-        getMetaContent("og:title") ||
-        getMetaContent("twitter:title") ||
-        doc.querySelector("title")?.textContent ||
-        domain,
-      description:
-        getMetaContent("og:description") ||
-        getMetaContent("twitter:description") ||
-        getMetaContent("description", "name") ||
-        "",
-      image:
-        getMetaContent("og:image") || getMetaContent("twitter:image") || null,
-      siteName: getMetaContent("og:site_name") || domain,
-      url: url,
-      favicon: `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
-    };
-  };
 
-  const fetchWithTimeout = async (url, timeout = 3000) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        cache: "force-cache",
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-      return response;
-    } catch (error) {
-      clearTimeout(timeoutId);
-      throw error;
-    }
-  };
 
-  const fetchWithRetry = async (url, maxRetries = 2) => {
-    for (let i = 0; i < maxRetries; i++) {
-      try {
-        if (i > 0) {
-          await new Promise((resolve) => setTimeout(resolve, i * 200));
-        }
-        const response = await fetchWithTimeout(url, 3000);
-        if (response.ok) {
-          return await response.text();
-        }
-      } catch (error) {
-        if (i === maxRetries - 1) throw error;
-        continue;
-      }
-    }
-    throw new Error("Max retries exceeded");
-  };
 
-  const fetchPreviewData = async (url) => {
-    if (cache.has(url)) {
-      return cache.get(url);
-    }
-
-    const urlObj = new URL(url);
-    const domain = urlObj.hostname.replace(/^www\./, "");
-
-    try {
-      // Try multiple CORS proxies with retry logic
-      const proxies = [
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        `https://corsproxy.io/?${encodeURIComponent(url)}`,
-      ];
-
-      let html = null;
-      for (const proxyUrl of proxies) {
-        try {
-          html = await fetchWithRetry(proxyUrl, 2);
-          if (html) break;
-        } catch (e) {
-          continue;
-        }
-      }
-
-      if (html) {
-        const data = extractOGData(html, url);
-        cache.set(url, data);
-        return data;
-      }
-
-      throw new Error("All proxies failed");
-    } catch (error) {
-      // Fallback to basic info from URL
-      const fallbackData = {
-        title: domain,
-        description: url,
-        image: null,
-        siteName: domain,
-        url: url,
-        favicon: `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
-        isFallback: true,
-      };
-      cache.set(url, fallbackData);
-      return fallbackData;
-    }
-  };
 
   const handleMouseEnter = async (event) => {
     const link = event.currentTarget;
@@ -159,13 +53,32 @@
       await tick();
       adjustPreview(link);
 
-      const data = await fetchPreviewData(url);
-      if (currentUrl === url) {
-        previewData = data;
-        isLoading = false;
-        // re-adjust after content changes size
-        await tick();
-        adjustPreview(link);
+      try {
+        const data = await fetchOGData(url);
+        if (currentUrl === url) {
+          previewData = data;
+          isLoading = false;
+          // re-adjust after content changes size
+          await tick();
+          adjustPreview(link);
+        }
+      } catch (e) {
+        if (currentUrl === url) {
+          const urlObj = new URL(url);
+          const domain = urlObj.hostname.replace(/^www\./, "");
+          previewData = {
+            title: domain,
+            description: url,
+            image: null,
+            siteName: domain,
+            favicon: `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+            url,
+            isFallback: true,
+          };
+          isLoading = false;
+          await tick();
+          adjustPreview(link);
+        }
       }
     }, 300);
   };
