@@ -240,6 +240,10 @@
         {/each}
       </div>
     {/if}
+
+    <div class="projects-footer">
+      <a class="projects-jump" href="/projects" data-no-preview>View All Projects</a>
+    </div>
   </div>
 </section>
 
@@ -503,6 +507,32 @@
 
   .dot:hover {
     transform: scale(1.2);
+  }
+
+  .projects-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-3xl);
+  }
+
+  .projects-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+  }
+
+  .projects-jump:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
   @media (max-width: 1024px) {
