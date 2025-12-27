@@ -2,12 +2,25 @@
   import { projects } from "../../settings/config.js";
   import { onMount } from "svelte";
 
+  export let showAll = false; // when true, display all projects in a grid
+
+  // displayedProjects is either all projects or only those with pin: true
+  $: displayedProjects = showAll ? projects : projects.filter((p) => p.pin);
+
+  // reset indexes when mode or project set changes
+  $: if (displayedProjects) {
+    currentIndex = 0;
+    displayIndex = 0;
+    imageErrors = new Set();
+  }
+
   let currentIndex = 0;
   let displayIndex = 0;
   let isTransitioning = false;
   let imageErrors = new Set();
 
   const handleImageError = (index) => {
+    // index corresponds to displayedProjects
     imageErrors.add(index);
     imageErrors = imageErrors;
   };
@@ -35,7 +48,8 @@
   };
 
   const nextSlide = () => {
-    if (isTransitioning || currentIndex === projects.length - 1) return;
+    if (isTransitioning || currentIndex === displayedProjects.length - 1)
+      return;
     isTransitioning = true;
     displayIndex = currentIndex + 1;
 
@@ -100,27 +114,123 @@
 
 <section id="projects" class="projects-section">
   <div class="container">
-    <h2 class="projects-title">Projects</h2>
+    <h2 class="projects-title">{showAll ? "All Projects" : "Projects"}</h2>
 
-    <div class="carousel-wrapper">
-      <div
-        class="carousel"
-        on:touchstart={handleTouchStart}
-        on:touchmove={handleTouchMove}
-        on:touchend={handleTouchEnd}
-      >
-        {#each projects as project, index}
-          <article
-            class="project-card"
-            class:active={index === currentIndex}
-            class:no-image={!project.image}
-            style="transform: translateX({getSlidePosition(
-              index
-            )}%); opacity: {getOpacity(index)}; z-index: {index ===
-              currentIndex || index === displayIndex
-              ? 10
-              : 1};"
-          >
+    {#if !showAll}
+      <div class="carousel-wrapper">
+        <div
+          class="carousel"
+          on:touchstart={handleTouchStart}
+          on:touchmove={handleTouchMove}
+          on:touchend={handleTouchEnd}
+        >
+          {#each displayedProjects as project, index}
+            <article
+              class="project-card"
+              class:active={index === currentIndex}
+              class:no-image={!project.image}
+              style="transform: translateX({getSlidePosition(
+                index
+              )}%); opacity: {getOpacity(index)}; z-index: {index ===
+                currentIndex || index === displayIndex
+                ? 10
+                : 1};"
+            >
+              <div class="project-image">
+                {#if !project.image || imageErrors.has(index)}
+                  <div class="project-placeholder">
+                    <iconify-icon icon="mdi:folder-image" width="64" height="64"
+                    ></iconify-icon>
+                    <p>No Image</p>
+                  </div>
+                {:else}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    on:error={() => handleImageError(index)}
+                  />
+                {/if}
+                <div class="project-overlay">
+                  {#if project.url}
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-link"
+                    >
+                      View Project
+                    </a>
+                  {/if}
+                  {#if project.github}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-github"
+                    >
+                      <iconify-icon icon="mdi:github" width="20" height="20"
+                      ></iconify-icon>
+                      GitHub
+                    </a>
+                  {/if}
+                </div>
+              </div>
+              <div class="project-content">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div class="project-tags">
+                  {#each project.tags as tag}
+                    <span class="tag">{tag}</span>
+                  {/each}
+                </div>
+              </div>
+            </article>
+          {/each}
+        </div>
+
+        {#if displayedProjects.length > 1}
+          {#if currentIndex > 0}
+            <button
+              class="carousel-control carousel-prev"
+              on:click={prevSlide}
+              aria-label="Previous project"
+            >
+              ←
+            </button>
+          {/if}
+          {#if currentIndex < displayedProjects.length - 1}
+            <button
+              class="carousel-control carousel-next"
+              on:click={nextSlide}
+              aria-label="Next project"
+            >
+              →
+            </button>
+          {/if}
+        {/if}
+      </div>
+
+      {#if displayedProjects.length > 1}
+        <div class="carousel-dots">
+          {#each displayedProjects as _, index}
+            <button
+              class="dot"
+              class:active={index === currentIndex}
+              on:click={() => goToSlide(index)}
+              aria-label="Go to project {index + 1}"
+              aria-current={index === currentIndex}
+            ></button>
+          {/each}
+        </div>
+      {/if}
+
+      <div class="projects-footer">
+        <a class="projects-jump" href="/projects">View All Projects</a>
+      </div>
+    {:else}
+      <div class="projects-grid">
+        {#each displayedProjects as project, index}
+          <article class="project-card grid" class:no-image={!project.image}>
             <div class="project-image">
               {#if !project.image || imageErrors.has(index)}
                 <div class="project-placeholder">
@@ -129,32 +239,15 @@
                   <p>No Image</p>
                 </div>
               {:else}
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  on:error={() => handleImageError(index)}
-                />
+                <img src={project.image} alt={project.title} on:error={() => handleImageError(index)} />
               {/if}
               <div class="project-overlay">
                 {#if project.url}
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link"
-                  >
-                    View Project
-                  </a>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
                 {/if}
                 {#if project.github}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-github"
-                  >
-                    <iconify-icon icon="mdi:github" width="20" height="20"
-                    ></iconify-icon>
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-github">
+                    <iconify-icon icon="mdi:github" width="20" height="20"></iconify-icon>
                     GitHub
                   </a>
                 {/if}
@@ -170,41 +263,6 @@
               </div>
             </div>
           </article>
-        {/each}
-      </div>
-
-      {#if projects.length > 1}
-        {#if currentIndex > 0}
-          <button
-            class="carousel-control carousel-prev"
-            on:click={prevSlide}
-            aria-label="Previous project"
-          >
-            ←
-          </button>
-        {/if}
-        {#if currentIndex < projects.length - 1}
-          <button
-            class="carousel-control carousel-next"
-            on:click={nextSlide}
-            aria-label="Next project"
-          >
-            →
-          </button>
-        {/if}
-      {/if}
-    </div>
-
-    {#if projects.length > 1}
-      <div class="carousel-dots">
-        {#each projects as _, index}
-          <button
-            class="dot"
-            class:active={index === currentIndex}
-            on:click={() => goToSlide(index)}
-            aria-label="Go to project {index + 1}"
-            aria-current={index === currentIndex}
-          ></button>
         {/each}
       </div>
     {/if}
@@ -471,6 +529,61 @@
 
   .dot:hover {
     transform: scale(1.2);
+  }
+
+  .projects-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-3xl);
+  }
+
+  .projects-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+  }
+
+  .projects-jump:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-2xl);
+    max-width: 1100px;
+    margin: 0 auto var(--spacing-2xl);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .project-card.grid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    pointer-events: auto;
+    transform: none;
+    opacity: 1;
+    transition: all var(--transition-normal);
+  }
+
+  .project-card.grid .project-image {
+    height: 200px;
+  }
+
+  .project-card.grid .project-content {
+    padding: var(--spacing-lg);
   }
 
   @media (max-width: 1024px) {

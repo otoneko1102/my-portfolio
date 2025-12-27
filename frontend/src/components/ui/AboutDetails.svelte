@@ -20,7 +20,6 @@
 <style>
   .about-details {
     display: grid;
-    /* Show up to 3 groups per row; any additional groups will wrap to the next line */
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: var(--spacing-lg);
     margin-top: var(--spacing-2xl);
@@ -64,18 +63,11 @@
 
   @media (max-width: 768px) {
     .about-details {
-      /* On mobile and small tablet widths, show a single stacked column to avoid horizontal side-by-side */
       grid-template-columns: 1fr;
     }
 
     .detail-values li {
       font-size: var(--font-size-xs);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .about-details {
-      grid-template-columns: 1fr;
     }
 
     .detail-label {

@@ -1,5 +1,19 @@
 <script>
   import { navLinks, siteConfig } from "../../settings/config.js";
+  import { onMount } from "svelte";
+
+  let currentPath = "/";
+
+  onMount(() => {
+    const updatePath = () => (currentPath = location.pathname || "/");
+    updatePath();
+    window.addEventListener("popstate", updatePath);
+    window.addEventListener("hashchange", updatePath);
+    return () => {
+      window.removeEventListener("popstate", updatePath);
+      window.removeEventListener("hashchange", updatePath);
+    };
+  });
 </script>
 
 <header>
@@ -10,7 +24,7 @@
     <ul class="header-links">
       {#each navLinks as link}
         <li>
-          <a href={link.href} data-no-preview>{link.label}</a>
+          <a href={link.href} data-no-preview aria-current={link.href === currentPath ? 'page' : undefined}>{link.label}</a>
         </li>
       {/each}
     </ul>
@@ -103,6 +117,11 @@
 
   .header-links a:hover::after {
     width: 100%;
+  }
+
+  .header-links a[aria-current="page"] {
+    color: var(--color-primary);
+    font-weight: 700;
   }
 
   @media (max-width: 768px) {

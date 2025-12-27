@@ -20,6 +20,7 @@ export const projects = [
     tags: ["Astro", "Svelte"],
     github:
       "https://github.com/otoneko1102/my-portfolio",
+    pin: true,
   },
   {
     title: "Milkee",
@@ -30,6 +31,7 @@ export const projects = [
     url: "https://milkee.oto.im",
     github:
       "https://github.com/otoneko1102/coffeescript-milkee",
+    pin: true,
   },
   {
     title: "nekos",
@@ -44,6 +46,7 @@ export const projects = [
     url: "https://www.npmjs.com/package/nekos",
     github:
       "https://github.com/otoneko1102/nekos",
+    pin: true,
   },
   {
     title: "ドメインフォ",
@@ -59,6 +62,7 @@ export const projects = [
     url: "https://domainfo.blog",
     github:
       "https://github.com/otoneko1102/domainfo.blog",
+    pin: false,
   },
   {
     title: "oto.im URL Shortener",
@@ -74,6 +78,7 @@ export const projects = [
     url: "https://oto.im",
     github:
       "https://github.com/otoneko1102/shorturl-service",
+    pin: false,
   },
   {
     title: "U'n'IVERSE",
@@ -89,5 +94,6 @@ export const projects = [
       "Hono",
     ],
     url: "https://universe.mfmf.moe",
+    pin: false,
   },
 ];

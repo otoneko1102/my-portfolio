@@ -288,7 +288,7 @@
     {#if isLoading}
       <div class="loading">
         <div class="spinner"></div>
-        <p>Loading links...</p>
+        <p>Loading...</p>
       </div>
     {:else if linkData.length > 0}
       <div class="crosslinks-grid">
