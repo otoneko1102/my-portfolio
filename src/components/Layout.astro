@@ -2,6 +2,7 @@
 import Header from "./ui/Header.svelte";
 import Footer from "./ui/Footer.astro";
 import LinkPreview from "./ui/LinkPreview.svelte";
+import TableOfContents from "./ui/TableOfContents.svelte";
 import { metaConfig, siteConfig } from "../settings/config.js";
 import "../styles/global.css";
 
@@ -95,6 +96,7 @@ const headerSpacing = (Astro.props.headerSpacing ?? true) as boolean;
     <main class={headerSpacing ? "site-main with-header-spacing" : "site-main"}>
       <slot />
     </main>
+    <TableOfContents client:load />
     <Footer />
     <LinkPreview client:load />
   </body>

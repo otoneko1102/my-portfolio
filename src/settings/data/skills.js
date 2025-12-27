@@ -166,6 +166,11 @@ export const skills = [
         icon: "vscode-icons:file-type-sqlite",
         proficiency: 50,
       },
+      {
+        name: "Regex",
+        icon: "file-icons:regex",
+        proficiency: 65,
+      }
     ],
   },
 ];

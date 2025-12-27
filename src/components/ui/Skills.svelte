@@ -56,7 +56,7 @@
     text-align: center;
     margin-bottom: var(--spacing-3xl);
     color: var(--color-primary);
-    font-size: var(--font-size-4xl);
+    font-size: clamp(1rem, 5vw, var(--font-size-2xl)); /* smaller: shrink on small screens, never exceed 2xl */
   }
 
   .skills-categories {
@@ -65,6 +65,7 @@
     gap: var(--spacing-3xl);
     width: 100%;
     box-sizing: border-box;
+    min-width: 0; /* allow grid columns to shrink and prevent horizontal overflow */
   }
 
   .skill-category {
@@ -85,7 +86,7 @@
     margin-bottom: var(--spacing-2xl);
     padding-bottom: var(--spacing-md);
     border-bottom: 2px solid var(--color-border);
-    font-size: var(--font-size-2xl);
+    font-size: clamp(0.875rem, 2.4vw, var(--font-size-base)); /* smaller: never exceed base */
   }
 
   .skill-category:hover h3 {
@@ -94,8 +95,10 @@
 
   .skill-items {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--spacing-lg);
+    min-width: 0; /* let grid columns shrink instead of causing overflow */
+    justify-items: center;
   }
 
   .skill-item {
@@ -105,6 +108,7 @@
     text-align: center;
     cursor: pointer;
     transition: all var(--transition-normal);
+    min-width: 0;
   }
 
   .skill-item:hover {
@@ -115,12 +119,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: clamp(36px, 6vw, 56px);
+    height: clamp(36px, 6vw, 56px);
     background-color: transparent;
     border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-xs); /* more compact spacing between icon and name */
     transition: all var(--transition-normal);
+    overflow: hidden;
   }
 
   .skill-item:hover .skill-icon {
@@ -128,30 +133,42 @@
     transform: scale(1.1);
   }
 
-  :global(iconify-icon) {
-    display: inline-block;
+  .skill-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .skill-icon :global(iconify-icon) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .skill-name {
-    font-size: var(--font-size-xs);
+    font-size: clamp(0.5rem, 1.2vw, var(--font-size-2xs)); /* smaller: never larger than 2xs */
     color: var(--color-text);
     font-weight: 500;
     margin: 0;
     width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
   }
 
   .skill-proficiency {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    margin-top: var(--spacing-sm);
+    gap: 2px;
+    margin-top: var(--spacing-xs); /* reduced spacing between name and bar */
     width: 100%;
   }
 
   .proficiency-bar {
-    width: 60px;
-    height: 6px;
+    width: clamp(20px, 5.5vw, 40px); /* even narrower: shrink on small screens, cap at 40px */
+    height: clamp(3px, 0.5vw, 4px); /* thinner height */
     background-color: #f0f0f0;
     border-radius: 3px;
     overflow: hidden;
@@ -175,7 +192,7 @@
   }
 
   .proficiency-text {
-    font-size: var(--font-size-xs);
+    font-size: clamp(0.5rem, 1vw, var(--font-size-2xs)); /* smaller: never larger than 2xs */
     color: var(--color-text);
     font-weight: 600;
     margin: 0;
@@ -190,18 +207,20 @@
       grid-template-columns: 1fr;
     }
 
+    /* Always at least 3 columns; allow them to shrink but keep a reasonable minimum */
     .skill-items {
-      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      grid-template-columns: repeat(3, minmax(44px, 1fr));
       gap: var(--spacing-lg);
     }
 
     .skill-icon {
-      width: 56px;
-      height: 56px;
+      width: clamp(36px, 8vw, 56px);
+      height: clamp(36px, 8vw, 56px);
+      margin-bottom: var(--spacing-xs);
     }
 
     .skill-name {
-      font-size: var(--font-size-xs);
+      font-size: var(--font-size-2xs);
     }
   }
 
@@ -211,7 +230,7 @@
     }
 
     .skills-title {
-      font-size: var(--font-size-2xl);
+      font-size: clamp(0.95rem, 5vw, var(--font-size-2xl));
       margin-bottom: var(--spacing-md);
     }
 
@@ -225,18 +244,20 @@
     }
 
     .skill-category h3 {
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-xs);
       margin-bottom: var(--spacing-lg);
     }
 
+    /* Keep at least 3 columns even on very small screens */
     .skill-items {
-      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      grid-template-columns: repeat(3, minmax(40px, 1fr));
       gap: var(--spacing-md);
     }
 
     .skill-icon {
-      width: 48px;
-      height: 48px;
+      width: clamp(32px, 10vw, 48px);
+      height: clamp(32px, 10vw, 48px);
+      margin-bottom: var(--spacing-xs);
     }
 
     .skill-name {
