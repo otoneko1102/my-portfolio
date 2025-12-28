@@ -83,6 +83,18 @@ export const projects = [
     pin: true,
   },
   {
+    title: "メイドちゃん",
+    description: "Discordの多機能Bot(現在サービス終了済み)。",
+    tags: ["Discord"],
+    url: "https://maidproject.otoneko.jp",
+  },
+  {
+    title: "ProteCat",
+    description: "DiscordのセキュリティBot(現在サービス終了済み)。",
+    tags: ["Discord"],
+    url: "https://protecat.otoneko.jp",
+  },
+  {
     title: "Spotify Now Playing",
     description: "Spotifyでの現在再生中の楽曲を他ユーザーに簡単に見てもらったり、#NowPlayingのツイートをしやすくするものです。",
     tags: ["Spotify", "Svelte", "TypeScript"],
