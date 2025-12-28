@@ -6,7 +6,7 @@
   export let description: string = "";
   export let icon: string | null;
   export let variant: "default" | "teapot" | "notfound" = "default";
-  export let redirectAfter: number | null; // sec
+  export let redirectAfter: number | null;
   export let redirectTo: string = "/";
   export let backText: string = "トップページへ戻る";
 
@@ -65,29 +65,28 @@
     overflow-x: hidden;
     overflow-y: auto;
     inset: 0;
-    z-index: 0; /* allow header/footer (higher z-index) to overlay */
+    z-index: 0;
   }
 
   .error-container.default {
     background: transparent;
   }
 
-  /* Teapot uses an image background with a subtle overlay for readability */
   .error-container.teapot {
     background-image: url("/teapot.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-color: #f5576c; /* fallback */
+    background-color: #f5576c;
     position: relative;
-    overflow-x: hidden; /* hide any horizontal overflow from the background */
+    overflow-x: hidden;
   }
 
   .error-container.teapot::before {
     content: "";
     position: absolute;
     inset: 0;
-    /* subtle dark overlay to ensure contrast with varying images */
+
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.25) 0%,
@@ -96,27 +95,25 @@
     z-index: 0;
   }
 
-  /* Hide inline icon for teapot variant (we also remove the prop in the invocation) */
   .error-container.teapot .error-icon {
     display: none;
   }
 
-  /* Not Found uses an image background similar to teapot */
   .error-container.notfound {
     background-image: url("/notfound.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-color: #f5f7fa; /* fallback */
+    background-color: #f5f7fa;
     position: relative;
-    overflow-x: hidden; /* hide any horizontal overflow from the background */
+    overflow-x: hidden;
   }
 
   .error-container.notfound::before {
     content: "";
     position: absolute;
     inset: 0;
-    /* subtle dark overlay to ensure contrast with varying images */
+
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.25) 0%,

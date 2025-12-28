@@ -1,6 +1,3 @@
-// Lightweight client-side OGP fetcher with caching and retries
-// Designed for use in browser (client:load) only.
-
 const cache = new Map();
 
 const getMetaContent = (doc, property, attribute = "property") => {
@@ -28,7 +25,9 @@ const extractOGData = (html, url) => {
     "";
 
   const image =
-    getMetaContent(doc, "og:image") || getMetaContent(doc, "twitter:image") || null;
+    getMetaContent(doc, "og:image") ||
+    getMetaContent(doc, "twitter:image") ||
+    null;
 
   const siteName = getMetaContent(doc, "og:site_name") || domain;
 
@@ -93,15 +92,12 @@ export const fetchOGData = async (url) => {
 
     if (html) {
       const data = extractOGData(html, url);
-      // Resolve relative image URLs
       if (data.image && !/^https?:\/\//i.test(data.image)) {
         try {
           data.image = new URL(data.image, url).href;
-        } catch (e) {
-          // ignore
-        }
+        } catch (e) {}
       }
-      // Include original URL and isFallback flag for consumers like LinkPreview
+
       data.url = url;
       data.isFallback = false;
       cache.set(url, data);

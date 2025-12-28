@@ -97,10 +97,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
-  /* leave room for fixed footer so content isn't hidden */
-  /* padding-bottom: var(--footer-height); */
-  /* respect safe-area insets on supported devices */
-  /* padding-bottom: calc(var(--footer-height) + env(safe-area-inset-bottom)); */
 }
 
 /* Typography */
@@ -273,13 +269,9 @@ section {
 
 @media (max-width: 768px) {
   :root {
-    /* ヘッダー/フッターの縮小値に追従 */
     --header-padding-y: var(--spacing-md);
     --header-padding-x: var(--spacing-md);
-    --header-height: 80px; /* ロゴ縮小＋padding調整想定 */
-
-    /* footerはPCと同等でもOK。必要なら下記で縮小 */
-    /* --footer-padding-y: var(--spacing-xl); */
+    --header-height: 80px;
   }
 }
 

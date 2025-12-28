@@ -51,20 +51,36 @@
           <div class="project-image">
             {#if !project.image || imageErrors.has(index)}
               <div class="project-placeholder">
-                <iconify-icon icon="mdi:folder-image" width="64" height="64"></iconify-icon>
+                <iconify-icon icon="mdi:folder-image" width="64" height="64"
+                ></iconify-icon>
                 <p>No Image</p>
               </div>
             {:else}
-              <img src={project.image} alt={project.title} on:error={() => handleImageError(index)} />
+              <img
+                src={project.image}
+                alt={project.title}
+                on:error={() => handleImageError(index)}
+              />
             {/if}
 
             <div class="project-overlay">
               {#if project.url}
-                <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link">View Project</a
+                >
               {/if}
               {#if project.github}
-                <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-github">
-                  <iconify-icon icon="mdi:github" width="20" height="20"></iconify-icon>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-github"
+                >
+                  <iconify-icon icon="mdi:github" width="20" height="20"
+                  ></iconify-icon>
                   GitHub
                 </a>
               {/if}
@@ -96,17 +112,16 @@
 
   .projects-grid {
     display: grid;
-    /* one card per row */
+
     grid-template-columns: 1fr;
     gap: var(--spacing-2xl);
-    /* match the carousel max width for visual consistency */
+
     max-width: 900px;
     margin: 0 auto var(--spacing-2xl);
     width: 100%;
     box-sizing: border-box;
   }
 
-  /* Grid variant uses the same card styling as the root Projects component */
   .project-card.grid {
     position: relative;
     display: flex;

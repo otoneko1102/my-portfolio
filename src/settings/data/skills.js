@@ -82,7 +82,7 @@ export const skills = [
         name: "EJS",
         icon: "vscode-icons:file-type-ejs",
         proficiency: 50,
-      }
+      },
     ],
   },
   {
@@ -170,7 +170,7 @@ export const skills = [
         name: "Regex",
         icon: "file-icons:regex",
         proficiency: 65,
-      }
+      },
     ],
   },
 ];

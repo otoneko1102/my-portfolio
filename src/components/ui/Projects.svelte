@@ -7,7 +7,7 @@
   let displayIndex = 0;
   let isTransitioning = false;
   let imageErrors = new Set();
-  // Only include pinned projects in the carousel
+
   let projectList = projects.filter((p) => p.pin === true);
 
   const handleImageError = (index) => {
@@ -58,8 +58,6 @@
   };
 
   onMount(() => {
-    // Autoplay disabled - manual navigation only
-
     (async () => {
       const pinned = projects.filter((p) => p.pin === true);
       const need = pinned.some(
@@ -242,7 +240,9 @@
     {/if}
 
     <div class="projects-footer">
-      <a class="projects-jump" href="/projects" data-no-preview>View All Projects</a>
+      <a class="projects-jump" href="/projects" data-no-preview
+        >View All Projects</a
+      >
     </div>
   </div>
 </section>

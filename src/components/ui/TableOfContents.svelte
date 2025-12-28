@@ -23,7 +23,9 @@
     sections = nodes
       .map((el) => {
         const heading = el.querySelector("h2, h1, h3");
-        const title = heading ? heading.innerText.trim() : el.getAttribute("aria-label") || el.id;
+        const title = heading
+          ? heading.innerText.trim()
+          : el.getAttribute("aria-label") || el.id;
         return { id: el.id, title };
       })
       .filter((s) => s.id && s.title);
@@ -57,11 +59,9 @@
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
-      // do not auto-close; keep menu open until user closes explicitly or clicks outside
     }
   };
 
-  // focus management: when open -> focus panel; when closing after being open -> focus the toggle
   $: {
     if (open) {
       tick().then(() => panelEl?.focus());
@@ -93,18 +93,21 @@
     const handleOutsidePointer = (ev) => {
       if (!open) return;
       const target = ev.target;
-      // If click/tap is not inside the panel and not inside the toggle button, close the TOC
-      const clickedInsidePanel = panelEl && (panelEl === target || panelEl.contains(target));
-      const clickedOnToggle = toggleEl && (toggleEl === target || toggleEl.contains(target));
+
+      const clickedInsidePanel =
+        panelEl && (panelEl === target || panelEl.contains(target));
+      const clickedOnToggle =
+        toggleEl && (toggleEl === target || toggleEl.contains(target));
       if (!clickedInsidePanel && !clickedOnToggle) {
         open = false;
       }
     };
 
     window.addEventListener("pointerdown", handleOutsidePointer);
-    window.addEventListener("touchstart", handleOutsidePointer, { passive: true });
+    window.addEventListener("touchstart", handleOutsidePointer, {
+      passive: true,
+    });
 
-    // If the toggle button is focused when the page loads, blur it to avoid visible focus outline
     if (toggleEl === document.activeElement) toggleEl.blur();
 
     return () => {
@@ -118,7 +121,7 @@
 </script>
 
 {#if sections.length > 0}
-  <div class="toc-root" class:open={open}>
+  <div class="toc-root" class:open>
     <button
       type="button"
       class="toc-toggle-btn"
@@ -138,7 +141,7 @@
     <aside
       id="toc-panel"
       class="toc-drawer"
-      class:open={open}
+      class:open
       role="region"
       aria-hidden={!open}
       aria-label="目次"
@@ -154,7 +157,7 @@
           {#each sections as s}
             <li class="toc-list-item">
               <a
-                href={'#' + s.id}
+                href={"#" + s.id}
                 class="toc-link"
                 class:active={s.id === activeId}
                 on:click|preventDefault={() => handleLinkClick(s.id)}
@@ -168,7 +171,13 @@
     </aside>
 
     {#if open}
-      <button type="button" class="toc-backdrop" aria-label="閉じる" on:click={() => (open = false)} on:pointerdown={() => (open = false)}></button>
+      <button
+        type="button"
+        class="toc-backdrop"
+        aria-label="閉じる"
+        on:click={() => (open = false)}
+        on:pointerdown={() => (open = false)}
+      ></button>
     {/if}
   </div>
 {/if}
@@ -211,7 +220,6 @@
     border: none;
   }
 
-  /* Keep keyboard focus visible for accessibility */
   .toc-toggle-btn:focus-visible {
     box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
     outline: none;
@@ -232,7 +240,9 @@
     height: 2px;
     background: currentColor;
     border-radius: 2px;
-    transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), opacity 160ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 160ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hamburger .bar-top {
@@ -272,12 +282,12 @@
     position: fixed;
     top: calc(var(--header-height) + var(--spacing-sm));
     right: 0;
-    /* closed: fully translate out of view by its width + toggle width + gap */
+
     transform: translateX(calc(100% + var(--toggle-size) + var(--toggle-gap)));
     width: var(--toc-width);
     max-width: 92vw;
     height: calc(100vh - (var(--header-height) + (var(--spacing-md) * 2)));
-    /* translucent background + blur to match header/footer */
+
     background-color: rgba(248, 248, 248, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -321,7 +331,9 @@
     display: block;
     padding: 6px 8px;
     border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast), color var(--transition-fast);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
     font-weight: 600;
   }
 
@@ -332,7 +344,11 @@
 
   .toc-link.active {
     color: var(--color-primary);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.02));
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.08),
+      rgba(139, 92, 246, 0.02)
+    );
   }
 
   .toc-backdrop {
@@ -352,7 +368,9 @@
       height: calc(100vh - (var(--header-height) + (var(--spacing-md) * 1)));
       top: calc(var(--header-height) + var(--spacing-sm));
       right: 0;
-      transform: translateX(calc(100% + var(--toggle-size) + var(--toggle-gap)));
+      transform: translateX(
+        calc(100% + var(--toggle-size) + var(--toggle-gap))
+      );
       border-radius: 0;
       padding: var(--spacing-md);
     }

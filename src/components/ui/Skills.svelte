@@ -56,7 +56,7 @@
     text-align: center;
     margin-bottom: var(--spacing-3xl);
     color: var(--color-primary);
-    font-size: clamp(1rem, 5vw, var(--font-size-2xl)); /* smaller: shrink on small screens, never exceed 2xl */
+    font-size: clamp(1rem, 5vw, var(--font-size-2xl));
   }
 
   .skills-categories {
@@ -65,7 +65,7 @@
     gap: var(--spacing-3xl);
     width: 100%;
     box-sizing: border-box;
-    min-width: 0; /* allow grid columns to shrink and prevent horizontal overflow */
+    min-width: 0;
   }
 
   .skill-category {
@@ -86,7 +86,7 @@
     margin-bottom: var(--spacing-2xl);
     padding-bottom: var(--spacing-md);
     border-bottom: 2px solid var(--color-border);
-    font-size: clamp(0.875rem, 2.4vw, var(--font-size-base)); /* smaller: never exceed base */
+    font-size: clamp(0.875rem, 2.4vw, var(--font-size-base));
   }
 
   .skill-category:hover h3 {
@@ -97,7 +97,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--spacing-lg);
-    min-width: 0; /* let grid columns shrink instead of causing overflow */
+    min-width: 0;
     justify-items: center;
   }
 
@@ -123,7 +123,7 @@
     height: clamp(36px, 6vw, 56px);
     background-color: transparent;
     border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-xs); /* more compact spacing between icon and name */
+    margin-bottom: var(--spacing-xs);
     transition: all var(--transition-normal);
     overflow: hidden;
   }
@@ -147,7 +147,7 @@
   }
 
   .skill-name {
-    font-size: clamp(0.5rem, 1.2vw, var(--font-size-2xs)); /* smaller: never larger than 2xs */
+    font-size: clamp(0.5rem, 1.2vw, var(--font-size-2xs));
     color: var(--color-text);
     font-weight: 500;
     margin: 0;
@@ -162,20 +162,19 @@
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: var(--spacing-xs); /* reduced spacing between name and bar */
+    margin-top: var(--spacing-xs);
     width: 100%;
   }
 
   .proficiency-bar {
-    width: clamp(20px, 5.5vw, 40px); /* even narrower: shrink on small screens, cap at 40px */
-    height: clamp(3px, 0.5vw, 4px); /* thinner height */
+    width: clamp(20px, 5.5vw, 40px);
+    height: clamp(3px, 0.5vw, 4px);
     background-color: #f0f0f0;
     border-radius: 3px;
     overflow: hidden;
     border: 1px solid #e0e0e0;
   }
 
-  /* Desktop-only: slightly wider proficiency bars for improved readability */
   @media (min-width: 769px) {
     .proficiency-bar {
       width: clamp(26px, 6.5vw, 48px);
@@ -200,7 +199,7 @@
   }
 
   .proficiency-text {
-    font-size: clamp(0.5rem, 1vw, var(--font-size-2xs)); /* smaller: never larger than 2xs */
+    font-size: clamp(0.5rem, 1vw, var(--font-size-2xs));
     color: var(--color-text);
     font-weight: 600;
     margin: 0;
@@ -215,7 +214,6 @@
       grid-template-columns: 1fr;
     }
 
-    /* Always at least 3 columns; allow them to shrink but keep a reasonable minimum */
     .skill-items {
       grid-template-columns: repeat(3, minmax(44px, 1fr));
       gap: var(--spacing-lg);
@@ -256,7 +254,6 @@
       margin-bottom: var(--spacing-lg);
     }
 
-    /* Keep at least 3 columns even on very small screens */
     .skill-items {
       grid-template-columns: repeat(3, minmax(40px, 1fr));
       gap: var(--spacing-md);

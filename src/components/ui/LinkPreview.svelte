@@ -12,14 +12,6 @@
 
   let previewDirection = "top";
 
-
-
-
-
-
-
-
-
   const handleMouseEnter = async (event) => {
     const link = event.currentTarget;
     const url = link.href;
@@ -49,7 +41,6 @@
       showPreview = true;
       isLoading = true;
 
-      // initial adjust so it doesn't overflow while loading
       await tick();
       adjustPreview(link);
 
@@ -58,7 +49,7 @@
         if (currentUrl === url) {
           previewData = data;
           isLoading = false;
-          // re-adjust after content changes size
+
           await tick();
           adjustPreview(link);
         }
@@ -93,7 +84,6 @@
   };
 
   const attachListeners = (link) => {
-    // Remove title attribute
     link.removeAttribute("title");
 
     link.addEventListener("mouseenter", handleMouseEnter);
@@ -118,7 +108,6 @@
     const elWidth = elRect.width;
     const elHeight = elRect.height;
 
-    // Horizontal clamp (center of link)
     let centerX = linkRect.left + linkRect.width / 2;
     centerX = Math.min(
       Math.max(centerX, margin + elWidth / 2),
@@ -126,7 +115,6 @@
     );
     previewPosition.x = centerX;
 
-    // Vertical placement: prefer above, fallback to below
     const gap = 8;
     const topSpace = linkRect.top - margin;
     const bottomSpace = viewportHeight - linkRect.bottom - margin;
@@ -138,7 +126,6 @@
       previewDirection = "bottom";
       previewPosition.y = linkRect.bottom + gap;
     } else {
-      // choose the side with more space and clamp
       if (topSpace > bottomSpace) {
         previewDirection = "top";
         previewPosition.y = Math.max(margin + elHeight, linkRect.top - gap);
@@ -168,10 +155,8 @@
       });
     };
 
-    // Initial processing
     processLinks();
 
-    // Observe DOM changes for dynamically added links
     const observer = new MutationObserver(() => {
       processLinks();
     });

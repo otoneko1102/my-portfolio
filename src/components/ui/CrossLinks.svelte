@@ -35,8 +35,6 @@
     }
   });
 
-  // Truncate multi-line descriptions to 3 lines (with ellipsis) as a JS fallback
-  // for browsers that don't support -webkit-line-clamp or where we'll ensure an ellipsis is shown.
   let resizeTimeout;
 
   const adjustDescriptions = async () => {
@@ -48,11 +46,9 @@
     const nodes = container.querySelectorAll(".crosslink-description");
 
     nodes.forEach((el) => {
-      // store original text
       if (!el.dataset.fulltext) el.dataset.fulltext = el.textContent || "";
       const fulltext = el.dataset.fulltext;
 
-      // measurement element
       const style = window.getComputedStyle(el);
       const lineHeightPx =
         parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.4;
@@ -83,7 +79,6 @@
         return;
       }
 
-      // binary-search to find the maximum substring that fits
       let low = 0;
       let high = fulltext.length;
       let best = 0;
@@ -112,7 +107,6 @@
   };
 
   $: if (!isLoading && linkData.length) {
-    // schedule it (adjustDescriptions uses tick internally)
     adjustDescriptions();
   }
 
@@ -238,8 +232,7 @@
     width: 100%;
     overflow-x: hidden;
 
-    /* Card layout variables (title:2 lines, author:1 line, desc:3 lines) */
-    --cl-title-size: 1rem; /* slightly smaller than var(--font-size-lg) */
+    --cl-title-size: 1rem;
     --cl-title-line-height: 1.4;
     --cl-author-size: var(--font-size-sm);
     --cl-author-line-height: 1.5;
@@ -432,7 +425,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    /* ensure single-line header to keep title start aligned */
+
     white-space: nowrap;
     overflow: hidden;
   }
@@ -507,7 +500,7 @@
   @media (max-width: 768px) {
     .crosslinks-section {
       padding: var(--spacing-2xl) var(--spacing-lg);
-      /* smaller measurements for mobile */
+
       --cl-title-size: var(--font-size-base);
       --cl-title-line-height: 1.3;
       --cl-author-size: var(--font-size-xs);

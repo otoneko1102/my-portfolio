@@ -273,7 +273,6 @@
     font-size: var(--font-size-md);
   }
 
-  /* Skeleton placeholders for loading state */
   .blog-card.placeholder {
     pointer-events: none;
     opacity: 0.95;
@@ -315,14 +314,11 @@
     margin: 6px 0;
   }
 
-  /* Ensure placeholders match the expected height of the real card content */
   .blog-card.placeholder .skeleton-title {
-    /* title typically spans up to 2 lines */
     height: calc(var(--font-size-xl) * 1.4 * 2);
   }
 
   .blog-card.placeholder .post-description.skeleton {
-    /* description typically spans up to 3 lines */
     height: calc(var(--font-size-base) * 1.6 * 3);
     margin: 0;
   }

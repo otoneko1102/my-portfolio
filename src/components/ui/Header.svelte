@@ -24,7 +24,12 @@
     <ul class="header-links">
       {#each navLinks as link}
         <li>
-          <a href={link.href} data-no-preview aria-current={link.href === currentPath ? 'page' : undefined}>{link.label}</a>
+          <a
+            href={link.href}
+            data-no-preview
+            aria-current={link.href === currentPath ? "page" : undefined}
+            >{link.label}</a
+          >
         </li>
       {/each}
     </ul>
