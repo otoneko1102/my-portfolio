@@ -25,9 +25,9 @@ export const metaConfig = {
     type: "website",
   },
   pages: {
-    home: {
-      title: "ホーム | まろん｡のポートフォリオ",
-      description: "まろん｡のポートフォリオサイトです。",
+    projects: {
+      title: "Projects | まろん｡のポートフォリオ",
+      description: "私の制作物をまとめたページです。個人開発とチーム開発のものを掲載しています。",
       image: "/icon.png",
       type: "website",
     },
