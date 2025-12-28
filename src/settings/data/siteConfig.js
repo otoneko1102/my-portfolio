@@ -15,8 +15,7 @@
  */
 export const siteConfig = {
   title: "まろん｡のポートフォリオ",
-  description:
-    "まろん｡のポートフォリオサイトです。",
+  description: "まろん｡のポートフォリオサイトです。",
   author: "まろん｡",
   email: "montblank.fun@gmail.com",
   url: "https://montblank.fun",

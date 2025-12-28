@@ -91,7 +91,9 @@
             <h3>{project.title}</h3>
             <p>{project.description}</p>
             <div class="project-tags">
-              {#each project.tags as tag}
+              {#each (project.tags ?? [])
+                .slice()
+                .sort((a, b) => a.localeCompare(b, "ja")) as tag}
                 <span class="tag">{tag}</span>
               {/each}
             </div>

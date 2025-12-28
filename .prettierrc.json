@@ -9,11 +9,18 @@
   "overrides": [
     {
       "files": [
-        "*.json",
-        "src/settings/**"
+        "*.json"
       ],
       "options": {
         "printWidth": 40
+      }
+    },
+    {
+      "files": [
+        "src/settings/data/**"
+      ],
+      "options": {
+        "printWidth": 200
       }
     }
   ]

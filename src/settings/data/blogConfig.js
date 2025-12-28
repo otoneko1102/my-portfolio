@@ -6,7 +6,6 @@
 
 /** @type {BlogConfig} */
 export const blogConfig = {
-  feedUrl:
-    "https://blog.montblank.fun/feed",
+  feedUrl: "https://blog.montblank.fun/feed",
   siteUrl: "https://blog.montblank.fun",
 };

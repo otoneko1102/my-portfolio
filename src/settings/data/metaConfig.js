@@ -26,10 +26,8 @@ export const metaConfig = {
   },
   pages: {
     home: {
-      title:
-        "ホーム | まろん｡のポートフォリオ",
-      description:
-        "まろん｡のポートフォリオサイトです。",
+      title: "ホーム | まろん｡のポートフォリオ",
+      description: "まろん｡のポートフォリオサイトです。",
       image: "/icon.png",
       type: "website",
     },
