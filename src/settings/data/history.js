@@ -60,7 +60,7 @@ export const history = {
       { text: "p2hacks 2025 Pre-PBL部門 最優秀賞 受賞", url: "https://universe.mfmf.moe", badge: "award" },
     ],
     11: [
-      { text: "つくるっしょ！運営メンバーになる", badge: "event" },
+      { text: "つくるっしょ！運営メンバーになる", url: "https://tsukurussyo.pages.dev", badge: "event" },
       { text: "開発バイトを開始", badge: "work" },
       { text: "道南リモートワーカーお茶会 Vol.02 参加", url: "https://blog.montblank.fun/b/donan-remoteworker_2", badge: "event" },
     ],

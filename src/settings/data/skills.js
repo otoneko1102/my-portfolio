@@ -116,6 +116,11 @@ export const skills = [
         icon: "logos:ruby",
         proficiency: 20,
       },
+      {
+        name: "Python",
+        icon: "logos:python",
+        proficiency: 40,
+      }
     ],
   },
   {
