@@ -1,5 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
+  import { history } from "../../settings/config.js";
 
   let open = false;
   let sections = [];
@@ -20,7 +21,7 @@
     }
 
     const nodes = Array.from(main.querySelectorAll("section[id]"));
-    sections = nodes
+    let baseSections = nodes
       .map((el) => {
         const heading = el.querySelector("h2, h1, h3");
         const title = heading
@@ -29,6 +30,26 @@
         return { id: el.id, title };
       })
       .filter((s) => s.id && s.title);
+
+    // If the page contains a `history` section, add year anchors to the TOC
+    const historyIndex = baseSections.findIndex((s) => s.id === "history");
+    if (historyIndex >= 0) {
+      const years = Object.keys(history || {})
+        .map((y) => Number(y))
+        .filter((n) => !Number.isNaN(n))
+        .sort((a, b) => b - a)
+        .map((n) => String(n));
+
+      const yearSections = years.map((y) => ({
+        id: `year-${y}`,
+        title: `${y}`,
+        isYear: true,
+      }));
+
+      baseSections.splice(historyIndex + 1, 0, ...yearSections);
+    }
+
+    sections = baseSections;
   };
 
   const setupObserver = () => {
@@ -155,7 +176,7 @@
       <nav class="toc-nav">
         <ul class="toc-list">
           {#each sections as s}
-            <li class="toc-list-item">
+            <li class="toc-list-item" class:year-item={s.isYear}>
               <a
                 href={"#" + s.id}
                 class="toc-link"
@@ -349,6 +370,17 @@
       rgba(99, 102, 241, 0.08),
       rgba(139, 92, 246, 0.02)
     );
+  }
+
+  .toc-list-item.year-item .toc-link {
+    padding-left: calc(var(--spacing-lg) + 12px);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    opacity: 0.95;
+  }
+
+  .toc-list-item.year-item .toc-link:hover {
+    background-color: rgba(99, 102, 241, 0.04);
   }
 
   .toc-backdrop {

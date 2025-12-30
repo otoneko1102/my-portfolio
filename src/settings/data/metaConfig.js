@@ -31,5 +31,11 @@ export const metaConfig = {
       image: "/icon.png",
       type: "website",
     },
+    history: {
+      title: "History | まろん｡のポートフォリオ",
+      description: "これまでの出来事を時系列でまとめたページです。",
+      image: "/icon.png",
+      type: "website",
+    },
   },
 };

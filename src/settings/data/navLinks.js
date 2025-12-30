@@ -11,4 +11,5 @@ export const navLinks = [
     label: "Projects",
     href: "/projects",
   },
+  { label: "History", href: "/history" },
 ];
