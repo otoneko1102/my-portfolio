@@ -83,15 +83,21 @@ export const projects = [
     pin: true,
   },
   {
+    title: "LDS Sync",
+    description: "LINE, Discord, Slackのグループチャット・チャンネルを同期させます。",
+    tags: ["Discord", "LINE", "Slack", "TypeScript"],
+    github: "https://github.com/otoneko1102/lds-sync"
+  },
+  {
     title: "メイドちゃん",
     description: "Discordの多機能Bot(現在サービス終了済み)。",
-    tags: ["Discord"],
+    tags: ["Discord", "JavaScript"],
     url: "https://maidproject.otoneko.jp",
   },
   {
     title: "ProteCat",
     description: "DiscordのセキュリティBot(現在サービス終了済み)。",
-    tags: ["Discord"],
+    tags: ["Discord", "JavaScript"],
     url: "https://protecat.otoneko.jp",
   },
   {
