@@ -96,18 +96,23 @@ export const history = {
     3: [{ text: "北海道岩見沢東高等学校 卒業", badge: "work" }],
   },
   2024: {
-    12: [{ text: "Idea Sellerでの活動を休止", badge: "personal" }],
+    12: [{ text: "Chrome拡張機能の開発とストア掲載を始める" }, { text: "Idea Sellerでの活動を休止", badge: "personal" }],
     8: [{ text: "Idea Sellerに所属しチーム開発を進める", badge: "personal" }],
     4: [{ text: "TypeScriptを使い始める", badge: "project" }],
   },
   2023: {
     9: [{ text: "セキュリティDiscord Botを公開", url: "https://protecat.otoneko.jp", badge: "release" }],
     7: [{ text: "OSS開発を開始", badge: "project" }],
-    4: [{ text: "Web開発を開始、JavaScriptやHTML/CSSを使い始める", badge: "project" }],
-    1: [{ text: "多機能Discord Botを公開", url: "https://maidproject.otoneko.jp", badge: "release" }],
+    1: [
+      { text: "Google App Scriptを始める", badge: "project" },
+      { text: "多機能Discord Botを公開", url: "https://maidproject.otoneko.jp", badge: "release" },
+    ],
   },
   2022: {
-    12: [{ text: "新型コロナに感染。自宅療養中の暇な時間を活用し、Node.jsでDiscord Botの作成を開始", badge: "project" }],
+    12: [
+      { text: "新型コロナに感染。自宅療養中の暇な時間を活用し、Node.jsでDiscord Botの作成を開始", badge: "project" },
+      { text: "Web開発を開始。JavaScriptやHTML/CSSを使い始める", badge: "project" },
+    ],
     8: [
       { text: "個人開発を開始", badge: "project" },
       { text: "BDFDという簡易的な言語でDiscord Botの作成を開始", badge: "project" },

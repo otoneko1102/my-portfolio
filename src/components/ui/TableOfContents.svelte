@@ -49,6 +49,22 @@
       baseSections.splice(historyIndex + 1, 0, ...yearSections);
     }
 
+    // If the page contains a `projects` section, add project anchors to the TOC
+    const projectsIndex = baseSections.findIndex((s) => s.id === "projects");
+    if (projectsIndex >= 0) {
+      // Look for elements that have ids like `project-<index>` (added by ProjectsAll.svelte)
+      const projectEls = Array.from(main.querySelectorAll('[id^="project-"]'));
+      const projectSections = projectEls.map((el) => ({
+        id: el.id,
+        title: (el.innerText || el.textContent || "").trim(),
+        isProject: true,
+      }));
+
+      if (projectSections.length) {
+        baseSections.splice(projectsIndex + 1, 0, ...projectSections);
+      }
+    }
+
     sections = baseSections;
   };
 
@@ -76,10 +92,77 @@
     open = !open;
   };
 
-  const handleLinkClick = (id) => {
+  const getHeaderOffset = () => {
+    const header = document.querySelector("header");
+    return header ? Math.round(header.getBoundingClientRect().height) : 0;
+  };
+
+  const scrollToKeepVisible = (el, opts = {}) => {
+    if (!el) return;
+    const preferCenter = !!opts.preferCenter;
+    const container =
+      el.closest && el.closest("article") ? el.closest("article") : el;
+    const headerOffset = getHeaderOffset();
+    const padding = 12;
+    const rect = container.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const top = rect.top;
+    const bottom = rect.bottom;
+    const elHeight = rect.height;
+
+    // Prefer centering for project-like sections when the element fits comfortably
+    if (preferCenter) {
+      const availableSpace = viewportHeight - headerOffset - padding * 2;
+      if (elHeight < availableSpace) {
+        const centerOffset = Math.round((availableSpace - elHeight) / 2);
+        const targetTop =
+          window.scrollY + top - headerOffset - padding - centerOffset;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+        container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
+        container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
+        return;
+      }
+    }
+
+    // If already fully visible, just nudge to align to header offset for consistency
+    if (top >= headerOffset + padding && bottom <= viewportHeight - padding) {
+      window.scrollTo({
+        top: window.scrollY + top - headerOffset - padding,
+        behavior: "smooth",
+      });
+      container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
+      container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
+      return;
+    }
+
+    // If element is taller than available space, align its top under the header
+    if (elHeight + headerOffset + padding * 2 >= viewportHeight) {
+      window.scrollTo({
+        top: window.scrollY + top - headerOffset - padding,
+        behavior: "smooth",
+      });
+      container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
+      container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
+      return;
+    }
+
+    // Normal case: align the top under the header, but ensure bottom fits in viewport
+    let targetTop = window.scrollY + top - headerOffset - padding;
+    if (targetTop + elHeight > window.scrollY + viewportHeight - padding) {
+      targetTop = window.scrollY + bottom - viewportHeight + padding;
+    }
+
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+
+    container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
+    container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
+  };
+
+  const handleLinkClick = (id, opts = {}) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      scrollToKeepVisible(el, opts);
+      open = false;
     }
   };
 
@@ -176,12 +259,17 @@
       <nav class="toc-nav">
         <ul class="toc-list">
           {#each sections as s}
-            <li class="toc-list-item" class:year-item={s.isYear}>
+            <li
+              class="toc-list-item"
+              class:year-item={s.isYear}
+              class:project-item={s.isProject}
+            >
               <a
                 href={"#" + s.id}
                 class="toc-link"
                 class:active={s.id === activeId}
-                on:click|preventDefault={() => handleLinkClick(s.id)}
+                on:click|preventDefault={() =>
+                  handleLinkClick(s.id, { preferCenter: !!s.isProject })}
               >
                 {s.title}
               </a>
@@ -380,6 +468,18 @@
   }
 
   .toc-list-item.year-item .toc-link:hover {
+    background-color: rgba(99, 102, 241, 0.04);
+  }
+
+  /* Project items (inserted under Projects section) */
+  .toc-list-item.project-item .toc-link {
+    padding-left: calc(var(--spacing-lg) + 12px);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    opacity: 0.95;
+  }
+
+  .toc-list-item.project-item .toc-link:hover {
     background-color: rgba(99, 102, 241, 0.04);
   }
 
