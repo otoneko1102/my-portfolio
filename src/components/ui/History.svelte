@@ -53,69 +53,72 @@
       <p class="history-empty">No events yet.</p>
     {/if}
 
-    {#each years as year}
-      <div class="year-block" aria-labelledby={"year-" + year}>
-        <div class="content-col">
-          <div class="timeline-wrapper">
-            <div
-              id={"year-" + year}
-              class="year-anchor"
-              aria-hidden="true"
-            ></div>
-            <div class="timeline-line" aria-hidden="true"></div>
+    <div class="timeline">
+      {#each years as year}
+        <div class="year-block" aria-labelledby={"year-" + year}>
+          <div class="content-col">
+            <div class="timeline-wrapper">
+              <div
+                id={"year-" + year}
+                class="year-anchor"
+                aria-hidden="true"
+              ></div>
+              <div class="timeline-line" aria-hidden="true"></div>
 
-            <div class="timeline-items">
-              {#each getMonthsForYear(year) as month}
-                <div class="month-block">
-                  <div class="month-label" id={"month-" + year + "-" + month}>
-                    {year} / {String(Number(month)).padStart(2, "0")}
-                  </div>
+              <div class="timeline-items">
+                {#each getMonthsForYear(year) as month}
+                  <div class="month-block">
+                    <div class="month-label" id={"month-" + year + "-" + month}>
+                      {year} / {String(Number(month)).padStart(2, "0")}
+                    </div>
 
-                  <div class="month-entries">
-                    {#each getEntries(year, month) as item}
-                      <div class="timeline-row">
-                        <div class="month-col"></div>
+                    <div class="month-entries">
+                      {#each getEntries(year, month) as item}
+                        <div class="timeline-row">
+                          <div class="month-col"></div>
 
-                        <div class="dot-col" aria-hidden="true">
-                          {#if getBadgeInfo(item)}
-                            <span
-                              class={"badge badge--" + getBadgeInfo(item).shape}
-                              style={"--badge-color:" +
-                                getBadgeInfo(item).color}
-                            ></span>
-                          {/if}
+                          <div class="dot-col" aria-hidden="true">
+                            {#if getBadgeInfo(item)}
+                              <span
+                                class={"badge badge--" +
+                                  getBadgeInfo(item).shape}
+                                style={"--badge-color:" +
+                                  getBadgeInfo(item).color}
+                              ></span>
+                            {/if}
+                          </div>
+
+                          <div class="event-col">
+                            {#if typeof item === "string"}
+                              <div class="event-text">{item}</div>
+                            {:else if item?.url}
+                              <a
+                                class="event-link"
+                                href={item.url}
+                                target={item.url.startsWith("http")
+                                  ? "_blank"
+                                  : undefined}
+                                rel={item.url.startsWith("http")
+                                  ? "noopener noreferrer"
+                                  : undefined}
+                              >
+                                {item.text}
+                              </a>
+                            {:else}
+                              <div class="event-text">{item.text}</div>
+                            {/if}
+                          </div>
                         </div>
-
-                        <div class="event-col">
-                          {#if typeof item === "string"}
-                            <div class="event-text">{item}</div>
-                          {:else if item?.url}
-                            <a
-                              class="event-link"
-                              href={item.url}
-                              target={item.url.startsWith("http")
-                                ? "_blank"
-                                : undefined}
-                              rel={item.url.startsWith("http")
-                                ? "noopener noreferrer"
-                                : undefined}
-                            >
-                              {item.text}
-                            </a>
-                          {:else}
-                            <div class="event-text">{item.text}</div>
-                          {/if}
-                        </div>
-                      </div>
-                    {/each}
+                      {/each}
+                    </div>
                   </div>
-                </div>
-              {/each}
+                {/each}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   </div>
 </section>
 
@@ -133,8 +136,20 @@
     gap: var(--spacing-xl);
     padding: var(--spacing-xl) 0 var(--spacing-xl);
     align-items: start;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.18);
     position: relative;
+  }
+
+  .year-block::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--axis-absolute-left) + 8px);
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 2px;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .year-col {
@@ -154,9 +169,31 @@
     padding-top: var(--spacing-lg);
   }
 
-  /* Use per-month connectors instead of one continuous line */
+  /* Hide legacy continuous line — we'll draw a single continuous axis for the full timeline */
   .timeline-line {
     display: none;
+  }
+
+  .timeline {
+    position: relative;
+    --axis-left: 16px;
+    /* position of the axis measured from the timeline left edge; accounts for wrapper padding */
+    --axis-absolute-left: calc(var(--axis-left) + 44px);
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: var(--axis-absolute-left);
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 3px; /* slightly thicker axis */
+    background-color: rgba(0, 0, 0, 0.08);
+    opacity: 1;
+    z-index: 3; /* above year separators but below labels */
+    border-radius: 2px;
+    pointer-events: none;
   }
 
   .timeline-items {
@@ -178,38 +215,31 @@
     padding: var(--spacing-md) 0;
   }
 
-  /* Per-month vertical connectors: draw a line above and below the centered month label */
+  /* Remove per-month vertical connectors (hide axis to avoid broken vertical line) */
   .month-block::before,
   .month-block::after {
     content: "";
     position: absolute;
     left: var(--axis-left);
-    width: 2px;
-    background-color: rgba(0, 0, 0, 0.06);
-    opacity: 0.5;
+    width: 0; /* hide vertical axis */
+    height: 0;
+    background-color: transparent;
     z-index: 1;
-  }
-
-  .month-block::before {
-    top: 0;
-    /* stop above the label: adjust the offset if label size changes */
-    bottom: calc(50% + 14px);
-  }
-
-  .month-block::after {
-    top: calc(50% + 14px);
-    bottom: 0;
+    pointer-events: none;
   }
 
   /* Horizontal separator between months (intra-year) */
   .month-block + .month-block::before {
     content: "";
     position: absolute;
-    left: calc(var(--axis-left) + 32px);
+    left: calc(var(--axis-absolute-left) + 8px);
     right: 0;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.06);
-    opacity: 0.5;
+    /* allow the separator to stretch across the content area */
+    width: auto;
+    background: none;
+    height: 0;
+    border-top: 1px dotted rgba(0, 0, 0, 0.14);
+    opacity: 1;
     top: -8px;
     z-index: 2;
     pointer-events: none;
@@ -217,18 +247,43 @@
 
   @media (max-width: 768px) {
     .month-block + .month-block::before {
-      left: calc(var(--axis-left) + 24px);
+      left: calc(var(--axis-absolute-left) + 6px);
+      width: auto;
+      background: none;
+      opacity: 1;
+      border-top: 1px dotted rgba(0, 0, 0, 0.14);
+      z-index: 2;
+    }
+
+    /* Reduce left padding on small screens so timeline sits closer to the edge */
+    .history-section .container {
+      padding-left: var(--spacing-sm);
+      padding-right: var(--spacing-sm);
+    }
+
+    .timeline {
+      --axis-left: 14px;
+      --axis-absolute-left: calc(var(--axis-left) + 28px);
     }
 
     .timeline-wrapper {
-      --axis-left: 20px;
-      padding-left: 40px;
+      --axis-left: 14px;
+      padding-left: 28px;
       padding-top: var(--spacing-md);
     }
 
     .year-block {
       padding: var(--spacing-lg) 0 var(--spacing-lg);
       gap: var(--spacing-md);
+    }
+
+    .year-block::after {
+      left: calc(var(--axis-absolute-left) + 6px);
+    }
+
+    .month-label {
+      padding: 4px 8px;
+      font-size: var(--font-size-xs);
     }
 
     .year-label {
@@ -241,33 +296,36 @@
     left: var(--axis-left);
     top: 50%;
     transform: translate(-50%, -50%);
-    color: var(--color-text-light);
-    background: var(--color-background);
-    padding: 6px 10px;
-    border-radius: var(--border-radius-full);
+    color: var(--color-text);
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border);
     font-weight: 700;
-    z-index: 3;
+    font-size: var(--font-size-sm);
+    z-index: 5;
     box-shadow: var(--shadow-sm);
   }
 
   .timeline-row {
     display: grid;
-    grid-template-columns: 56px 40px 1fr;
-    gap: var(--spacing-md);
+    grid-template-columns: 60px 44px 1fr;
+    gap: var(--spacing-md) 0;
     align-items: center;
     padding: var(--spacing-sm) 0;
   }
 
   .month-col {
     /* reserved column for month label (kept empty in rows) */
-    width: 56px;
+    width: 60px;
   }
 
   .dot-col {
-    width: 40px;
+    width: 44px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: var(--spacing-md);
   }
 
   .badge {
@@ -337,7 +395,18 @@
     }
 
     .timeline-row {
-      grid-template-columns: 44px 36px 1fr;
+      grid-template-columns: 52px 40px 1fr;
+      gap: var(--spacing-md) 0;
+    }
+
+    .month-col {
+      width: 52px;
+    }
+
+    /* Slightly reduce event text size on small screens */
+    .event-text,
+    .event-link {
+      font-size: var(--font-size-xsm);
     }
   }
 </style>

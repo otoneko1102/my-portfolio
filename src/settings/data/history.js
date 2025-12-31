@@ -96,7 +96,10 @@ export const history = {
     1: [{ text: "Svelteを使い始める", badge: "project" }],
   },
   2024: {
-    12: [{ text: "Chrome拡張機能の開発とストア掲載を始める" }, { text: "Idea Sellerでの活動を休止", badge: "personal" }],
+    12: [
+      { text: "Chrome拡張機能の開発とストア掲載を始める", badge: "personal" },
+      { text: "Idea Sellerでの活動を休止", badge: "personal" },
+    ],
     8: [{ text: "Idea Sellerに所属しチーム開発を進める", badge: "personal" }],
     4: [{ text: "TypeScriptを使い始める", badge: "project" }],
   },
