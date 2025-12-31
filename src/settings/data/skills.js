@@ -120,7 +120,7 @@ export const skills = [
         name: "Python",
         icon: "logos:python",
         proficiency: 40,
-      }
+      },
     ],
   },
   {

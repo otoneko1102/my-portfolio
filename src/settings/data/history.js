@@ -87,13 +87,13 @@ export const history = {
     5: [{ text: "はこだて未来大×企業エンジニア 大LT2025 参加", badge: "event" }],
     4: [
       { text: "公立はこだて未来大学 入学", badge: "work" },
-      { text: "Svelteを使い始める", badge: "project" },
       { text: "Viteを使い始める", badge: "project" },
       { text: "EJSを使い始める", badge: "project" },
       { text: "ポートフォリオサイトを公開", badge: "release" },
       { text: "Mariners' Conference `25 Spring 参加", badge: "event" },
     ],
     3: [{ text: "北海道岩見沢東高等学校 卒業", badge: "work" }],
+    1: [{ text: "Svelteを使い始める", badge: "project" }],
   },
   2024: {
     12: [{ text: "Chrome拡張機能の開発とストア掲載を始める" }, { text: "Idea Sellerでの活動を休止", badge: "personal" }],
@@ -104,7 +104,7 @@ export const history = {
     9: [{ text: "セキュリティDiscord Botを公開", url: "https://protecat.otoneko.jp", badge: "release" }],
     7: [{ text: "OSS開発を開始", badge: "project" }],
     1: [
-      { text: "Google App Scriptを始める", badge: "project" },
+      { text: "Google Apps Scriptを始める", badge: "project" },
       { text: "多機能Discord Botを公開", url: "https://maidproject.otoneko.jp", badge: "release" },
     ],
   },

@@ -86,7 +86,7 @@ export const projects = [
     title: "LDS Sync",
     description: "LINE, Discord, Slackのグループチャット・チャンネルを同期させます。",
     tags: ["Discord", "LINE", "Slack", "TypeScript"],
-    github: "https://github.com/otoneko1102/lds-sync"
+    github: "https://github.com/otoneko1102/lds-sync",
   },
   {
     title: "メイドちゃん",
