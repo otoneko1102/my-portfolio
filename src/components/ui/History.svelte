@@ -179,6 +179,7 @@
     --axis-left: 16px;
     /* position of the axis measured from the timeline left edge; accounts for wrapper padding */
     --axis-absolute-left: calc(var(--axis-left) + 44px);
+    --axis-width: 3px; /* used for axis thickness and label borders */
   }
 
   .timeline::before {
@@ -188,11 +189,11 @@
     top: 0;
     bottom: 0;
     transform: translateX(-50%);
-    width: 3px; /* slightly thicker axis */
+    width: var(--axis-width); /* axis thickness */
     background-color: rgba(0, 0, 0, 0.08);
     opacity: 1;
     z-index: 3; /* above year separators but below labels */
-    border-radius: 2px;
+    border-radius: calc(var(--axis-width) / 2);
     pointer-events: none;
   }
 
@@ -300,7 +301,7 @@
     background: #ffffff;
     padding: 6px 12px;
     border-radius: var(--border-radius-lg);
-    border: 1px solid var(--color-border);
+    border: var(--axis-width) solid var(--color-border);
     font-weight: 700;
     font-size: var(--font-size-sm);
     z-index: 5;
