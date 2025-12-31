@@ -35,23 +35,13 @@ export const socialLinks = [
     icon: "logos:instagram-icon",
   },
   {
-    name: "npm",
-    url: "https://www.npmjs.com/~otoneko.",
-    icon: "logos:npm-icon",
+    name: "SoundCloud",
+    url: "https://on.soundcloud.com/5OhpzmUg6gmYcFqe7N",
+    icon: "logos:soundcloud",
   },
   {
     name: "Spotify",
     url: "https://open.spotify.com/user/31ichihsves6wrs7th6eoufpmuua",
     icon: "logos:spotify-icon",
-  },
-  {
-    name: "#NowPlaying",
-    url: "https://spotify.montblank.fun",
-    icon: "simple-icons:spotify",
-  },
-  {
-    name: "Blog",
-    url: "https://blog.montblank.fun",
-    icon: "codicon:link-external",
   },
 ];

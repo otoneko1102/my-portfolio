@@ -13,10 +13,31 @@ const chunkSocialLinks = (
   links: Array<{ icon: string; url: string; name: string }>
 ) => {
   const rows: Array<Array<{ icon: string; url: string; name: string }>> = [];
+  const total = links.length;
+
+  if (total === 0) return rows;
+
+  // Keep a single row for small lists
+  if (total <= 5) {
+    rows.push(links.slice(0, total));
+    return rows;
+  }
+
+  // For up to 10 items, split into two rows where the odd row is at most 5
+  // and the even row is the remainder (for odd totals this makes the even row
+  // exactly one less than the odd row, e.g. 7 -> 4, 3)
+  if (total <= 10) {
+    const oddTake = Math.min(5, Math.ceil(total / 2));
+    rows.push(links.slice(0, oddTake));
+    rows.push(links.slice(oddTake));
+    return rows;
+  }
+
+  // For larger lists, alternate between 5 (odd) and 4 (even)
   let index = 0;
   let isOddRow = true;
 
-  while (index < links.length) {
+  while (index < total) {
     const take = isOddRow ? 5 : 4;
     rows.push(links.slice(index, index + take));
     index += take;
