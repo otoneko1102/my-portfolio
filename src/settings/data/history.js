@@ -53,9 +53,9 @@ export const history = {
   2025: {
     12: [
       { text: "もふもふぽっぷに所属", badge: "personal" },
-      { text: "React(Next.js)を使い始める", badge: "project" },
+      { text: "React(Next.js)を始める", badge: "project" },
       { text: "ポートフォリオをリニューアル", badge: "release" },
-      { text: "TailwindCSSを使い始める", badge: "project" },
+      { text: "TailwindCSSを始める", badge: "project" },
       { text: "p2hacks 2025 Pre-PBL部門 Fenrir賞 受賞", url: "https://universe.mfmf.moe", badge: "award" },
       { text: "p2hacks 2025 Pre-PBL部門 最優秀賞 受賞", url: "https://universe.mfmf.moe", badge: "award" },
     ],
@@ -66,14 +66,14 @@ export const history = {
     ],
     10: [
       { text: "技育CAMPキャラバン札幌2025秋 参加", url: "https://blog.montblank.fun/b/geekcamp_2025-10-04", badge: "event" },
-      { text: "CoffeeScriptを使い始める", badge: "project" },
+      { text: "CoffeeScriptを始める", badge: "project" },
       { text: "CoffeeScript用のビルダー、Milkeeを作成", url: "https://milkee.oto.im", badge: "release" },
-      { text: "Rubyを使い始める", badge: "project" },
+      { text: "Rubyを始める", badge: "project" },
       { text: "未来祭LT2025", url: "https://blog.montblank.fun/b/miraisailt_2025-10-12", badge: "event" },
     ],
     9: [{ text: "道南リモートワーカーお茶会 Vol.01 参加", badge: "event" }],
     8: [
-      { text: "Astroを使い始める", badge: "project" },
+      { text: "Astroを始める", badge: "project" },
       { text: "hokkaido.js(函館)2025 登壇", url: "https://blog.montblank.fun/b/hokkaidojs_2025-08-02", badge: "event" },
       { text: "セブンイレブンで長期休暇は帰省すると申告したら何故かバイトを辞めさせられる", badge: "work" },
       { text: "CISTLT2025 登壇", url: "https://blog.montblank.fun/b/cistlt_2025-08", badge: "event" },
@@ -87,13 +87,13 @@ export const history = {
     5: [{ text: "はこだて未来大×企業エンジニア 大LT2025 参加", badge: "event" }],
     4: [
       { text: "公立はこだて未来大学 入学", badge: "work" },
-      { text: "Viteを使い始める", badge: "project" },
-      { text: "EJSを使い始める", badge: "project" },
+      { text: "Viteを始める", badge: "project" },
+      { text: "EJSを始める", badge: "project" },
       { text: "ポートフォリオサイトを公開", badge: "release" },
       { text: "Mariners' Conference `25 Spring 参加", badge: "event" },
     ],
     3: [{ text: "北海道岩見沢東高等学校 卒業", badge: "work" }],
-    1: [{ text: "Svelteを使い始める", badge: "project" }],
+    1: [{ text: "Svelteを始める", badge: "project" }],
   },
   2024: {
     12: [
@@ -101,7 +101,7 @@ export const history = {
       { text: "Idea Sellerでの活動を休止", badge: "personal" },
     ],
     8: [{ text: "Idea Sellerに所属しチーム開発を進める", badge: "personal" }],
-    4: [{ text: "TypeScriptを使い始める", badge: "project" }],
+    4: [{ text: "TypeScriptを始める", badge: "project" }],
   },
   2023: {
     9: [{ text: "セキュリティDiscord Botを公開", url: "https://protecat.otoneko.jp", badge: "release" }],
@@ -114,7 +114,7 @@ export const history = {
   2022: {
     12: [
       { text: "新型コロナに感染。自宅療養中の暇な時間を活用し、Node.jsでDiscord Botの作成を開始", badge: "project" },
-      { text: "Web開発を開始。JavaScriptやHTML/CSSを使い始める", badge: "project" },
+      { text: "Web開発を開始。JavaScriptやHTML/CSSを始める", badge: "project" },
     ],
     8: [
       { text: "個人開発を開始", badge: "project" },
