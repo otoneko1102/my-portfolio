@@ -67,7 +67,7 @@ export const history = {
     10: [
       { text: "技育CAMPキャラバン札幌2025秋 参加", url: "https://blog.montblank.fun/b/geekcamp_2025-10-04", badge: "event" },
       { text: "CoffeeScriptを始める", badge: "project" },
-      { text: "CoffeeScript用のビルダー、Milkeeを作成", url: "https://milkee.oto.im", badge: "release" },
+      { text: "CoffeeScript用のビルダー、Milkeeを公開", url: "https://milkee.oto.im", badge: "release" },
       { text: "Rubyを始める", badge: "project" },
       { text: "未来祭LT2025", url: "https://blog.montblank.fun/b/miraisailt_2025-10-12", badge: "event" },
     ],
