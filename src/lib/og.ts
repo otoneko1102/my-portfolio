@@ -1,11 +1,27 @@
-const cache = new Map();
+export type OGData = {
+  title: string;
+  description: string;
+  image: string | null;
+  siteName: string;
+  favicon: string;
+  url: string;
+  isFallback: boolean;
+};
 
-const getMetaContent = (doc, property, attribute = "property") => {
-  const meta = doc.querySelector(`meta[${attribute}="${property}"]`);
+const cache = new Map<string, OGData>();
+
+const getMetaContent = (
+  doc: Document,
+  property: string,
+  attribute: "property" | "name" = "property"
+): string | null => {
+  const meta = doc.querySelector<HTMLMetaElement>(
+    `meta[${attribute}="${property}"]`
+  );
   return meta ? meta.getAttribute("content") : null;
 };
 
-const extractOGData = (html, url) => {
+const extractOGData = (html: string, url: string) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
@@ -36,13 +52,16 @@ const extractOGData = (html, url) => {
   return { title, description, image, siteName, favicon };
 };
 
-const fetchWithTimeout = async (url, timeout = 3000) => {
+const fetchWithTimeout = async (
+  url: string,
+  timeout = 3000
+): Promise<Response> => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
   try {
     const response = await fetch(url, {
       method: "GET",
-      cache: "force-cache",
+      cache: "force-cache" as RequestCache,
       signal: controller.signal,
     });
     clearTimeout(timeoutId);
@@ -53,7 +72,7 @@ const fetchWithTimeout = async (url, timeout = 3000) => {
   }
 };
 
-const fetchWithRetry = async (url, maxRetries = 2) => {
+const fetchWithRetry = async (url: string, maxRetries = 2): Promise<string> => {
   for (let i = 0; i < maxRetries; i++) {
     try {
       if (i > 0) await new Promise((r) => setTimeout(r, i * 200));
@@ -67,9 +86,11 @@ const fetchWithRetry = async (url, maxRetries = 2) => {
   throw new Error("Max retries exceeded");
 };
 
-export const fetchOGData = async (url) => {
+export const fetchOGData = async (
+  url?: string | null
+): Promise<OGData | null> => {
   if (!url) return null;
-  if (cache.has(url)) return cache.get(url);
+  if (cache.has(url)) return cache.get(url)!;
 
   const urlObj = new URL(url);
   const domain = urlObj.hostname.replace(/^www\./, "");
@@ -80,7 +101,7 @@ export const fetchOGData = async (url) => {
       `https://corsproxy.io/?${encodeURIComponent(url)}`,
     ];
 
-    let html = null;
+    let html: string | null = null;
     for (const proxyUrl of proxies) {
       try {
         html = await fetchWithRetry(proxyUrl, 2);
@@ -91,27 +112,35 @@ export const fetchOGData = async (url) => {
     }
 
     if (html) {
-      const data = extractOGData(html, url);
+      const dataPartial = extractOGData(html, url);
+      const data: OGData = {
+        ...dataPartial,
+        url,
+        isFallback: false,
+      };
+
       if (data.image && !/^https?:\/\//i.test(data.image)) {
         try {
           data.image = new URL(data.image, url).href;
-        } catch (e) {}
+        } catch (e) {
+          // ignore
+        }
       }
 
-      data.url = url;
-      data.isFallback = false;
       cache.set(url, data);
       return data;
     }
 
     throw new Error("All proxies failed");
   } catch (error) {
-    const fallbackData = {
+    const fallbackData: OGData = {
       title: domain,
       description: url,
       image: null,
       siteName: domain,
       favicon: `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+      url,
+      isFallback: true,
     };
     cache.set(url, fallbackData);
     return fallbackData;
@@ -119,14 +148,3 @@ export const fetchOGData = async (url) => {
 };
 
 export default { fetchOGData };
-
-// NOTE: fetchOGData returns an object with the following fields:
-// {
-//   title: string,
-//   description: string,
-//   image: string | null,
-//   siteName: string,
-//   favicon: string,
-//   url: string,
-//   isFallback: boolean
-// }

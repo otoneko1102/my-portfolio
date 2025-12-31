@@ -2,7 +2,7 @@
   import { crossLinks, crossLinksConfig } from "../../settings/config.js";
   import { onMount, tick, onDestroy } from "svelte";
 
-  import { fetchOGData } from "../../lib/og.js";
+  import { fetchOGData } from "../../lib/og";
 
   let linkData = [];
   let isLoading = true;

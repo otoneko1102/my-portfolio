@@ -1,6 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { fetchOGData } from "../../lib/og.js";
+  import { fetchOGData } from "../../lib/og";
 
   let previewData = null;
   let isLoading = false;

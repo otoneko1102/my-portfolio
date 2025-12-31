@@ -1,7 +1,7 @@
 <script>
   import { projects } from "../../settings/config.js";
   import { onMount } from "svelte";
-  import { fetchOGData } from "../../lib/og.js";
+  import { fetchOGData } from "../../lib/og";
 
   let imageErrors = new Set();
   let projectList = projects;

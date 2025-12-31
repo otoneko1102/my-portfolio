@@ -77,6 +77,7 @@ export const history = {
       { text: "hokkaido.js(函館)2025 登壇", url: "https://blog.montblank.fun/b/hokkaidojs_2025-08-02", badge: "event" },
       { text: "セブンイレブンで長期休暇は帰省すると申告したら何故かバイトを辞めさせられる", badge: "work" },
       { text: "CISTLT2025 登壇", url: "https://blog.montblank.fun/b/cistlt_2025-08", badge: "event" },
+      { text: "nekosを公開", url: "https://www.npmjs.com/package/nekos", badge: "release" },
     ],
     7: [{ text: "しょーもないLT2025 登壇・運営", url: "https://blog.montblank.fun/b/shomonailt_2025-07-06", badge: "event" }],
     6: [
