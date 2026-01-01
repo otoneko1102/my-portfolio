@@ -208,20 +208,24 @@
       {#if projectList.length > 1}
         {#if currentIndex > 0}
           <button
+            type="button"
             class="carousel-control carousel-prev"
             on:click={prevSlide}
             aria-label="Previous project"
+            title="Previous project"
           >
-            ←
+            <span class="material-icons" aria-hidden="true">chevron_left</span>
           </button>
         {/if}
         {#if currentIndex < projectList.length - 1}
           <button
+            type="button"
             class="carousel-control carousel-next"
             on:click={nextSlide}
             aria-label="Next project"
+            title="Next project"
           >
-            →
+            <span class="material-icons" aria-hidden="true">chevron_right</span>
           </button>
         {/if}
       {/if}
@@ -335,6 +339,18 @@
 
   .carousel-control:hover {
     background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .carousel-control:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+  }
+
+  .carousel-control .material-icons {
+    font-size: inherit;
+    line-height: 1;
+    vertical-align: middle;
   }
 
   .carousel-prev {

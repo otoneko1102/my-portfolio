@@ -196,7 +196,7 @@
     {#if isLoading}
       <div class="preview-loading">
         <div class="spinner"></div>
-        <span>Loading preview...</span>
+        <span>Loading...</span>
       </div>
     {:else if previewData}
       <div class="preview-content">
