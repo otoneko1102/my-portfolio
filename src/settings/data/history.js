@@ -50,6 +50,9 @@ export const historyBadgeKeys = Object.keys(historyBadges);
 
 /** @type {HistoryMap} */
 export const history = {
+  2026: {
+    1: [{ text: "Vueを始める", badge: "project" }],
+  },
   2025: {
     12: [
       { text: "もふもふぽっぷに所属", badge: "personal" },

@@ -64,6 +64,11 @@ export const skills = [
         proficiency: 60,
       },
       {
+        name: "Vue",
+        icon: "logos:vue",
+        proficiency: 50,
+      },
+      {
         name: "React",
         icon: "logos:react",
         proficiency: 35,

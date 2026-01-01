@@ -1,17 +1,62 @@
 ---
 import { siteConfig } from "../../settings/config.js";
 
-const currentYear = new Date().getFullYear();
 const startYear = 2022;
-const yearText =
-  currentYear > startYear ? `${startYear} - ${currentYear}` : `${startYear}`;
+let buildYear;
+try {
+  buildYear = Number(
+    new Intl.DateTimeFormat("en", {
+      timeZone: "Asia/Tokyo",
+      year: "numeric",
+    }).format(new Date())
+  );
+} catch (e) {
+  const now = new Date();
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  buildYear = jst.getUTCFullYear();
+}
+const buildYearText =
+  buildYear > startYear ? `${startYear} - ${buildYear}` : `${startYear}`;
 ---
 
 <footer>
   <div class="footer-content">
-    <p>{yearText} &copy; {siteConfig.author} - All rights reserved.</p>
+    <p>
+      <span id="copyright-year">{buildYearText}</span> &copy; {
+        siteConfig.author
+      } - All rights reserved.
+    </p>
   </div>
 </footer>
+
+<script>
+  (function () {
+    try {
+      const startYear = 2022;
+      let currentYear;
+      try {
+        currentYear = Number(
+          new Intl.DateTimeFormat("en", {
+            timeZone: "Asia/Tokyo",
+            year: "numeric",
+          }).format(new Date())
+        );
+      } catch (e) {
+        const now = new Date();
+        const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+        currentYear = jst.getUTCFullYear();
+      }
+      const el = document.getElementById("copyright-year");
+      if (!el) return;
+      el.textContent =
+        currentYear > startYear
+          ? `${startYear} - ${currentYear}`
+          : `${startYear}`;
+    } catch (e) {
+      // ignore
+    }
+  })();
+</script>
 
 <style>
   footer {
