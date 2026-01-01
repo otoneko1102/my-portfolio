@@ -10,47 +10,8 @@ export type OGData = {
 
 const cache = new Map<string, OGData>();
 
-const getMetaContent = (
-  doc: Document,
-  property: string,
-  attribute: "property" | "name" = "property"
-): string | null => {
-  const meta = doc.querySelector<HTMLMetaElement>(
-    `meta[${attribute}="${property}"]`
-  );
-  return meta ? meta.getAttribute("content") : null;
-};
-
-const extractOGData = (html: string, url: string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-
-  const urlObj = new URL(url);
-  const domain = urlObj.hostname.replace(/^www\./, "");
-
-  const title =
-    getMetaContent(doc, "og:title") ||
-    getMetaContent(doc, "twitter:title") ||
-    doc.querySelector("title")?.textContent ||
-    domain;
-
-  const description =
-    getMetaContent(doc, "og:description") ||
-    getMetaContent(doc, "twitter:description") ||
-    getMetaContent(doc, "description", "name") ||
-    "";
-
-  const image =
-    getMetaContent(doc, "og:image") ||
-    getMetaContent(doc, "twitter:image") ||
-    null;
-
-  const siteName = getMetaContent(doc, "og:site_name") || domain;
-
-  const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-
-  return { title, description, image, siteName, favicon };
-};
+// Use external OGP API for fetching metadata instead of scraping HTML.
+// Endpoint: https://ogp.montblank.fun?url={encodedUrl}
 
 const fetchWithTimeout = async (
   url: string,
@@ -72,19 +33,7 @@ const fetchWithTimeout = async (
   }
 };
 
-const fetchWithRetry = async (url: string, maxRetries = 2): Promise<string> => {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      if (i > 0) await new Promise((r) => setTimeout(r, i * 200));
-      const response = await fetchWithTimeout(url, 3000);
-      if (response.ok) return await response.text();
-    } catch (e) {
-      if (i === maxRetries - 1) throw e;
-      continue;
-    }
-  }
-  throw new Error("Max retries exceeded");
-};
+// fetchWithRetry removed — using direct API call instead.
 
 export const fetchOGData = async (
   url?: string | null
@@ -96,42 +45,49 @@ export const fetchOGData = async (
   const domain = urlObj.hostname.replace(/^www\./, "");
 
   try {
-    const proxies = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      `https://corsproxy.io/?${encodeURIComponent(url)}`,
-    ];
+    const apiUrl = `https://ogp.montblank.fun?url=${encodeURIComponent(url)}`;
 
-    let html: string | null = null;
-    for (const proxyUrl of proxies) {
+    const response = await fetchWithTimeout(apiUrl, 3000);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const json = await response.json();
+
+    const data: OGData = {
+      title:
+        typeof json.title === "string" && json.title.length > 0
+          ? json.title
+          : domain,
+      description:
+        typeof json.description === "string" && json.description.length > 0
+          ? json.description
+          : url,
+      image:
+        typeof json.image === "string" && json.image.length > 0
+          ? json.image
+          : null,
+      siteName:
+        typeof json.siteName === "string" && json.siteName.length > 0
+          ? json.siteName
+          : domain,
+      favicon:
+        typeof json.favicon === "string" && json.favicon.length > 0
+          ? json.favicon
+          : `https://www.google.com/s2/favicons?domain=${domain}&sz=32`,
+      url: typeof json.url === "string" && json.url.length > 0 ? json.url : url,
+      isFallback: Boolean(json.isFallback || false),
+    };
+
+    // Resolve relative image URLs
+    if (data.image && !/^https?:\/\//i.test(data.image)) {
       try {
-        html = await fetchWithRetry(proxyUrl, 2);
-        if (html) break;
+        data.image = new URL(data.image, data.url || url).href;
       } catch (e) {
-        continue;
+        // ignore
       }
     }
 
-    if (html) {
-      const dataPartial = extractOGData(html, url);
-      const data: OGData = {
-        ...dataPartial,
-        url,
-        isFallback: false,
-      };
-
-      if (data.image && !/^https?:\/\//i.test(data.image)) {
-        try {
-          data.image = new URL(data.image, url).href;
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      cache.set(url, data);
-      return data;
-    }
-
-    throw new Error("All proxies failed");
+    cache.set(url, data);
+    return data;
   } catch (error) {
     const fallbackData: OGData = {
       title: domain,
