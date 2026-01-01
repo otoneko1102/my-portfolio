@@ -46,4 +46,19 @@ export const crossLinks = [
     description: null,
     thumbnail: null,
   },
+  {
+    url: "https://profile.activetk.jp",
+    title: null,
+    author: "ActiveTK.",
+    description: null,
+    // description: "A programmer, a security researcher, a super procrastinator",
+    thumbnail: "https://profile.activetk.jp/avatar.png",
+  },
+  // {
+  //   url: "https://sinta.fun",
+  //   title: null,
+  //   author: "sinta",
+  //   description: null,
+  //   thumbnail: null,
+  // }
 ];
