@@ -444,6 +444,22 @@
       background-color var(--transition-fast),
       color var(--transition-fast);
     font-weight: 600;
+    /* Make non-top items compact by default */
+    font-size: var(--font-size-sm);
+  }
+
+  /* Emphasize the very first TOC item and keep others small to match other pages */
+  .toc-nav .toc-list .toc-list-item:first-child .toc-link {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    padding-left: 8px;
+  }
+
+  .toc-nav .toc-list .toc-list-item:not(:first-child) .toc-link {
+    font-size: var(--font-size-sm);
+    opacity: 0.95;
+    /* Match the indentation used for year/project items */
+    padding-left: calc(var(--spacing-lg) + 12px);
   }
 
   .toc-link:hover {
@@ -515,6 +531,15 @@
       width: 44px;
       height: 44px;
       border-radius: 999px;
+    }
+
+    /* Reduce TOC item indent on small screens */
+    .toc-nav .toc-list .toc-list-item:not(:first-child) .toc-link {
+      padding-left: calc(var(--spacing-md) + 8px);
+    }
+
+    .toc-nav .toc-list .toc-list-item:first-child .toc-link {
+      padding-left: 8px;
     }
   }
 </style>
