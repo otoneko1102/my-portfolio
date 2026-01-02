@@ -15,6 +15,16 @@ export const socialLinks = [
     icon: "logos:github-icon",
   },
   {
+    name: "WakaTime",
+    url: "https://wakatime.com/@otoneko1102",
+    icon: "logos:wakatime",
+  },
+  {
+    name: "npm",
+    url: "https://www.npmjs.com/~otoneko.",
+    icon: "logos:npm-icon",
+  },
+  {
     name: "Discord",
     url: "https://discord.com/users/236727759672442880",
     icon: "logos:discord-icon",

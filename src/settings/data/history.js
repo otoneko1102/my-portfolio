@@ -70,7 +70,7 @@ export const history = {
     10: [
       { text: "技育CAMPキャラバン札幌2025秋 参加", url: "https://blog.montblank.fun/b/geekcamp_2025-10-04", badge: "event" },
       { text: "CoffeeScriptを始める", badge: "project" },
-      { text: "CoffeeScript用のビルダー、Milkeeを公開", url: "https://milkee.oto.im", badge: "release" },
+      { text: "CoffeeScript用のビルダー「Milkee」を公開", url: "https://milkee.oto.im", badge: "release" },
       { text: "Rubyを始める", badge: "project" },
       { text: "未来祭LT2025", url: "https://blog.montblank.fun/b/miraisailt_2025-10-12", badge: "event" },
     ],
@@ -80,7 +80,7 @@ export const history = {
       { text: "hokkaido.js(函館)2025 登壇", url: "https://blog.montblank.fun/b/hokkaidojs_2025-08-02", badge: "event" },
       { text: "セブンイレブンで長期休暇は帰省すると申告したら何故かバイトを辞めさせられる", badge: "work" },
       { text: "CISTLT2025 登壇", url: "https://blog.montblank.fun/b/cistlt_2025-08", badge: "event" },
-      { text: "nekosを公開", url: "https://www.npmjs.com/package/nekos", badge: "release" },
+      { text: "cliツール「nekos」を公開", url: "https://www.npmjs.com/package/nekos", badge: "release" },
     ],
     7: [{ text: "しょーもないLT2025 登壇・運営", url: "https://blog.montblank.fun/b/shomonailt_2025-07-06", badge: "event" }],
     6: [
@@ -90,6 +90,7 @@ export const history = {
     ],
     5: [{ text: "はこだて未来大×企業エンジニア 大LT2025 参加", badge: "event" }],
     4: [
+      { text: "北海道函館市に移る", badge: "personal" },
       { text: "公立はこだて未来大学 入学", badge: "work" },
       { text: "Viteを始める", badge: "project" },
       { text: "EJSを始める", badge: "project" },
@@ -125,5 +126,23 @@ export const history = {
       { text: "BDFDという簡易的な言語でDiscord Botの作成を開始", badge: "project" },
     ],
     4: [{ text: "北海道岩見沢東高等学校 入学", badge: "work" }],
+    3: [{ text: "岩見沢市立東光中学校 卒業", badge: "work" }],
+  },
+  2019: {
+    4: [{ text: "岩見沢市立東光中学校 入学", badge: "work" }],
+    3: [{ text: "岩見沢市立東小学校 卒業", badge: "work" }],
+  },
+  2013: {
+    4: [{ text: "岩見沢市立東小学校 入学", badge: "work" }],
+  },
+  2009: {
+    12: [{ text: "北海道岩見沢市に戻る", badge: "personal" }],
+    10: [{ text: "一時的に北海道夕張市で過ごす", badge: "personal" }],
+  },
+  2006: {
+    11: [
+      { text: "北海道苫小牧市で生まれる", badge: "personal" },
+      { text: "北海道岩見沢市に住む", badge: "personal" },
+    ],
   },
 };
