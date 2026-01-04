@@ -159,11 +159,23 @@
   };
 
   const handleLinkClick = (id, opts = {}) => {
-    const el = document.getElementById(id);
-    if (el) {
-      scrollToKeepVisible(el, opts);
-      open = false;
+    let el = document.getElementById(id);
+    if (!el) return;
+
+    // 年アンカー（`year-YYYY`）は小さい透明な要素なので、
+    // より表示位置が安定するようにその親の年ブロック（aria-labelledby）を優先してスクロールする。
+    if (id.startsWith("year-")) {
+      const labelled = document.querySelector(`[aria-labelledby="${id}"]`);
+      if (labelled) {
+        el = labelled;
+      } else if (el.closest) {
+        const closestYear = el.closest(".year-block");
+        if (closestYear) el = closestYear;
+      }
     }
+
+    scrollToKeepVisible(el, opts);
+    open = false;
   };
 
   $: {
