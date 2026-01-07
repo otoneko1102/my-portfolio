@@ -306,6 +306,11 @@
     height: 100%;
   }
 
+  .project-card:hover {
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+  }
+
   .project-card.active {
     pointer-events: auto;
   }

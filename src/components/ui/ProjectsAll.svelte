@@ -140,6 +140,11 @@
     box-shadow: var(--shadow-sm);
   }
 
+  .project-card.grid:hover {
+    border-color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+  }
+
   .project-card.grid .project-image {
     height: 200px;
     position: relative;
