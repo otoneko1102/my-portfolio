@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@astrojs/svelte": "^7.2.2",
-    "astro": "^5.16.6",
+    "astro": "^5.16.8",
     "svelte": "^5.45.6",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/sitemap": "^3.6.1",
     "@babel/parser": "^7.28.5",
     "@babel/types": "^7.28.5",
     "prettier": "^3.7.4",

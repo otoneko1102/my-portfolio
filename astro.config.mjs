@@ -12,11 +12,12 @@ export default defineConfig({
   integrations: [
     svelte(),
     sitemap({
+      changefreq: "weekly",
+      priority: 1,
+      lastmod: new Date(),
       serialize(item) {
         return item;
       },
-      changefreq: "weekly",
-      priority: 1,
     }),
   ],
 });
