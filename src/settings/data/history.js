@@ -51,7 +51,10 @@ export const historyBadgeKeys = Object.keys(historyBadges);
 /** @type {HistoryMap} */
 export const history = {
   2026: {
-    1: [{ text: "Vueを始める", badge: "project" }],
+    1: [
+      { text: "Vueを始める", badge: "project" },
+      { text: "C#を始める", badge: "project" },
+    ],
   },
   2025: {
     12: [
@@ -94,6 +97,7 @@ export const history = {
       { text: "公立はこだて未来大学 入学", badge: "work" },
       { text: "Viteを始める", badge: "project" },
       { text: "EJSを始める", badge: "project" },
+      { text: "nginxを始める", badge: "project" },
       { text: "ポートフォリオサイトを公開", badge: "release" },
       { text: "Mariners' Conference `25 Spring 参加", badge: "event" },
     ],
@@ -105,7 +109,11 @@ export const history = {
       { text: "Chrome拡張機能の開発とストア掲載を始める", badge: "personal" },
       { text: "Idea Sellerでの活動を休止", badge: "personal" },
     ],
-    8: [{ text: "Idea Sellerに所属しチーム開発を進める", badge: "personal" }],
+    8: [
+      { text: "Idea Sellerに所属しチーム開発を進める", badge: "personal" },
+      { text: "SQLを始める", badge: "project" },
+      { text: "Prismaを始める", badge: "project" },
+    ],
     4: [{ text: "TypeScriptを始める", badge: "project" }],
   },
   2023: {
@@ -120,6 +128,7 @@ export const history = {
     12: [
       { text: "新型コロナに感染。自宅療養中の暇な時間を活用し、Node.jsでDiscord Botの作成を開始", badge: "project" },
       { text: "Web開発を開始。JavaScriptやHTML/CSSを始める", badge: "project" },
+      { text: "Pythonを始める", badge: "project" },
     ],
     8: [
       { text: "個人開発を開始", badge: "project" },
