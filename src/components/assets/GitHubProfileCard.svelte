@@ -34,11 +34,11 @@
       <span class="value">{profile?.followers ?? "–"}</span>
     </div>
     <div class="stat">
-      <span class="label">Public Repos</span>
+      <span class="label">Repos</span>
       <span class="value">{profile?.public_repos ?? "–"}</span>
     </div>
     <div class="stat">
-      <span class="label">Total Stars</span>
+      <span class="label">Stars</span>
       <span class="value">{profile?.total_stars ?? "–"}</span>
     </div>
   </div>

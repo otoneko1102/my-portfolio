@@ -74,8 +74,6 @@
   onMount(fetchFromApi);
 </script>
 
-<h3 class="section-title">GitHub Snapshot</h3>
-
 {#if loading}
   <div class="loading">
     <div class="spinner"></div>
@@ -93,13 +91,6 @@
 {/if}
 
 <style>
-  .section-title {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #3b82f6;
-    font-size: clamp(1rem, 5vw, 1.25rem);
-  }
-
   .loading,
   .error {
     display: flex;
