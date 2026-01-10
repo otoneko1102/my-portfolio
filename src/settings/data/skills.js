@@ -93,14 +93,14 @@ export const skills = [
   {
     category: "Backend",
     items: [
+      javaScript,
+      typescript,
+      coffeescript,
       {
         name: "Node.js",
         icon: "logos:nodejs-icon",
         proficiency: 85,
       },
-      javaScript,
-      typescript,
-      coffeescript,
       {
         name: "Express",
         icon: "simple-icons:express",
@@ -117,6 +117,21 @@ export const skills = [
         proficiency: 30,
       },
       {
+        name: "SQL",
+        icon: "vscode-icons:file-type-sql",
+        proficiency: 50,
+      },
+      {
+        name: "SQLite",
+        icon: "vscode-icons:file-type-sqlite",
+        proficiency: 50,
+      },
+      {
+        name: "Prisma",
+        icon: "vscode-icons:file-type-prisma",
+        proficiency: 30,
+      },
+      {
         name: "Ruby",
         icon: "logos:ruby",
         proficiency: 20,
@@ -126,11 +141,31 @@ export const skills = [
         icon: "logos:python",
         proficiency: 40,
       },
+      {
+        name: "C",
+        icon: "logos:c",
+        proficiency: 5,
+      },
+      {
+        name: "C#",
+        icon: "vscode-icons:file-type-csharp2",
+        proficiency: 5,
+      }
     ],
   },
   {
     category: "Others",
     items: [
+      {
+        name: "Bash",
+        icon: "logos:bash-icon",
+        proficiency: 50,
+      },
+      {
+        name: "PowerShell",
+        icon: "vscode-icons:file-type-powershell",
+        proficiency: 30,
+      },
       {
         name: "Git",
         icon: "logos:git-icon",
@@ -169,11 +204,6 @@ export const skills = [
       {
         name: "nginx",
         icon: "logos:nginx",
-        proficiency: 50,
-      },
-      {
-        name: "SQLite",
-        icon: "vscode-icons:file-type-sqlite",
         proficiency: 50,
       },
       {
