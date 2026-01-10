@@ -29,15 +29,36 @@
   <div class="stats-grid">
     <div class="stat">
       <span class="label">Followers</span>
-      <span class="value">{profile?.followers ?? "–"}</span>
+      <iconify-icon
+        icon="mdi:account-multiple"
+        width="18"
+        height="18"
+        class="icon"
+        aria-hidden="true"
+      ></iconify-icon>
+      <span class="value">{profile?.followers ?? "-"}</span>
     </div>
     <div class="stat">
       <span class="label">Repos</span>
-      <span class="value">{profile?.public_repos ?? "–"}</span>
+      <iconify-icon
+        icon="mdi:book-outline"
+        width="18"
+        height="18"
+        class="icon"
+        aria-hidden="true"
+      ></iconify-icon>
+      <span class="value">{profile?.public_repos ?? "-"}</span>
     </div>
     <div class="stat">
       <span class="label">Stars</span>
-      <span class="value">{profile?.total_stars ?? "–"}</span>
+      <iconify-icon
+        icon="mdi:star"
+        width="18"
+        height="18"
+        class="icon"
+        aria-hidden="true"
+      ></iconify-icon>
+      <span class="value">{profile?.total_stars ?? "-"}</span>
     </div>
   </div>
 </div>
@@ -122,5 +143,12 @@
   .value {
     font-weight: 700;
     color: #f1f5f9;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    align-self: center;
+    color: #94a3b8;
   }
 </style>
