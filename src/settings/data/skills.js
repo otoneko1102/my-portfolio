@@ -150,7 +150,7 @@ export const skills = [
         name: "C#",
         icon: "vscode-icons:file-type-csharp2",
         proficiency: 5,
-      }
+      },
     ],
   },
   {
