@@ -11,24 +11,19 @@
         <span class="avatar-placeholder">@</span>
       {/if}
     </div>
-    <div class="profile-meta">
+    <a
+      class="profile-meta"
+      href={profile?.html_url || "#"}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div class="profile-display-name">
         {profile?.name || profile?.login || "GitHub"}
       </div>
       {#if profile?.login}
         <div class="profile-username">@{profile.login}</div>
       {/if}
-      {#if profile?.html_url}
-        <a
-          class="profile-link"
-          href={profile.html_url}
-          target="_blank"
-          rel="noreferrer"
-        >
-          View profile
-        </a>
-      {/if}
-    </div>
+    </a>
   </div>
 
   <div class="stats-grid">
@@ -89,6 +84,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    text-decoration: none;
   }
 
   .profile-display-name {
@@ -99,18 +95,6 @@
   .profile-username {
     font-size: 0.75rem;
     color: #64748b;
-  }
-
-  .profile-link {
-    font-size: 0.875rem;
-    color: #3b82f6;
-    text-decoration: none;
-    margin-top: 0.125rem;
-  }
-
-  .profile-link:hover,
-  .profile-link:focus-visible {
-    text-decoration: underline;
   }
 
   .stats-grid {
