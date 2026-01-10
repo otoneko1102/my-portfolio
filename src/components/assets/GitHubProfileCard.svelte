@@ -12,9 +12,12 @@
       {/if}
     </div>
     <div class="profile-meta">
-      <div class="profile-name">
-        {profile?.login ? `@${profile.login}` : "GitHub"}
+      <div class="profile-display-name">
+        {profile?.name || profile?.login || "GitHub"}
       </div>
+      {#if profile?.login}
+        <div class="profile-username">@{profile.login}</div>
+      {/if}
       {#if profile?.html_url}
         <a
           class="profile-link"
@@ -85,18 +88,24 @@
   .profile-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.125rem;
   }
 
-  .profile-name {
+  .profile-display-name {
     font-weight: 700;
     color: #f1f5f9;
+  }
+
+  .profile-username {
+    font-size: 0.75rem;
+    color: #64748b;
   }
 
   .profile-link {
     font-size: 0.875rem;
     color: #3b82f6;
     text-decoration: none;
+    margin-top: 0.125rem;
   }
 
   .profile-link:hover,

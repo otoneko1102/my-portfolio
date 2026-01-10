@@ -77,20 +77,22 @@
 
   .card-head {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 0.5rem;
-    gap: 0.5rem;
+    gap: 0.25rem;
   }
 
   .card-title {
     font-weight: 700;
     color: #f1f5f9;
+    white-space: nowrap;
   }
 
   .card-sub {
     color: #94a3b8;
     font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .sparkline {
@@ -126,6 +128,7 @@
     margin-top: 0.25rem;
     color: #94a3b8;
     font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .empty {
@@ -139,6 +142,7 @@
       flex-direction: column;
       gap: 0.25rem;
       align-items: flex-start;
+      white-space: nowrap;
     }
   }
 </style>

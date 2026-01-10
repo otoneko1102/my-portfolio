@@ -37,6 +37,7 @@
 
       profile = data?.profile
         ? {
+            name: data.profile.name || null,
             login: data.profile.login,
             html_url: data.profile.html_url,
             avatar_url: data.profile.avatar_url,

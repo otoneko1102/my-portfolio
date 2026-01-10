@@ -81,26 +81,25 @@
   }
 
   .language-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.5rem 1rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    justify-content: center;
   }
 
   .language-item {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    font-size: 0.875rem;
+    gap: 0.375rem;
+    font-size: 0.75rem;
     color: #f1f5f9;
   }
 
   .color-dot {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -110,11 +109,13 @@
   }
   .lang-percent {
     color: #94a3b8;
+    flex-shrink: 0;
   }
 
   @media (max-width: 768px) {
     .language-list {
-      gap: 0.5rem 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.375rem 0.75rem;
     }
   }
 
