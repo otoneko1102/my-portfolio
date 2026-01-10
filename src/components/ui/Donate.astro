@@ -1,0 +1,153 @@
+---
+
+---
+
+<section id="donate" class="contact-section donate-section">
+  <div class="container">
+    <h2 class="contact-title">Donate</h2>
+    <div class="donate-content">
+      <a
+        class="bmc-link"
+        href="https://www.buymeacoffee.com/devuloper"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          class="bmc-img"
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+          alt="Buy Me A Coffee"
+        />
+      </a>
+
+      <div class="kofi-wrapper">
+        <script
+          type="text/javascript"
+          src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+        <script type="text/javascript">
+          kofiwidget2.init("Support me on Ko-fi", "#72a4f2", "E1E41LY2C9");
+          kofiwidget2.draw();
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    background-color: var(--color-background);
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .contact-title {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    color: var(--color-primary);
+    font-size: var(--font-size-4xl);
+  }
+
+  .donate-section {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: calc(var(--spacing-3xl) + var(--spacing-2xl));
+    padding-bottom: var(--spacing-2xl);
+  }
+
+  .donate-content {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .bmc-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+  }
+
+  .donate-content img,
+  .donate-content .bmc-img {
+    display: block;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .kofi-wrapper {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kofi-wrapper > * {
+    height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+  }
+
+  .kofi-wrapper iframe,
+  .kofi-wrapper .kofiwidget-2,
+  .kofi-wrapper .kofi-inline,
+  .kofi-wrapper .kofi-button {
+    height: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .contact-title {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .bmc-link {
+      height: 48px;
+    }
+
+    .kofi-wrapper {
+      height: 48px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .donate-content img {
+      height: 48px;
+      width: auto;
+    }
+
+    .kofi-wrapper {
+      height: 48px;
+    }
+
+    .kofi-wrapper iframe,
+    .kofi-wrapper .kofiwidget-2,
+    .kofi-wrapper .kofi-inline,
+    .kofi-wrapper .kofi-button {
+      height: 48px !important;
+      max-height: 48px !important;
+    }
+
+    .contact-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+
+    .contact-title {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+  }
+</style>
