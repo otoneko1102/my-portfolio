@@ -1,0 +1,51 @@
+---
+import GitHubSnapshot from "../assets/GitHubSnapshot.svelte";
+---
+
+<section id="github" class="github-section">
+  <div class="container">
+    <h2 class="github-title">GitHub</h2>
+    <GitHubSnapshot
+      client:only="svelte"
+      apiUrl="https://github-most-used-langs.montblank.fun/"
+    />
+  </div>
+</section>
+
+<style>
+  .github-section {
+    background-color: var(--color-background);
+    /* more horizontal padding to push content inward */
+    padding: calc(var(--spacing-4xl) + var(--spacing-3xl))
+      calc(var(--spacing-4xl) + var(--spacing-xl));
+    margin-bottom: var(--spacing-3xl);
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Match Skills title sizing */
+  .github-title {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    font-size: clamp(1rem, 5vw, var(--font-size-2xl));
+  }
+
+  @media (max-width: 768px) {
+    .github-section {
+      padding: calc(var(--spacing-2xl) + var(--spacing-2xl)) var(--spacing-lg);
+    }
+    .github-title {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .github-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+    .github-title {
+      font-size: var(--font-size-xl);
+    }
+  }
+</style>
