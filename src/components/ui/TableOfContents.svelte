@@ -99,63 +99,30 @@
 
   const scrollToKeepVisible = (el, opts = {}) => {
     if (!el) return;
-    const preferCenter = !!opts.preferCenter;
-    const container =
-      el.closest && el.closest("article") ? el.closest("article") : el;
     const headerOffset = getHeaderOffset();
     const padding = 12;
-    const rect = container.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    const top = rect.top;
-    const bottom = rect.bottom;
-    const elHeight = rect.height;
 
-    // Prefer centering for project-like sections when the element fits comfortably
-    if (preferCenter) {
-      const availableSpace = viewportHeight - headerOffset - padding * 2;
-      if (elHeight < availableSpace) {
-        const centerOffset = Math.round((availableSpace - elHeight) / 2);
-        const targetTop =
-          window.scrollY + top - headerOffset - padding - centerOffset;
-        window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
-        container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
-        container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
-        return;
+    // Calculate absolute top position of the element
+    const getAbsoluteTop = (element) => {
+      let top = 0;
+      while (element) {
+        top += element.offsetTop || 0;
+        element = element.offsetParent;
       }
-    }
+      return top;
+    };
 
-    // If already fully visible, just nudge to align to header offset for consistency
-    if (top >= headerOffset + padding && bottom <= viewportHeight - padding) {
-      window.scrollTo({
-        top: window.scrollY + top - headerOffset - padding,
-        behavior: "smooth",
-      });
-      container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
-      container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
-      return;
-    }
-
-    // If element is taller than available space, align its top under the header
-    if (elHeight + headerOffset + padding * 2 >= viewportHeight) {
-      window.scrollTo({
-        top: window.scrollY + top - headerOffset - padding,
-        behavior: "smooth",
-      });
-      container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
-      container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
-      return;
-    }
-
-    // Normal case: align the top under the header, but ensure bottom fits in viewport
-    let targetTop = window.scrollY + top - headerOffset - padding;
-    if (targetTop + elHeight > window.scrollY + viewportHeight - padding) {
-      targetTop = window.scrollY + bottom - viewportHeight + padding;
-    }
+    const absoluteTop = getAbsoluteTop(el);
+    const targetTop = absoluteTop - headerOffset - padding;
 
     window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
 
-    container.querySelector("h3, h2, h1")?.setAttribute("tabindex", "-1");
-    container.querySelector("h3, h2, h1")?.focus({ preventScroll: true });
+    // Focus the heading for accessibility
+    const heading = el.querySelector("h1, h2, h3");
+    if (heading) {
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+    }
   };
 
   const handleLinkClick = (id, opts = {}) => {
