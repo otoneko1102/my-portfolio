@@ -102,19 +102,22 @@
 
   .loading,
   .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     text-align: center;
     padding: 3rem;
     color: #94a3b8;
   }
 
   .spinner {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border: 3px solid #334155;
     border-top-color: #3b82f6;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
-    margin: 0 auto 0.5rem;
   }
 
   @keyframes spin {

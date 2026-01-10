@@ -269,24 +269,21 @@
     align-items: center;
     gap: 12px;
     padding: 20px;
-    color: #666;
+    color: #94a3b8;
     font-size: 14px;
   }
 
   .spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #666;
+    width: 24px;
+    height: 24px;
+    border: 3px solid #334155;
+    border-top-color: #3b82f6;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
   }
 
   @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
+    to {
       transform: rotate(360deg);
     }
   }
