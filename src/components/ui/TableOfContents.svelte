@@ -73,13 +73,20 @@
 
     observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            activeId = entry.target.id;
-          }
-        });
+        // Find the entry that is most visible (highest intersection ratio)
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const mostVisible = visibleEntries.reduce((prev, curr) =>
+            curr.intersectionRatio > prev.intersectionRatio ? curr : prev
+          );
+          activeId = mostVisible.target.id;
+        }
       },
-      { root: null, rootMargin: "0px 0px -60% 0px", threshold: [0, 0.1, 0.5] }
+      {
+        root: null,
+        rootMargin: "-20% 0px -35% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1.0],
+      }
     );
 
     sections.forEach((s) => {

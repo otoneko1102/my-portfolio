@@ -11,14 +11,13 @@
   let profile = null;
   let languages = [];
   let commitActivity = [];
-  let lastFetched = null;
 
   const normalizeCommitActivity = (activity = []) => {
     if (!Array.isArray(activity)) return [];
     return activity
       .map((item) => ({
         date: item.date,
-        count: item.count ?? item.commits ?? item.total ?? 0,
+        count: item.count ?? 0,
       }))
       .filter((item) => item.date)
       .sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -43,7 +42,7 @@
             avatar_url: data.profile.avatar_url,
             followers: data.profile.followers ?? 0,
             public_repos: data.profile.public_repos ?? 0,
-            total_stars: data.profile.total_stars ?? data.profile.stars ?? 0,
+            total_stars: data.profile.total_stars ?? 0,
           }
         : null;
 
@@ -57,16 +56,11 @@
         .sort((a, b) => b.bytes - a.bytes);
 
       commitActivity = normalizeCommitActivity(data?.commit_activity);
-      lastFetched =
-        data?.meta?.cached_at ||
-        data?.profile?.fetched_at ||
-        new Date().toISOString();
     } catch (e) {
       error = e.message || String(e);
       profile = null;
       languages = [];
       commitActivity = [];
-      lastFetched = null;
     } finally {
       loading = false;
     }

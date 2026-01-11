@@ -70,6 +70,9 @@
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .profile-row {
@@ -98,6 +101,7 @@
 
   .avatar-placeholder {
     color: #94a3b8;
+    font-size: 1.25rem;
     font-weight: 700;
   }
 
@@ -122,6 +126,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+    flex: 1;
+    align-content: start;
   }
 
   .stat {
