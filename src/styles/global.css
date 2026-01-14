@@ -120,6 +120,21 @@ h2 {
   font-size: var(--font-size-3xl);
 }
 
+/* Unified section title */
+.section-title {
+  font-size: var(--font-size-4xl) !important;
+  text-align: center;
+  margin-bottom: var(--spacing-md) !important;
+}
+
+.section-subtitle {
+  text-align: center;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-3xl);
+  color: var(--color-text-light);
+  font-size: var(--font-size-lg);
+}
+
 h3 {
   font-size: var(--font-size-2xl);
 }

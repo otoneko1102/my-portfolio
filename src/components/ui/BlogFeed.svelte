@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { blogConfig } from "../../settings/config.js";
+  import { blogConfig, sectionDescriptions } from "../../settings/config.js";
 
   const DEFAULT_FEED_URL = "https://blog.montblank.fun/feed";
   const DEFAULT_BLOG_URL = "https://blog.montblank.fun";
@@ -68,7 +68,8 @@
 <section id="blog" class="blog-section">
   <div class="container">
     <div class="blog-header">
-      <h2 class="blog-title">Blog</h2>
+      <h2 class="blog-title section-title">Blog</h2>
+      <p class="section-subtitle">{sectionDescriptions.blog}</p>
     </div>
     {#if loading}
       <div class="blog-list">

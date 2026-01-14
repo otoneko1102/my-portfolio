@@ -1,5 +1,9 @@
 <script>
-  import { history, historyBadges } from "../../settings/config.js";
+  import {
+    history,
+    historyBadges,
+    sectionDescriptions,
+  } from "../../settings/config.js";
 
   const years = Object.keys(history || {})
     .map((y) => Number(y))
@@ -47,7 +51,8 @@
 
 <section id="history" class="history-section">
   <div class="container">
-    <h2 class="history-title">History</h2>
+    <h2 class="history-title section-title">History</h2>
+    <p class="section-subtitle">{sectionDescriptions.history}</p>
 
     {#if years.length === 0}
       <p class="history-empty">No events yet.</p>

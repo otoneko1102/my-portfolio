@@ -1,10 +1,11 @@
 <script>
-  import { skills } from "../../settings/config.js";
+  import { skills, sectionDescriptions } from "../../settings/config.js";
 </script>
 
 <section id="skills" class="skills-section">
   <div class="container">
-    <h2 class="skills-title">Skills</h2>
+    <h2 class="skills-title section-title">Skills</h2>
+    <p class="section-subtitle">{sectionDescriptions.skills}</p>
     <div class="skills-categories">
       {#each skills as category}
         <div class="skill-category">

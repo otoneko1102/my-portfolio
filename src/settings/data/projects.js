@@ -21,14 +21,6 @@ export const projects = [
     pin: true,
   },
   {
-    title: "My Portfolio (V1)",
-    description: "昔のポートフォリオ",
-    tags: ["Svelte"],
-    url: "https://v1.p.montblank.fun/",
-    github: "https://github.com/otoneko1102/portfolio-v1",
-    pin: true,
-  },
-  {
     title: "Milkee",
     description: "現代のCoffeeScript Builderです。",
     image: "/projects/milkee-logo.png",

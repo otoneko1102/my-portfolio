@@ -1,10 +1,11 @@
 ---
-import { contactLinks } from "../../settings/config.js";
+import { contactLinks, sectionDescriptions } from "../../settings/config.js";
 ---
 
 <section id="contact" class="contact-section">
   <div class="container">
-    <h2 class="contact-title">Contact</h2>
+    <h2 class="contact-title section-title">Contact</h2>
+    <p class="section-subtitle">{sectionDescriptions.contact}</p>
     <div class="contact-list">
       {
         contactLinks.map((contact) => {

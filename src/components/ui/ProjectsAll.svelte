@@ -1,5 +1,5 @@
 <script>
-  import { projects } from "../../settings/config.js";
+  import { projects, sectionDescriptions } from "../../settings/config.js";
   import { onMount } from "svelte";
   import { fetchOGData } from "../../lib/og";
 
@@ -43,7 +43,8 @@
 
 <section id="projects" class="projects-section">
   <div class="container">
-    <h2 class="projects-title">Projects</h2>
+    <h2 class="projects-title section-title">Projects</h2>
+    <p class="section-subtitle">{sectionDescriptions.projects}</p>
 
     <div class="projects-grid">
       {#each projectList as project, index (project.github ?? project.url ?? project.title)}

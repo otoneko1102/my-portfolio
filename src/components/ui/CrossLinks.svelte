@@ -1,5 +1,9 @@
 <script>
-  import { crossLinks, crossLinksConfig } from "../../settings/config.js";
+  import {
+    crossLinks,
+    crossLinksConfig,
+    sectionDescriptions,
+  } from "../../settings/config.js";
   import { onMount, tick, onDestroy } from "svelte";
 
   import { fetchOGData } from "../../lib/og";
@@ -142,7 +146,8 @@
 
 <section id="crosslinks" class="crosslinks-section">
   <div class="container">
-    <h2 class="crosslinks-title">Cross Links</h2>
+    <h2 class="crosslinks-title section-title">Cross Links</h2>
+    <p class="section-subtitle">{sectionDescriptions.crossLinks}</p>
 
     <div class="crosslinks-apply">
       <p class="apply-description">

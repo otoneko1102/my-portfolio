@@ -1,5 +1,9 @@
 <script>
-  import { legacy, legacyConfig } from "../../settings/config.js";
+  import {
+    versions,
+    versionsConfig,
+    sectionDescriptions,
+  } from "../../settings/config.js";
   import { onMount } from "svelte";
   import { fetchOGData } from "../../lib/og";
 
@@ -8,18 +12,24 @@
   let isTransitioning = false;
   let imageErrors = new Set();
 
-  const baseDomain = legacyConfig?.baseDomain ?? "p.montblank.fun";
+  const baseDomain = versionsConfig?.baseDomain ?? "p.montblank.fun";
 
-  let legacyList = legacy.map((e) => {
-    const v = e.version;
-    const url = e.url || `https://v${v}.${baseDomain}`;
-    return {
-      title: e.title || `V${v}`,
-      description: e.description || "",
-      image: e.image,
-      url,
-    };
-  });
+  // Keep only entries with a valid numeric version, then sort by version descending (newest first) and normalize entries.
+  let versionsList = [...versions]
+    .filter((e) => e && typeof e.version === "number")
+    .sort((a, b) => (b.version || 0) - (a.version || 0))
+    .map((e) => {
+      const v = e.version;
+      // Prefer explicit `url`; if missing, derive a fallback using the version and base domain.
+      const url = e.url || (v ? `https://v${v}.${baseDomain}` : undefined);
+      return {
+        version: v,
+        title: e.title || (v ? `V${v}` : ""),
+        description: e.description || "",
+        image: e.image,
+        url,
+      };
+    });
 
   const handleImageError = (index) => {
     imageErrors.add(index);
@@ -49,7 +59,7 @@
   };
 
   const nextSlide = () => {
-    if (isTransitioning || currentIndex === legacyList.length - 1) return;
+    if (isTransitioning || currentIndex === versionsList.length - 1) return;
     isTransitioning = true;
     displayIndex = currentIndex + 1;
 
@@ -70,13 +80,13 @@
 
   onMount(() => {
     (async () => {
-      const need = legacyList.some(
+      const need = versionsList.some(
         (p) => p.url && (!p.image || !p.title || !p.description)
       );
       if (!need) return;
 
       const augmented = await Promise.all(
-        legacyList.map(async (p) => {
+        versionsList.map(async (p) => {
           if (p.url && (!p.image || !p.title || !p.description)) {
             try {
               const og = await fetchOGData(p.url);
@@ -94,7 +104,7 @@
         })
       );
 
-      legacyList = augmented;
+      versionsList = augmented;
     })();
   });
 
@@ -138,9 +148,10 @@
   };
 </script>
 
-<section id="legacy" class="legacy-section">
+<section id="versions" class="versions-section">
   <div class="container">
-    <h2 class="legacy-title">Legacy</h2>
+    <h2 class="versions-title section-title">Versions</h2>
+    <p class="section-subtitle">{sectionDescriptions.versions}</p>
 
     <div class="carousel-wrapper">
       <div
@@ -149,9 +160,9 @@
         on:touchmove={handleTouchMove}
         on:touchend={handleTouchEnd}
       >
-        {#each legacyList as item, index}
+        {#each versionsList as item, index}
           <article
-            class="legacy-card"
+            class="versions-card"
             class:active={index === currentIndex}
             class:no-image={!item.image}
             style="transform: translateX({getSlidePosition(
@@ -161,9 +172,9 @@
               ? 10
               : 1};"
           >
-            <div class="legacy-image">
+            <div class="versions-image">
               {#if !item.image || imageErrors.has(index)}
-                <div class="legacy-placeholder">
+                <div class="versions-placeholder">
                   <iconify-icon icon="mdi:folder-image" width="64" height="64"
                   ></iconify-icon>
                   <p>No Image</p>
@@ -175,20 +186,20 @@
                   on:error={() => handleImageError(index)}
                 />
               {/if}
-              <div class="legacy-overlay">
+              <div class="versions-overlay">
                 {#if item.url}
                   <a
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="legacy-link"
+                    class="versions-link"
                   >
                     Visit Site
                   </a>
                 {/if}
               </div>
             </div>
-            <div class="legacy-content">
+            <div class="versions-content">
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </div>
@@ -196,7 +207,7 @@
         {/each}
       </div>
 
-      {#if legacyList.length > 1}
+      {#if versionsList.length > 1}
         {#if currentIndex > 0}
           <button
             type="button"
@@ -208,7 +219,7 @@
             <span class="material-icons" aria-hidden="true">chevron_left</span>
           </button>
         {/if}
-        {#if currentIndex < legacyList.length - 1}
+        {#if currentIndex < versionsList.length - 1}
           <button
             type="button"
             class="carousel-control carousel-next"
@@ -222,9 +233,9 @@
       {/if}
     </div>
 
-    {#if legacyList.length > 1}
+    {#if versionsList.length > 1}
       <div class="carousel-dots">
-        {#each legacyList as _, index}
+        {#each versionsList as _, index}
           <button
             class="dot"
             class:active={index === currentIndex}
@@ -239,7 +250,7 @@
 </section>
 
 <style>
-  .legacy-section {
+  .versions-section {
     background-color: var(--color-background);
     padding: var(--spacing-4xl) var(--spacing-xl);
     margin-bottom: var(--spacing-3xl);
@@ -247,9 +258,9 @@
     overflow-x: hidden;
   }
 
-  .legacy-title {
+  .versions-title {
     text-align: center;
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-md);
     color: var(--color-primary);
     font-size: var(--font-size-4xl);
   }
@@ -272,7 +283,7 @@
     width: 100%;
   }
 
-  .legacy-card {
+  .versions-card {
     position: absolute;
     top: 0;
     left: 0;
@@ -291,20 +302,20 @@
     height: 100%;
   }
 
-  .legacy-card:hover {
+  .versions-card:hover {
     border-color: var(--color-text);
     box-shadow: var(--shadow-lg);
   }
 
-  .legacy-card.active {
+  .versions-card.active {
     pointer-events: auto;
   }
 
-  .legacy-card.no-image {
+  .versions-card.no-image {
     height: 100%;
   }
 
-  .legacy-card.no-image .legacy-content {
+  .versions-card.no-image .versions-content {
     justify-content: center;
   }
 
@@ -351,7 +362,7 @@
     right: 0;
   }
 
-  .legacy-image {
+  .versions-image {
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -360,18 +371,18 @@
     flex-shrink: 0;
   }
 
-  .legacy-image img {
+  .versions-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-normal);
   }
 
-  .legacy-card:hover .legacy-image img {
+  .versions-card:hover .versions-image img {
     transform: scale(1.05);
   }
 
-  .legacy-placeholder {
+  .versions-placeholder {
     width: 100%;
     height: 100%;
     display: flex;
@@ -383,7 +394,7 @@
     color: var(--color-text-light);
   }
 
-  .legacy-overlay {
+  .versions-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -395,7 +406,7 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
   }
 
-  .legacy-link {
+  .versions-link {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -410,12 +421,12 @@
     white-space: nowrap;
   }
 
-  .legacy-link:hover {
+  .versions-link:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
 
-  .legacy-content {
+  .versions-content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);

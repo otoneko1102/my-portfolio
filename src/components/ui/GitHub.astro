@@ -1,10 +1,12 @@
 ---
 import GitHubSnapshot from "../assets/GitHubSnapshot.svelte";
+import { sectionDescriptions } from "../../settings/config.js";
 ---
 
 <section id="github" class="github-section">
   <div class="container">
-    <h2 class="github-title">GitHub</h2>
+    <h2 class="github-title section-title">GitHub</h2>
+    <p class="section-subtitle">{sectionDescriptions.github}</p>
     <GitHubSnapshot client:only="svelte" />
   </div>
 </section>
