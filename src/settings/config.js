@@ -11,3 +11,4 @@ export { blogConfig } from "./data/blogConfig.js";
 export { colors } from "./data/colors.js";
 export { crossLinks, crossLinksConfig } from "./data/crossLinks.js";
 export { history, historyBadges, historyBadgeKeys } from "./data/history.js";
+export { legacy, legacyConfig } from "./data/legacy.js";
