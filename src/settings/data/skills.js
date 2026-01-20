@@ -207,7 +207,7 @@ export const skills = [
         proficiency: 50,
       },
       {
-        name: "Google Apps Script",
+        name: "GAS",
         icon: "vscode-icons:file-type-appscript",
         proficiency: 70,
       },
