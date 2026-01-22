@@ -16,7 +16,7 @@ export const projects = [
     title: "Milkee",
     description: "現代のCoffeeScript Builderです。",
     image: "/projects/milkee-logo.png",
-    tags: ["CoffeeScript"],
+    tags: ["cli", "CoffeeScript", "npm"],
     url: "https://milkee.oto.im",
     github: "https://github.com/otoneko1102/coffeescript-milkee",
     pin: true,
