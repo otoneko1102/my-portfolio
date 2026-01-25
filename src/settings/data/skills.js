@@ -216,6 +216,11 @@ export const skills = [
         icon: "file-icons:regex",
         proficiency: 65,
       },
+      {
+        name: "FFmpeg",
+        icon: "logos:ffmpeg-icon",
+        proficiency: 20,
+      },
     ],
   },
 ];
