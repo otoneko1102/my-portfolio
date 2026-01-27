@@ -217,6 +217,16 @@ export const skills = [
         proficiency: 65,
       },
       {
+        name: "Jest",
+        icon: "vscode-icons:file-type-light-jest",
+        proficiency: 40,
+      },
+      {
+        name: "Vitest",
+        icon: "vscode-icons:file-type-light-vitest",
+        proficiency: 40,
+      },
+      {
         name: "FFmpeg",
         icon: "logos:ffmpeg-icon",
         proficiency: 20,
