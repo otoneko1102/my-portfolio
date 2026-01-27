@@ -8,7 +8,8 @@
   --color-border: #e0e0e0;
   --color-text: #1a1a1a;
   --color-text-light: #666666;
-  --color-background: #f8f8f8;
+  ---color-background: transparent;
+  --color-sec-background: #f8f8f8;
 
   /* Spacing */
   --spacing-2xs: 0.15rem;
@@ -78,6 +79,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height, 80px);
+  background-color: var(--color-sec-background);
 }
 
 body {
@@ -93,7 +95,7 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(---color-sec-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -267,6 +269,52 @@ section {
 .site-main {
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+}
+
+.site-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      rgba(99, 102, 241, 0.12) 0px,
+      rgba(139, 92, 246, 0.12) 2px,
+      transparent 2px,
+      transparent 32px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(99, 102, 241, 0.12) 0px,
+      rgba(139, 92, 246, 0.12) 2px,
+      transparent 2px,
+      transparent 32px
+    );
+  background-size:
+    32px 32px,
+    32px 32px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation: gridShine 5s ease-in-out infinite;
+}
+
+@keyframes gridShine {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(2px);
+  }
 }
 
 .site-main.with-header-spacing {

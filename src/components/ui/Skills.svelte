@@ -70,7 +70,7 @@
   }
 
   .skill-category {
-    background-color: var(--color-background);
+    background-color: var(--color-sec-background);
     padding: var(--spacing-2xl);
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--color-border);

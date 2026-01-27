@@ -295,7 +295,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--color-background);
+    background-color: var(--color-sec-background);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     overflow: hidden;

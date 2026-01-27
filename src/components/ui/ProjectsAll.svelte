@@ -125,6 +125,10 @@
     box-sizing: border-box;
   }
 
+  .project-card {
+    background-color: var(--color-sec-background);
+  }
+
   .project-card.grid {
     position: relative;
     display: flex;
@@ -134,7 +138,6 @@
     transform: none;
     opacity: 1;
     transition: all var(--transition-normal);
-    background-color: var(--color-background);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
