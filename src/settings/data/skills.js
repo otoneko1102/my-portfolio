@@ -218,7 +218,7 @@ export const skills = [
       },
       {
         name: "Jest",
-        icon: "vscode-icons:file-type-light-jest",
+        icon: "vscode-icons:file-type-jest",
         proficiency: 40,
       },
       {
