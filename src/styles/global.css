@@ -8,8 +8,39 @@
   --color-border: #e0e0e0;
   --color-text: #1a1a1a;
   --color-text-light: #666666;
-  ---color-background: transparent;
+  --color-background: transparent;
   --color-sec-background: #f8f8f8;
+
+  /* Component-level colors */
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f5f5;
+  --color-glass-bg: rgba(248, 248, 248, 0.45);
+  --color-glass-border: rgba(0, 0, 0, 0.04);
+  --color-glass-shadow: rgba(0, 0, 0, 0.02);
+  --color-separator: rgba(0, 0, 0, 0.06);
+  --color-separator-strong: rgba(0, 0, 0, 0.08);
+  --color-separator-dotted: rgba(0, 0, 0, 0.14);
+  --color-icon-btn-border: #ccc;
+  --color-icon-btn-hover: #f5f5f5;
+  --color-icon-btn-active: #e0e0e0;
+  --color-proficiency-bg: #f0f0f0;
+  --color-proficiency-border: #e0e0e0;
+  --color-skeleton-from: rgba(0, 0, 0, 0.06);
+  --color-skeleton-mid: rgba(0, 0, 0, 0.04);
+  --color-crosslinks-gradient: linear-gradient(
+    135deg,
+    #f5f7fa 0%,
+    #c3cfe2 100%
+  );
+  --color-placeholder-gradient: linear-gradient(180deg, #fff, #fbfbfb);
+  --color-preview-text: #1a1a1a;
+  --color-preview-text-light: #666;
+  --color-preview-text-muted: #999;
+  --color-loading-text: #94a3b8;
+  --color-spinner-border: #334155;
+  --color-spinner-top: #3b82f6;
+  --color-backdrop: rgba(0, 0, 0, 0.12);
+  --color-icon-bg: #ffffff;
 
   /* Spacing */
   --spacing-2xs: 0.15rem;
@@ -95,7 +126,7 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(---color-sec-background);
+  background-color: var(--color-sec-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -209,14 +240,14 @@ li {
 /* Code */
 code {
   font-family: "Courier New", monospace;
-  background-color: #f5f5f5;
+  background-color: var(--color-surface-alt);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-sm);
   font-size: 0.9em;
 }
 
 pre {
-  background-color: #f5f5f5;
+  background-color: var(--color-surface-alt);
   padding: var(--spacing-md);
   border-radius: var(--border-radius-md);
   overflow-x: auto;
@@ -250,7 +281,7 @@ td {
 }
 
 th {
-  background-color: #f9f9f9;
+  background-color: var(--color-surface-alt);
   font-weight: 600;
 }
 

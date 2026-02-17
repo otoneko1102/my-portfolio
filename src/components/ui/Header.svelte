@@ -42,10 +42,10 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(248, 248, 248, 0.45);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    background-color: var(--color-glass-bg);
+    border-bottom: 1px solid var(--color-glass-border);
     z-index: 100;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 1px 2px var(--color-glass-shadow);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }

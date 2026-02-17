@@ -151,7 +151,7 @@
     right: 0;
     bottom: 0;
     height: 2px;
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: var(--color-separator);
     border-radius: 2px;
     z-index: 1;
     pointer-events: none;
@@ -195,7 +195,7 @@
     bottom: 0;
     transform: translateX(-50%);
     width: var(--axis-width); /* axis thickness */
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: var(--color-separator-strong);
     opacity: 1;
     z-index: 3; /* above year separators but below labels */
     border-radius: calc(var(--axis-width) / 2);
@@ -244,7 +244,7 @@
     width: auto;
     background: none;
     height: 0;
-    border-top: 1px dotted rgba(0, 0, 0, 0.14);
+    border-top: 1px dotted var(--color-separator-dotted);
     opacity: 1;
     top: -8px;
     z-index: 2;
@@ -257,7 +257,7 @@
       width: auto;
       background: none;
       opacity: 1;
-      border-top: 1px dotted rgba(0, 0, 0, 0.14);
+      border-top: 1px dotted var(--color-separator-dotted);
       z-index: 2;
     }
 
@@ -303,7 +303,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: var(--color-text);
-    background: #ffffff;
+    background: var(--color-surface);
     padding: 6px 12px;
     border-radius: var(--border-radius-lg);
     border: var(--axis-width) solid var(--color-border);

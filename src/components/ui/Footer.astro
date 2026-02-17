@@ -65,14 +65,14 @@ const buildYearText =
     bottom: 0;
     width: 100%;
     z-index: 60;
-    background-color: rgba(248, 248, 248, 0.35);
-    border-top: 1px solid rgba(0, 0, 0, 0.025);
+    background-color: var(--color-glass-bg);
+    border-top: 1px solid var(--color-glass-border);
     padding: var(--footer-padding-y) var(--footer-padding-x);
 
     padding-bottom: calc(var(--footer-padding-y) + env(safe-area-inset-bottom));
     text-align: center;
     margin-top: 0;
-    box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 -1px 6px var(--color-glass-shadow);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }

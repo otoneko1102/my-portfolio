@@ -14,7 +14,7 @@ export const aboutDetails = [
   },
   {
     label: "活動",
-    values: ["LT", "作曲", "温泉"],
+    values: ["LT", "作曲"],
   },
   {
     label: "趣味",

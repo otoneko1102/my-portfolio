@@ -266,7 +266,7 @@
     text-align: center;
     margin-bottom: var(--spacing-3xl);
     padding: var(--spacing-xl);
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--color-crosslinks-gradient);
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--color-border);
   }
@@ -349,14 +349,14 @@
     align-items: center;
     gap: 0.5rem;
     padding: 3rem;
-    color: #94a3b8;
+    color: var(--color-loading-text);
   }
 
   .spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid #334155;
-    border-top-color: #3b82f6;
+    border: 3px solid var(--color-spinner-border);
+    border-top-color: var(--color-spinner-top);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
@@ -380,7 +380,7 @@
   .crosslink-card {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
@@ -401,7 +401,7 @@
     width: 100%;
     height: 160px;
     overflow: hidden;
-    background: #f5f5f5;
+    background: var(--color-surface-alt);
     display: flex;
     align-items: center;
     justify-content: center;

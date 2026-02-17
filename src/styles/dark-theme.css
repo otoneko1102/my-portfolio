@@ -1,0 +1,49 @@
+/* Dark theme overrides for otoneko.cat */
+:root {
+  /* Core colors */
+  --color-primary: #e0e0e0;
+  --color-secondary: #1a1a2e;
+  --color-accent: #a0a0b8;
+  --color-border: #2a2a4a;
+  --color-text: #e0e0e0;
+  --color-text-light: #a0a0b8;
+  --color-background: transparent;
+  --color-sec-background: #0f0f23;
+
+  /* Component-level colors */
+  --color-surface: #1a1a2e;
+  --color-surface-alt: #16213e;
+  --color-glass-bg: rgba(22, 33, 62, 0.65);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-shadow: rgba(0, 0, 0, 0.3);
+  --color-separator: rgba(255, 255, 255, 0.08);
+  --color-separator-strong: rgba(255, 255, 255, 0.12);
+  --color-separator-dotted: rgba(255, 255, 255, 0.14);
+  --color-icon-btn-border: #555;
+  --color-icon-btn-hover: #2a2a4a;
+  --color-icon-btn-active: #3a3a5a;
+  --color-proficiency-bg: #2a2a4a;
+  --color-proficiency-border: #3a3a5a;
+  --color-skeleton-from: rgba(255, 255, 255, 0.08);
+  --color-skeleton-mid: rgba(255, 255, 255, 0.04);
+  --color-crosslinks-gradient: linear-gradient(
+    135deg,
+    #1a1a2e 0%,
+    #16213e 100%
+  );
+  --color-placeholder-gradient: linear-gradient(180deg, #1a1a2e, #16213e);
+  --color-preview-text: #e0e0e0;
+  --color-preview-text-light: #a0a0b8;
+  --color-preview-text-muted: #7a7a9a;
+  --color-loading-text: #7a7a9a;
+  --color-spinner-border: #3a3a5a;
+  --color-spinner-top: #6366f1;
+  --color-backdrop: rgba(0, 0, 0, 0.4);
+  --color-icon-bg: #3a3a5e;
+
+  /* Shadows — softer in dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}

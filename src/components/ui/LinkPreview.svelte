@@ -234,10 +234,10 @@
   .link-preview {
     position: fixed;
     transform: translate(-50%, -100%);
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px var(--color-glass-shadow);
     max-width: min(400px, calc(100vw - 32px));
     width: auto;
     z-index: 10001;
@@ -269,15 +269,15 @@
     align-items: center;
     gap: 12px;
     padding: 20px;
-    color: #94a3b8;
+    color: var(--color-loading-text);
     font-size: 14px;
   }
 
   .spinner {
     width: 24px;
     height: 24px;
-    border: 3px solid #334155;
-    border-top-color: #3b82f6;
+    border: 3px solid var(--color-spinner-border);
+    border-top-color: var(--color-spinner-top);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
@@ -299,7 +299,7 @@
     width: 100%;
     height: 140px;
     overflow: hidden;
-    background: #f5f5f5;
+    background: var(--color-surface-alt);
   }
 
   .preview-image img {
@@ -329,14 +329,14 @@
 
   .preview-sitename {
     font-size: 11px;
-    color: #666;
+    color: var(--color-preview-text-light);
     font-weight: 500;
   }
 
   .preview-title {
     font-size: 14px;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--color-preview-text);
     margin: 0;
     line-height: 1.3;
     display: -webkit-box;
@@ -348,7 +348,7 @@
 
   .preview-description {
     font-size: 12px;
-    color: #666;
+    color: var(--color-preview-text-light);
     line-height: 1.4;
     margin: 0;
     display: -webkit-box;
@@ -360,7 +360,7 @@
 
   .preview-url {
     font-size: 10px;
-    color: #999;
+    color: var(--color-preview-text-muted);
     font-family: "Courier New", monospace;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -130,7 +130,7 @@
   }
 
   .skill-item:hover .skill-icon {
-    background-color: #f5f5f5;
+    background-color: var(--color-surface-alt);
     transform: scale(1.1);
   }
 
@@ -170,10 +170,10 @@
   .proficiency-bar {
     width: clamp(20px, 5.5vw, 40px);
     height: clamp(3px, 0.5vw, 4px);
-    background-color: #f0f0f0;
+    background-color: var(--color-proficiency-bg);
     border-radius: 3px;
     overflow: hidden;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-proficiency-border);
   }
 
   @media (min-width: 769px) {

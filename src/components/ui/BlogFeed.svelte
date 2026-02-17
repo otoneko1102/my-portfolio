@@ -188,7 +188,7 @@
   }
 
   .blog-card {
-    background: #ffffff;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-2xl);
@@ -278,7 +278,7 @@
     pointer-events: none;
     opacity: 0.95;
     filter: saturate(0.98);
-    background: linear-gradient(180deg, #fff, #fbfbfb);
+    background: var(--color-placeholder-gradient);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
 
@@ -291,9 +291,9 @@
   .skeleton {
     background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.06) 25%,
-      rgba(0, 0, 0, 0.04) 50%,
-      rgba(0, 0, 0, 0.06) 75%
+      var(--color-skeleton-from) 25%,
+      var(--color-skeleton-mid) 50%,
+      var(--color-skeleton-from) 75%
     );
     background-size: 200% 100%;
     animation: shimmer 1.2s linear infinite;

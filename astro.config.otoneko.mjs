@@ -8,6 +8,7 @@ import sitemap from "@astrojs/sitemap";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const configOtoneko = path.resolve(__dirname, "src/settings/config-o.js");
+const darkThemeCss = path.resolve(__dirname, "src/styles/dark-theme.css");
 
 /**
  * Vite plugin to redirect config.js → config-o.js for otoneko.cat build.
@@ -24,6 +25,27 @@ function configSwapPlugin() {
         source.endsWith("settings/config")
       ) {
         return configOtoneko;
+      }
+      return null;
+    },
+  };
+}
+
+/**
+ * Vite plugin to inject dark theme for otoneko.cat build.
+ * Redirects theme.css → dark-theme.css (same pattern as config-swap).
+ */
+function darkThemePlugin() {
+  return {
+    name: "dark-theme-inject",
+    enforce: /** @type {const} */ ("pre"),
+    /** @param {string} source */
+    resolveId(source) {
+      if (
+        source.endsWith("styles/theme.css") ||
+        source.endsWith("styles/theme")
+      ) {
+        return darkThemeCss;
       }
       return null;
     },
@@ -48,6 +70,6 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [configSwapPlugin()],
+    plugins: [configSwapPlugin(), darkThemePlugin()],
   },
 });

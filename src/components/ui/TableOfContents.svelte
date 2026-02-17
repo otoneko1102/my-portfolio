@@ -383,11 +383,11 @@
     max-width: 92vw;
     height: calc(100vh - (var(--header-height) + (var(--spacing-md) * 2)));
 
-    background-color: rgba(248, 248, 248, 0.45);
+    background-color: var(--color-glass-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-left: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.04);
+    border-left: 1px solid var(--color-glass-border);
+    box-shadow: -4px 0 12px var(--color-glass-shadow);
     padding: var(--spacing-md);
     transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     overflow: auto;
@@ -489,7 +489,7 @@
     position: fixed;
     inset: 0;
     z-index: 330;
-    background: rgba(0, 0, 0, 0.12);
+    background: var(--color-backdrop);
   }
 
   @media (max-width: 640px) {

@@ -28,7 +28,7 @@
 
   .detail-card {
     padding: var(--spacing-lg);
-    background-color: #ffffff;
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
     transition: all var(--transition-normal);

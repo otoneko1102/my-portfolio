@@ -372,7 +372,7 @@
     overflow: hidden;
     width: 100%;
     height: 280px;
-    background-color: #f0f0f0;
+    background-color: var(--color-surface-alt);
     flex-shrink: 0;
   }
 
@@ -395,7 +395,11 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-md);
-    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    background: linear-gradient(
+      135deg,
+      var(--color-surface-alt) 0%,
+      var(--color-surface) 100%
+    );
     color: var(--color-text-light);
   }
 
@@ -499,7 +503,7 @@
   .tag {
     display: inline-block;
     padding: 4px 12px;
-    background-color: #f0f0f0;
+    background-color: var(--color-surface-alt);
     color: var(--color-text);
     border-radius: var(--border-radius-full);
     font-size: var(--font-size-xs);
