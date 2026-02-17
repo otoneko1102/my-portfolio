@@ -34,12 +34,4 @@ export const crossLinksConfig = {
 /**
  * @type {CrossLink[]}
  */
-export const crossLinks = [
-  {
-    url: "https://montblank.fun",
-    title: null,
-    author: "まろん｡",
-    description: null,
-    thumbnail: null,
-  },
-];
+export const crossLinks = [];
