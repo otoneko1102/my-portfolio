@@ -51,6 +51,13 @@ export const historyBadgeKeys = Object.keys(historyBadges);
 /** @type {HistoryMap} */
 export const history = {
   2026: {
+    2: [
+      { text: "LiveScriptを始める", badge: "project" },
+      { text: "冬の3大学合同LT会 in 札幌 登壇", url: "https://blog.montblank.fun/b/3d-winter_2026-02-07", badge: "event" },
+      { text: "送り出しLT2026 登壇", url: "https://blog.montblank.fun/b/sendout_2026-02-12", badge: "event" },
+      { text: "つくるっしょ！開催・運営", url: "https://tsukurussyo.pages.dev", badge: "event" },
+      { text: "シフトキーを押さずにJavaScriptを書けるプログラミング言語「NoShift.js」を公開", url: "https://noshift.js.org", badge: "release" },
+    ],
     1: [
       { text: "Vueを始める", badge: "project" },
       { text: "C#を始める", badge: "project" },
@@ -66,7 +73,7 @@ export const history = {
       { text: "p2hacks 2025 Pre-PBL部門 最優秀賞 受賞", url: "https://universe.mfmf.moe", badge: "award" },
     ],
     11: [
-      { text: "つくるっしょ！運営メンバーになる", url: "https://tsukurussyo.pages.dev", badge: "event" },
+      { text: "つくるっしょ！の運営メンバーになる", url: "https://tsukurussyo.pages.dev", badge: "event" },
       { text: "開発バイトを開始", badge: "work" },
       { text: "道南リモートワーカーお茶会 Vol.02 参加", url: "https://blog.montblank.fun/b/donan-remoteworker_2", badge: "event" },
     ],
