@@ -1,3 +1,5 @@
+// share
+
 /**
  * @typedef {Object} Skill
  * @property {string} name

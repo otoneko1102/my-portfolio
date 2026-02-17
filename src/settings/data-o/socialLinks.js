@@ -33,17 +33,17 @@ export const socialLinks = [
   },
   {
     name: "Twitter",
-    url: "https://twitter.com/rin_montblank",
+    url: "https://twitter.com/rin_pineapple",
     icon: "logos:twitter",
   },
   {
-    name: "mixi2",
-    url: "https://mixi.social/@rin_montblank",
-    icon: "/logos/mixi2.png",
+    name: "YouTube",
+    url: "https://www.youtube.com/@rin_pineapple",
+    icon: "logos:youtube-icon",
   },
   {
     name: "Instagram",
-    url: "https://www.instagram.com/rin_montblank/",
+    url: "https://www.instagram.com/rin_pineapple",
     icon: "logos:instagram-icon",
   },
   {

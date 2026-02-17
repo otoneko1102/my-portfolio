@@ -12,10 +12,10 @@
 
 /** @type {AboutMe} */
 export const aboutMe = {
-  name: "まろん｡",
+  name: "otoneko.",
   title: "Full-stack dev / Funny OSS dev",
   birthday: "2006/11/02",
-  location: "Hakodate, Hokkaido, Japan",
-  bio: "主に JavaScript / TypeScript / Web を触っている大学生の個人開発勢です。主にOSS開発とネタ開発をしています。フロントエンドよりもバックエンドのほうが得意です。最近は開発バイトしてます。",
+  location: "Hokkaido, Japan",
+  bio: "主に JavaScript / TypeScript / Web を触っている個人開発勢です。主にOSS開発とネタ開発をしています。フロントエンドよりもバックエンドのほうが得意です。",
   image: "/icon.png",
 };

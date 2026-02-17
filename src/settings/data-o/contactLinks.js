@@ -26,13 +26,13 @@ export const contactLinks = [
   },
   {
     name: "Twitter",
-    value: "@rin_montblank",
-    url: "https://twitter.com/rin_montblank",
+    value: "@rin_pineapple",
+    url: "https://twitter.com/rin_pineapple",
     icon: "logos:twitter",
   },
   {
     name: "Email",
-    value: "montblank.fun@gmail.com",
+    value: "otoneko1102@gmail.com",
     url: "mailto:montblank.fun@gmail.com",
     icon: "mdi:email",
   },

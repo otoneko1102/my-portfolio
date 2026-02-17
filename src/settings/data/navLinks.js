@@ -1,3 +1,5 @@
+// share
+
 /**
  * @typedef {Object} NavLink
  * @property {string} label

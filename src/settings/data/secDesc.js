@@ -1,3 +1,5 @@
+// share
+
 /**
  * @typedef {Object} SectionDescriptions
  * @property {string} github

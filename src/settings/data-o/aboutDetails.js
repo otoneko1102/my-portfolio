@@ -10,11 +10,11 @@
 export const aboutDetails = [
   {
     label: "所属",
-    values: ["公立はこだて未来大学 '25 (B1)", "Oto Home", "もふもふぽっぷ"],
+    values: ["Oto Home", "もふもふぽっぷ"],
   },
   {
-    label: "サークル",
-    values: ["Mariners' conference", "Sound Create", "温泉同好会"],
+    label: "活動",
+    values: ["LT", "作曲", "温泉"],
   },
   {
     label: "趣味",
@@ -26,6 +26,9 @@ export const aboutDetails = [
   },
   {
     label: "実績",
-    values: ["P2HACKS 2025 Pre-PBL部門 Fenrir賞", "P2HACKS 2025 Pre-PBL部門 最優秀賞"],
+    values: [
+      "P2HACKS 2025 Pre-PBL部門 Fenrir賞",
+      "P2HACKS 2025 Pre-PBL部門 最優秀賞",
+    ],
   },
 ];

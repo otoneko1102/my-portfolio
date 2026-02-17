@@ -16,24 +16,21 @@
 
 /** @type {VersionsConfig} */
 export const versionsConfig = {
-  // If you previously relied on deriving URLs from version (v{n}.{baseDomain}),
-  // you can still set a `baseDomain` for backward compatibility, but it's
-  // recommended to explicitly specify `url` on each entry.
-  domain: "p.montblank.fun",
+  domain: "p.otoneko.cat",
 };
 
 /** @type {VersionEntry[]} */
 export const versions = [
-  // Each entry should specify at minimum `version` and `url`.
-  // Optional fields: title, description, image
   {
     version: 2,
-    url: "https://montblank.fun",
+    url: "https://otoneko.cat",
     title: "V2 (latest)",
-    description: "2025年の12月から現在まで使用している最新のバージョンです。AstroとSvelteで書いています。",
+    description:
+      "2026年の2月から現在まで使用している最新のバージョンです。AstroとSvelteで書いています。",
   },
   {
     version: 1,
-    description: "2025年の11月まで使用していたバージョンです。Svelteで書いています。",
+    url: "https://www.otoneko.jp",
+    description: "2024年まで使用していたサイトです。",
   },
 ];

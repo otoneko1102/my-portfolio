@@ -25,8 +25,9 @@ import requirementsHtml from "./crossLinks.html?raw";
 export const crossLinksConfig = {
   applyDescription: "相互リンクをご希望の方は、お気軽にご連絡ください！",
   applyButtonText: "相互リンクを申請する",
-  twitterUsername: "1517667933291704320",
-  applyMessageTemplate: "相互リンクしませんか！\n\nURL:\nあなたの名前:\n紹介文:(任意)\nサイト名:(任意)\nサムネイルURL:(任意)\n\n※OGPから取得できるのであれば任意の部分は不要",
+  twitterUsername: "1508332521997893633",
+  applyMessageTemplate:
+    "相互リンクしませんか！\n\nURL:\nあなたの名前:\n紹介文:(任意)\nサイト名:(任意)\nサムネイルURL:(任意)\n\n※OGPから取得できるのであれば任意の部分は不要",
   requirementsHtml: requirementsHtml,
 };
 
@@ -35,31 +36,9 @@ export const crossLinksConfig = {
  */
 export const crossLinks = [
   {
-    url: "https://kinoemon.com",
+    url: "https://montblank.fun",
     title: null,
-    author: "キノえもん",
-    description: null,
-    thumbnail: null,
-  },
-  {
-    url: "https://shikoshib.ru",
-    title: null,
-    author: "shikoshib",
-    description: null,
-    thumbnail: null,
-  },
-  {
-    url: "https://profile.activetk.jp",
-    title: null,
-    author: "ActiveTK.",
-    description: null,
-    // description: "A programmer, a security researcher, a super procrastinator",
-    thumbnail: "https://profile.activetk.jp/avatar.png",
-  },
-  {
-    url: "https://sinta.fun",
-    title: null,
-    author: "sinta",
+    author: "まろん｡",
     description: null,
     thumbnail: null,
   },

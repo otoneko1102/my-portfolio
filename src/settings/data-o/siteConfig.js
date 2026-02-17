@@ -16,12 +16,12 @@
  * @type {SiteConfig}
  */
 export const siteConfig = {
-  title: "まろん｡のポートフォリオ",
-  description: "まろん｡のポートフォリオサイトです。",
-  author: "まろん｡",
+  title: "音猫｡のポートフォリオ",
+  description: "音猫｡のポートフォリオサイトです。",
+  author: "音猫｡",
   email: "montblank.fun@gmail.com",
-  url: "https://montblank.fun",
+  url: "https://otoneko.cat",
   ogImage: "/icon.png",
-  twitterHandle: "@rin_montblank",
+  twitterHandle: "@rin_pineapple",
   logo: "/logo.png",
 };

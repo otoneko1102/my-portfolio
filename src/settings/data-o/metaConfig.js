@@ -21,20 +21,21 @@ import { aboutMe } from "./aboutMe";
  */
 export const metaConfig = {
   default: {
-    title: "まろん｡のポートフォリオ",
+    title: "音猫｡のポートフォリオ",
     description: aboutMe.bio,
     image: aboutMe.image,
     type: "website",
   },
   pages: {
     projects: {
-      title: "Projects | まろん｡のポートフォリオ",
-      description: "私の制作物をまとめたページです。個人開発とチーム開発のものを掲載しています。",
+      title: "Projects | 音猫｡のポートフォリオ",
+      description:
+        "私の制作物をまとめたページです。個人開発とチーム開発のものを掲載しています。",
       image: "/icon.png",
       type: "website",
     },
     history: {
-      title: "History | まろん｡のポートフォリオ",
+      title: "History | 音猫｡のポートフォリオ",
       description: "これまでの出来事を時系列でまとめたページです。",
       image: "/icon.png",
       type: "website",

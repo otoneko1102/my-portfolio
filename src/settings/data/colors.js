@@ -1,3 +1,5 @@
+// share
+
 /**
  * @typedef {Object} ColorTheme
  * @property {string} primary

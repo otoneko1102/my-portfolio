@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "dev:o": "astro dev --config astro.config.otoneko.mjs",
+    "build": "astro build && npm run build:o",
+    "build:o": "astro build --config astro.config.otoneko.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ./src/ && node ./scripts/index.cjs"

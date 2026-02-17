@@ -8,6 +8,6 @@
 
 /** @type {BlogConfig} */
 export const blogConfig = {
-  feedUrl: "https://blog.montblank.fun/feed",
-  siteUrl: "https://blog.montblank.fun",
+  feedUrl: "https://blog.otoneko.cat/feed",
+  siteUrl: "https://blog.otoneko.cat",
 };
