@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.0",
-    "@babel/parser": "^7.28.5",
+    "@babel/parser": "^7.29.0",
     "@babel/types": "^7.28.5",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
