@@ -17,7 +17,7 @@ export const projects = [
   {
     title: "Purus",
     description: "Write code without the Shift key. Beautiful, simple, and easy-to-use.",
-    tags: ["AltJS", "cli", "JavaScript", "MoonBit", "language"],
+    tags: ["AltJS", "cli", "JavaScript", "language", "MoonBit"],
     url: "https://www.purus.work",
     github: "https://github.com/otoneko1102/purus",
     pin: true,
@@ -38,6 +38,14 @@ export const projects = [
     tags: ["AltJS", "cli", "JavaScript", "language"],
     url: "https://noshift.js.org",
     github: "https://github.com/otoneko1102/NoShift.js",
+    pin: true,
+  },
+  {
+    title: "mixi2-js",
+    description: "mixi2 の Application API を利用するための 非公式 TypeScript/JavaScript SDK です。",
+    tags: ["API", "Framework", "mixi2", "SDK", "TypeScript"],
+    url: "https://www.npmjs.com/package/mixi2-js",
+    github: "https://github.com/otoneko1102/mixi2-js",
     pin: true,
   },
   {

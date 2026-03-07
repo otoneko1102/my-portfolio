@@ -59,6 +59,11 @@ export const history = {
         url: "https://www.purus.work",
         badge: "release",
       },
+      {
+        text: "mixi2 の Application API を利用するための 非公式 TypeScript/JavaScript SDK「mixi2-js」を公開",
+        url: "https://www.npmjs.com/package/mixi2-js",
+        badge: "release",
+      },
     ],
     2: [
       { text: "LiveScriptを始める", badge: "project" },
