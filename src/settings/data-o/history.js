@@ -53,6 +53,13 @@ export const historyBadgeKeys = Object.keys(historyBadges);
 /** @type {HistoryMap} */
 export const history = {
   2026: {
+    3: [
+      {
+        text: "US/JIS配列のキーボードでシフトキーをほとんど押さずに書ける実用的なプログラミング言語「Purus」を公開",
+        url: "https://www.purus.work",
+        badge: "release",
+      },
+    ],
     2: [
       { text: "LiveScriptを始める", badge: "project" },
       { text: "冬の3大学合同LT会 in 札幌 登壇", badge: "event" },

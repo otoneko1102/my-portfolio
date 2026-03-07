@@ -15,6 +15,14 @@
  */
 export const projects = [
   {
+    title: "Purus",
+    description: "Write code without the Shift key. Beautiful, simple, and easy-to-use.",
+    tags: ["AltJS", "cli", "JavaScript", "MoonBit", "language"],
+    url: "https://www.purus.work",
+    github: "https://github.com/otoneko1102/purus",
+    pin: true,
+  },
+  {
     title: "Milkee",
     description: "現代のCoffeeScript Builderです。",
     image: "/projects/milkee-logo.png",
