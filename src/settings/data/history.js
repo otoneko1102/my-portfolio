@@ -55,6 +55,9 @@ export const history = {
   2026: {
     3: [
       {
+        text: "MoonBitを始める", badge: "project"
+      },
+      {
         text: "US/JIS配列のキーボードでシフトキーをほとんど押さずに書ける実用的なプログラミング言語「Purus」を公開",
         url: "https://www.purus.work",
         badge: "release",

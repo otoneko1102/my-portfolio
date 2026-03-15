@@ -53,7 +53,7 @@ export const skills = [
       {
         name: "Vite",
         icon: "logos:vitejs",
-        proficiency: 75,
+        proficiency: 50,
       },
       {
         name: "Astro",
@@ -63,32 +63,32 @@ export const skills = [
       {
         name: "Svelte",
         icon: "logos:svelte-icon",
-        proficiency: 60,
+        proficiency: 50,
       },
       {
         name: "Vue",
         icon: "logos:vue",
-        proficiency: 50,
+        proficiency: 35,
       },
       {
         name: "React",
         icon: "logos:react",
-        proficiency: 35,
+        proficiency: 15,
       },
       {
         name: "Next.js",
         icon: "logos:nextjs-icon",
-        proficiency: 35,
+        proficiency: 15,
       },
       {
         name: "TailwindCSS",
         icon: "logos:tailwindcss-icon",
-        proficiency: 35,
+        proficiency: 15,
       },
       {
         name: "EJS",
         icon: "vscode-icons:file-type-ejs",
-        proficiency: 50,
+        proficiency: 35,
       },
     ],
   },
@@ -102,6 +102,11 @@ export const skills = [
         name: "Node.js",
         icon: "logos:nodejs-icon",
         proficiency: 85,
+      },
+      {
+        name: "MoonBit",
+        icon: "simple-icons:moonbit",
+        proficiency: 30,
       },
       {
         name: "Express",
