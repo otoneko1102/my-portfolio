@@ -63,4 +63,11 @@ export const crossLinks = [
     description: null,
     thumbnail: null,
   },
+  {
+    url: "https://negapainter.work",
+    title: "Np's pages",
+    author: "Np",
+    description: null,
+    thumbnail: null,
+  }
 ];
